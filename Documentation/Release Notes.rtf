@@ -1,0 +1,187 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf350
+{\fonttbl\f0\froman\fcharset0 Palatino-Roman;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww20580\viewh16080\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\b\fs24 \cf0 MacFire Release Notes
+\b0 \
+\
+
+\b Version 0.8.2 (alpha)
+\b0 \
+7 January 2009\
+\
+
+\i\b New Features and Changes
+\i0\b0 \
+- Rewrote the game file list.  Fixed a couple of issues in the existing list (incorrect games identified).\
+- Now respects the "Show timestamps in chat windows" preference option (thanks to Jasarien).\
+- You can now set the color that names appear in the chat message list via the preferences window (thanks to Jasarien).\
+- The username field for log-in contains a list of the last 5 user names successfully used to log in.\
+- The custom status text box now keeps a history of the last 10 custom messages you used (not including AFK status which is always shown).\
+- Added additional network packet scanning capability.\
+- Now tracks when any contact was last seen online (all friends and friends-of-friends that you ever see).\
+- The preferences window now respects the reset chat font to default button.\
+- Will now close the connection if the Xfire server stops responding.\
+- Chats are now logged to the ~/Library/Application Support/MacFire folder.  There is not yet a window in MacFire to view old logs.\
+\
+
+\i\b Fixes
+\i0\b0 \
+- Fixed hard-coded chat window title.  It can now be localized.\
+- Fixed an issue that could cause the custom status message to be changed unexpectedly when changing preferences.\
+- The chat font set in preferences is now respected by the chat windows and stored in the Preferences folder.\
+- Fixed a couple of small memory leaks.\
+\
+\
+
+\b Version 0.8.1 (alpha)
+\b0 \
+14 December 2008\
+\
+
+\i\b New Features and Changes
+\i0\b0 \
+- Updated to the latest Xfire game list 2008-12-11.\
+- Added "Call of Duty 4 Multiplayer.app" to the game list (thanks to Hardcore).\
+- Added expanded Mac game lists (many thanks to dirk).\
+\
+
+\i\b Fixes
+\i0\b0 \
+- Fixed an issue where the friend group lists would not be displayed. (thanks to SDS)\
+- Slight adjustment to the chat window scrolling logic.  It should fully scroll now.\
+- Fixed an issue affecting PowerPC Macs only (network decoding problem).  (thanks to dirk)\
+- Fixed potential crash after closing a chat window.\
+\
+\
+
+\b Version 0.8 (alpha)
+\b0 \
+11 December 2008\
+\
+
+\i\b New Features and Changes
+\i0\b0 \
+\
+- Now supports custom friend groups\
+	Create and remove custom friend groups\
+	Rename custom groups\
+	Add and remove friends from custom groups by dragging the friend into the group.  Does not work for friends of friends.\
+- New user options window with Xfire network support.  Some settings are managed by the Xfire server and may not work properly without it.\
+	This removed some options from the existing preferences window and moved them to the new window.\
+- Added a prompt to confirm before removing a friend.\
+- The Show Friend Profile menu item is now available in the user search results window.\
+- Changed the default icon for the friends list and Growl notifications to be the MacFire icon instead of the Xfire icon.\
+- Now keeps custom status when you become idle, to allow custom AFK status.\
+- Updated to use the latest version of the Growl client framework.\
+- Added Call of Duty 4 (single player) to the list of known Mac games.\
+- The incoming friendship request window now includes a "Show Profile" button so you can see more about who wants to be your friend.\
+- Revised the menu structure.  A new Xfire menu contains the items previously found in the File menu, plus some new options.\
+- Will now display a dialog window when the session end unexpectedly.\
+- Improved Xfire network packet processing based on more recent understanding of the network protocol.\
+- Updated to latest Xfire game information (current as of 30 Nov 2008, which includes Windows Xfire version 1.101).\
+\
+
+\i\b Fixes
+\i0\b0 \
+\
+- Fixed an issue where a Friend of Friend could appear in the list more than once under some situations.\
+- The tooltip displayed for friends in the list now sorts common friends properly.\
+- Chat window text is now scrolled automatically to show the most recent message (thanks to Hardcore for the report).\
+- The friends list is now sorted by ignoring case.\
+- Now properly disconnects when instructed by the Xfire server (thanks to Jasarien for the report).\
+- Fixed an issue where multiple chat windows could be opened.  It now brings the existing chat window forward.  (Thanks to Jasarien for the report.)\
+- Will cleanly move a friend from Friend of Friend list to Friend list if friendship request is accepted.\
+- Fixed some issues related to Xfire server IP address resolution.\
+- Will disconnect cleanly when the Xfire server closes the connection.\
+- Now correctly handles multiple simultaneous incoming friendship requests.\
+- Context menu (right click) now uses on the proper friend or friend group.  Previously you had to select the item then right click it for the menu to work.\
+- Fixed an issue where the friend list would not properly re-sort if a nickname change caused the list to re-sort.\
+- Fixed some potential crash issues when there are problems connecting to the Xfire server.  This includes network errors, bad passwords, new-version notifications, and more.\
+- Fixed some potential crash issues when logging off but not quitting.\
+- Improved the internal networking code, error handling.\
+\
+
+\i\b Code Documentation Updates:
+\i0\b0 \
+\
+- Added many new packets related to preferences and custom friend groups (create, delete, add members, etc.)\
+\
+
+\i\b Known Issues
+\i0\b0 \
+\
+- MacFire will not fail gracefully if there is no network connection.  This is due to how Mac OS X is implemented, and I have not yet figured out a good workaround.  Specifically, DNS resolution for the chat server appears to hang.\
+\
+\
+
+\b Version 0.7 (alpha)
+\b0 \
+15 June 2008\
+\
+- Added preliminary chat support (IM).\
+- Updated to latest game icons and fixed issues with some icons.\
+- Updated to be consistent with latest Xfire game registry.\
+- Changed the indicated skin from Shadow to Aqua.\
+- Added support for customizable display name style (various combinations of username and nickname).\
+- Should now properly respect changes to idle (AFK) preferences changes.\
+- Fixed issue when changing your nickname so it now properly updates the friends list if you have yourself as a friend.\
+- Further refined Xfire network packet decoding logic.\
+- Changed client network status broadcast to be consistent with what was recorded from an official Xfire client behind a router with UPnP disabled.\
+- Now sorts friends by their display name inside each group.\
+- Improved internal handling of changes to the friends list.  This will be necessary to support custom friend groups and chat logging in the future.  It also supports the friend list sorting functionality.\
+- Removed Ventrilo.app from the game list (Mac Games.plist).  It is handled in a different fashion in the network protocol, and not the same as other games.  It may be added back later if support for voice chat clients can be implemented.\
+- Fixed an issue where a user's status text and game information would not be updated correctly if a user went offline and came back online.\
+- Added full license terms for a BSD-style license.\
+- Fixed potential crash bug while posting Growl notifications.\
+- Posts Growl notifications for chat messages.\
+- Fixed some memory leaks.\
+- Now should disconnect cleanly when you log out, power off, or put your machine to sleep.\
+- Added some limited context menus for the friend list.\
+- Added tool-tip boxes on the friend list with additional information not found on the standard view.\
+- Changed game info display on the main window to include the game port.\
+\
+\
+
+\b Version 0.6 (alpha)
+\b0 \
+3 Mar 2008\
+\
+- Fixed possible issue with updated friend information.\
+- Now removes friend of friend from the list when that person stops playing a game.\
+- Added ability to change your nickname via a menu option (File menu).\
+- The "Show Friend's Profile" menu item works now.\
+- Moved Xfire server name and port number to the preferences file.  No preferences window support for it; it's more for development purposes.  (SCR 40)\
+- The MacFire version number now appears in the Finder Get Info window.\
+- Tracks changes to user nickname when the nickname is changed from their web profile page.\
+- Fixed issue that could cause MacFire to crash when a new Xfire version is found.\
+- Added preference to enable or disable Xfire network packet logging.  Packets are logged to <home>/Library/Caches/MacFire.  (SCR 45, 49)\
+- Added friend search/add window.  Can now search and add friends.\
+- Added support for removing friends.\
+- Now properly remembers the game info column width.\
+- Added support for handling incoming friendship requests.\
+\
+\
+
+\b Version 0.5 (alpha)
+\b0 \
+10 Feb 2008\
+\
+- Fixed the Log Off function (SCR 44)\
+- Fixed dangling network connection when a connection fails (SCR 48)\
+- Fixed situation when a new Xfire client is available whereby the password was lost before the re-connection attempt and the login would fail (SCR 48)\
+- Fixed issue whereby the game status would not be set correctly when a game is already running upon login (SCR 37)\
+- Added the new Xfire client version number when asking whether to pose as the new version (SCR 36)\
+- Added ability to log packets that don't decode properly, for future diagnostics (SCR 47)\
+- Further enhanced Xfire network packet decoding logic using information from latest client 1.87.\
+- Fixed issue with possibly unpredictable behavior when Xfire packets did not decode properly.\
+- Revised internal architecture to eliminate possible unpredictable behavior.  It should be easier to extend in the future.\
+- Added support for custom status text.  This means idle status works now.\
+- Added latest Xfire games list (xfire_games.ini) from 20080206.\
+- Added display of IP addresses of games friends are playing in the main list.\
+- Implemented preliminary Friends of Friends Playing support. (SCR 2)\
+\
+\
+}

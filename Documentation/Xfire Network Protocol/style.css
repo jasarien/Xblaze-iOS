@@ -1,0 +1,84 @@
+/* Xfire protocol specification stylesheet */
+/* Original version copied from Iain McGinniss's OpenFire document. */
+/* Modified by Mark Sawyer */
+
+/* General body styles */
+body
+{
+	font-family: "Times New Roman", serif;
+	color: black;
+	background-color: white;
+}
+
+/* All headers share the same color */
+/* It's a blu-ish color */
+h1, h2, h3, h4, h5, h6
+{
+	color: #005A9C;
+	margin-top: .6em;
+	margin-bottom: .3em;
+}
+
+/* h1 is used for document title, so behaves differently from the others */
+h1
+{
+	font-size: 24pt;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Other section headers*/
+h2, h3, h4, h5, h6
+{
+	font-size: 16pt;
+	font-style: normal;
+	font-weight: bold;
+	padding: 0;
+	
+	text-align: left;
+}
+
+/* Section auto-numbering */
+h2 { counter-increment:h2; counter-reset:h3 h4 h5 h6; }
+h3 { counter-increment:h3; counter-reset:h4 h5 h6; }
+h4 { counter-increment:h4; counter-reset:h5 h6; }
+h5 { counter-increment:h5; counter-reset:h6; }
+h6 { counter-increment:h6; }
+
+h2:before { content: counter(h2) ". "; }
+h3:before { content: counter(h2) "." counter(h3) " "; }
+h4:before { content: counter(h2) "." counter(h3) "." counter(h4) " "; }
+h5:before { content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) " "; }
+h6:before { content: counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) "." counter(h6) " "; }
+
+table
+{
+	border: 2px solid black;
+	border-collapse: collapse;
+	margin: 2px;
+}
+
+th
+{
+	border: 2px solid black;
+	background: #ccc;
+	padding: 1px 3px 2px 3px; /* top right bottom left */
+}
+
+td
+{
+	border: 1px solid #444;
+	padding: 1px 3px 2px 4px; /* top right bottom left */
+}
+
+/* Background colors for various kinds of table cells. */
+td.src_client { background: #ced; }
+td.src_server { background: #fe6; }
+td.int8       { background: #dfe; }
+td.int16      { background: #ced; }
+td.int32      { background: #bdc; }
+td.string     { background: #cef; }
+td.indeterminate { background: #fe6; }
+td.end        { background: #ccc; }
+td.center     { text-align: center; }

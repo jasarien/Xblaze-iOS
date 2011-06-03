@@ -1,0 +1,3689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Xfire Network Protocol Specification</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+<!--
+Document structure is as follows:
+
+Title
+Authors
+Change History
+1.  Document Overview
+2.  Protocol Overview
+2.1 High Level Description
+2.2 Data Encoding
+2.3 Log In Sequence
+2.4 Idle Time
+2.5 Information View
+2.6 Instant Messages (Chats)
+2.7 Friends of Friends
+3.  Packet Structure
+3.1 Attribute Maps
+3.2 Attribute Values
+4.  Packet Descriptions
+4.x various packet descriptions
+-->
+
+<!-- NEW SECTION  **************** -->
+<h1>Xfire Network Protocol</h1>
+
+<div style="text-align:center;">
+	Original Author: Iain McGinniss (OpenFire)
+	<br>
+	Updated by: MacFire.org
+</div>
+
+<p>
+Change History:
+<table>
+	<th>Rev</th>
+	<th>Date</th>
+	<th>Description</th>
+	
+	<tr>
+		<td>1</td>
+		<td>2007-08-16</td>
+		<td>Original revision by Iain McGinniss of OpenFire.</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>2008-06-15</td>
+		<td>Significant revision and lots of new information.</td>
+	</tr>
+</table>
+</p>
+
+<!-- NEW SECTION  **************** -->
+<h2>Document Overview</h2>
+
+<p>This document aims to provide a full specification for the <a href="http://www.xfire.com">Xfire</a>
+instant messaging protocol, including packet structure and application program
+behavior. A lot of the information found in this document would not be available if it
+were not for the hard work of the XFireLib project team
+(<a href="http://xfirelib.sphene.net">http://xfirelib.sphene.net</a>), who reverse
+engineered the protocol to write XFireLib. This document was written to formally
+document what they discovered, and to be provided as a basis for implementing Xfire
+communication libraries in alternative languages or on other platforms.</p>
+
+<p>Note that this document may be incomplete.  Not every aspect of the official Xfire
+client has been examined.  Nor has every possible combination of scenarios.  What
+follows should be adequate in most circumstances, but no guarnatees are made as to the
+correctness under all circumstances.</p>
+
+<p><a href="#sec2">Section 2</a> describes the higher level protocol behaviors, while
+<a href="#sec3">Section 3</a> describes the lower level packet interfaces.</p>
+
+<h2><a id="sec2">Protocol Overview</a></h2>
+
+This section describes the higher level protocol and application behaviors.
+
+<!-- NEW SECTION  **************** -->
+<h3>High Level Description</h3>
+
+<p>The client logs in to the server by establishing a TCP link (SOCK_STREAM) to the
+Xfire central server (cs.xfire.com) on port 25999.  After sending a short keying
+sequence to the server, the client and server exchange sequences of bytes that are
+arranged into short packets (see <a href="#sec3">Section 3</a>).</p>
+
+<p>After authenticating as a specific user, communication occurs between the client
+and the server, and may occur between clients.  The official Xfire client appears to
+support client-to-client (peer to peer) communication for IM conversations using UDP
+datagrams.  The official Xfire client also uses HTTP requests to retrieve some
+information, such as user avatar images and update downloads.</p>
+
+<!-- NEW SECTION  **************** -->
+<h3>Data Encoding</h3>
+
+<p>Xfire uses UTF-8 string encoding.  Integer values are transmitted in Little Endian
+byte order (least significant byte first).  Refer to <a href="#sec3">Section 3</a>
+for more information.</p>
+
+<!-- NEW SECTION  **************** -->
+<h3>Log In Sequence</h3>
+
+<p>After successfully opening a TCP connection to cs.xfire.com, the following sequence
+of packets is exchanged.</p>
+
+<p>
+<table>
+	<th>Seq. #</th>
+	<th>Source</th>
+	<th>Content</th>
+	<th>Comments</th>
+	<tr>
+		<td>1</td>
+		<td class="src_client">Client</td>
+		<td>String "UA01" (not a packet)</td>
+		<td>Keying sequence, in hex it is 0x55,0x41,0x30,0x31</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td class="src_client">Client</td>
+		<td><a href="#pkt3">Client Version packet</a></td>
+		<td>Client version number</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt128">Login Challenge packet</a></td>
+		<td>Server sends a value used to obscure the password (the "salt")</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td class="src_client">Client</td>
+		<td><a href="#pkt1">Authentication Data packet</a></td>
+		<td>Client obscures the password using the "salt" and asks to be authenticated</td>
+	</tr>
+</table>
+</p>
+
+<p>After the above sequence of data exchanges, the Xfire server will respond with one
+of three known possible respones:
+<ul>
+	<li><em>New Client Version Available</em> -
+		The Xfire server indicates that the client's version is too old and
+		gives information necessary to download the newest client version.  The Xfire
+		server will leave the connection open, but will stop responding to any new
+		packets sent to it.  The client should close the connection.
+		See <a href="#pkt134">New Version Available</a> packet.
+	</li>
+	
+	<li><em>Authentication Failure</em> - 
+		The supplied password was incorrect.  The Xfire server will leave the
+		connection open, but will stop responding to any new packets sent to it.
+		The client should close the connection.
+		See <a href="#pkt129">Login Failure</a> packet.
+	</li>
+	
+	<li><em>Authentication Success</em> - 
+		The password was accepted.  The Xfire server sends information that documents
+		the current session and other information to be used by the client during the
+		session.  The log-in continuation sequence is shown below.
+	</li>
+</ul>
+</p>
+
+<p>After authenticating successfully, the following sequence of packet exchanges
+occurs.  Note that the order doesn't appear to be exact, and may change from version
+to version.  For client implementation it is recommended to send the Client packets
+in the order they appear below.</p>
+
+<p>
+<table>
+	<th>Seq. #</th>
+	<th>Source</th>
+	<th>Content</th>
+	<th>Comments</th>
+	<tr>
+		<td>5</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt130">Authentication Success packet</a></td>
+		<td>Success indicator, and information to be used during the session.
+			Response 1 to auth packet.</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt400">Packet 400</a></td>
+		<td>Purpose is unknown.</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt141">Packet 141</a></td>
+		<td>Purpose is unknown.</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td class="src_client">Client</td>
+		<td><a href="#pkt16">Client Information packet</a></td>
+		<td>Identifies current skin, theme, and language</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt151">Custom Friend Group Names</a></td>
+		<td>Lists all known custom friend groups.</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt152">Custom Friend Group Members</a></td>
+		<td>Lists friends and their custom group memberships.</td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt148">Packet 148</a></td>
+		<td>Purpose is unknown - game information?</td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt155">Packet 155</a></td>
+		<td>Purpose is unknown</td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt157">Packet 157</a></td>
+		<td>Purpose is unknown</td>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt177">Packet 177</a></td>
+		<td>Purpose is unknown</td>
+	</tr>
+	<tr>
+		<td>15</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt163">Friend Group Information</a></td>
+		<td>Gives some kind of information about friend groups.</td>
+	</tr>
+	<tr>
+		<td>16</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt131">Friends List packet</a></td>
+		<td>Contains list of all friends</td>
+	</tr>
+	<tr>
+		<td>17</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt132">Session ID Change packet</a></td>
+		<td>Contains list of all friends that are online and their session IDs</td>
+	</tr>
+	<tr>
+		<td>18</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt135">Game status packet</a></td>
+		<td>List of friend game status (game IDs, IPs, and ports)</td>
+	</tr>
+	<tr>
+		<td>19</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt156">In-Game Information packet</a></td>
+		<td>In-game information for given friends.  These appear to be received even for people not on our friend list (maybe friend of friend?).</td>
+	</tr>
+	<tr>
+		<td>20</td>
+		<td class="src_server">Server</td>
+		<td><a href="#pkt154">Status Message Changed packet</a></td>
+		<td>Initial status message for one online friend's session; multiple messages
+			of this type may be received</td>
+	</tr>
+	<tr>
+		<td>21</td>
+		<td class="src_client">Client</td>
+		<td><a href="#pkt17">Client Network Information packet</a></td>
+		<td>Client sends network information, including how peers may contact us</td>
+	</tr>
+</table>
+</p>
+
+
+<!-- NEW SECTION  **************** -->
+<h3>Idle Time</h3>
+
+<p>
+During network idle time, the client should periodically send <a href="#pkt13">Keep-alive</a> packets.
+They let the server know the client is still around.  It is unknown the minimum amount of time before
+a server terminates a connection.  Sending keep-alive packets every minute seems to be reasonable.
+</p>
+
+<!-- NEW SECTION  **************** -->
+<h3>Information View</h3>
+
+<p>
+The official Xfire client has an information view that contains additional information related to what the
+user is doing.  Usually this relates to something selected in the main window (friends list, server list,
+downloads, etc.), but there are also generic views when nothing is selected or prior to log in.
+</p>
+<p>
+The information view is an HTML view created from many templates included with the Xfire client.  The template
+files use a special syntax to identify keys for information.  The Xfire client replaces those keys with information
+either readily available, or soon retrieved.  The client appears to make specific requests for information from
+the Xfire server or from one of the HTTP servers operated by Xfire.
+</p>
+<p>
+The extra information includes an avatar picture.  The specific URL for a given user's avatar picture is
+likely indicated by the content of certain request packets, but as of this writing the decoding is unknown.  The
+pictures are then retrieved via an HTTP request.  Known locations are:
+</p>
+<table>
+	<tr>
+		<th>URL</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>http://media.xfire.com/xfire/xf/images/avatars/gallery/default/xfire.gif</td>
+		<td>The default avatar.  Other built-in avatars appear in this folder.</td>
+	</tr>
+	<tr>
+		<td>http://screenshot.xfire.com/avatar/...</td>
+		<td>Specially uploaded avatars (?).  Decoding the subfolder name is unknown.  The specific picture image
+		appears to be the username followed by an image format suffix.</td>
+	</tr>
+</table>
+
+<!-- NEW SECTION  **************** -->
+<h3>Instant Messages</h3>
+
+<p>
+Messages are sent either:
+<ul>
+	<li>Routed through the log-in connection (to cs.xfire.com:25999)</li>
+	<li>Via UDP connections directly between clients</li>
+</ul>
+</p>
+
+<p>
+There appear to be provisions in the network protocol to support either.  The <a href="#pkt17">Client Network Information</a>
+packet describes the availability to the master server.  The Xfire client appears to support UPnP to put holes into
+visible router firewalls for a given port.  Other clients can use that port to communicate with you.  Indicating a 1 for
+a "NAT error" appears to work correctly to indicate that client-to-client communication is not possible.
+</p>
+
+<p>
+Instant messages are plain UTF-8 text strings.  As of this writing, the Xfire client support for chat rooms is not
+understood.  Instant messages are usually directed to specific Session IDs, which are assigned to specific clients.
+It is assumed that chat rooms recieve their own Session ID which causes messages to be routed to all connected
+clients.
+</p>
+
+<!-- NEW SECTION  **************** -->
+<h3><a id="FoFDesc">Friends of Friends</a></h3>
+
+<p>
+The Friends of Friends (Playing) feature allows an Xfire user to see what their friends' friends are playing.  It
+can be seen as a community-building exercise because it allows friends to find new friends that play the same games
+they like.
+</p>
+
+<p>
+In some ways, Friends of Friends is handled backwards.  The Xfire server first sends a <a href="#pkt135">Game Status</a>
+packet to the client.  The game status packet assigns game IDs, addresses, and ports to given session IDs.  The client
+would have previously received a <a href="#pkt132">Session ID</a> packet listing known friends and their session IDs.
+Presumably, any unassigned session IDs in the Game Status packet represent friends of friends.  So, the client must
+send a <a href="#pkt5">Friend of Friend Info</a> request packet to get the associated username and nickname information.
+</p>
+
+<p>
+Note that such friends are listed in the official Xfire client as Friends of Friends Playing.  Presumably this means
+that when a player goes offline, the client should no longer display them in the list.  These are indicated by
+<a href="#pkt135">Game Status</a> packets with game IDs set to 0.
+</p>
+
+
+<!-- NEW SECTION  **************** -->
+<h2><a id="sec3">Packet Structure</a></h2>
+
+<p>
+All data exchanged over the Xfire network protocol except the initial "UA01" synchronization key are combined into
+well-formed packets.  The packets contain a 4-byte header followed by a set of "attributes", or key/value pairs.
+The attribute map contains typed information that is used to uniquely decode a given message.
+</p>
+
+<p>
+The general packet structure is as follows:
+</p>
+<table>
+	<tr>
+		<th></th>
+		<th>0</th>
+		<th>1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>...</th>
+	</tr>
+	<tr>
+		<th>0</th>
+		<td class=int16 colspan=2>Packet Length</td>
+		<td class=int16 colspan=2>Packet Type ID</td>
+		<td class=indeterminate colspan=2>Attribute map...</td>
+	</tr>
+</table>
+
+<ul>
+	<li>The packet length indicates the total number of bytes in the packet, including the length itself.  Therefore,
+		total useful packet size is 65534 bytes.</li>
+	<li>The packet type ID is a unique number identifying the content of the packet as well as the key format of the
+		included attribute map.</li>
+	<li>The attribute map contains a set of key/value pairs.  Most packets include multiple keys and associated values.
+		The values are typed using a unique integer value, and can contain any of several known kinds of data.</li>
+</ul>
+
+<p>
+As indicated before, all multi-byte values are stored in Little Endian format (least-significant byte first).
+</p>
+
+<!-- NEW SECTION  **************** -->
+<h3>Attribute Maps</h3>
+
+<p>
+Attribute maps contain up to 255 key/value pairs.  The keys are formatted either as short, variable-length strings
+or as single-byte integer values.  The key "domain" appears to depend upon the specific packet type.  Most older
+packets use string keys, while many newer packets (higher number IDs) appear to use integer keys.  Whereas string-based
+keys are somewhat easier to interpret, integer keys are more opaque in all observed data.  It is believed that there
+are equivalent string-based keys for many (if not all) integer-based keys.  That relationship is not well understood
+to to absence of applicable observed network traffic.
+</p>
+
+<p>
+An attribute map starts with a 1-byte count of the number of attributes (key/value pairs) in the map.  It is then
+followed by alternating keys and values.  The value format is indicated in the next section.
+</p>
+
+<table>
+	<tr>
+		<th></th>
+		<th>0</th>
+		<th>1...</th>
+		<th>...</th>
+		<th>...</th>
+		<th>...</th>
+		<th>...</th>
+	</tr>
+	<tr>
+		<th>0</th>
+		<td class=int8>Attribute count</td>
+		<td class=indeterminate>Key 1</td>
+		<td class=indeterminate>Value 1</td>
+		<td class=indeterminate>...</td>
+		<td class=indeterminate>Key N</td>
+		<td class=indeterminate>Value N</td>
+	</tr>
+</table>
+
+<p>
+String-encoded keys appear as UTF-8 string data preceded by a 1-byte length field.  Note that the string encoding
+is assumed to be UTF-8 given string attribute values use UTF-8 encoding; all observed keys may also be using ASCII
+encoding since they use no special characters.  Because of the one-byte length field, a string-encoded attribute
+key may be at most 255 characters in length.  No known keys have zero length.  An example of a string-encoded key
+"userid" is:
+</p>
+
+<table>
+	<tr>
+		<th></th>
+		<th>0</th>
+		<th>1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>5</th>
+		<th>6</th>
+	</tr>
+	<tr>
+		<th rowspan=2>0</th>
+		<td class=uint8>0x06</td>
+		<td class=string>0x75</td>
+		<td class=string>0x73</td>
+		<td class=string>0x65</td>
+		<td class=string>0x72</td>
+		<td class=string>0x69</td>
+		<td class=string>0x64</td>
+	</tr>
+	<tr>
+		<td>Length</td>
+		<td>u</td>
+		<td>s</td>
+		<td>e</td>
+		<td>r</td>
+		<td>i</td>
+		<td>d</td>
+	</tr>
+</table>
+
+<p>
+Integer-encoded keys appear as single-byte values in the data stream.  They are followed immediately by values.  The
+current guesses at the content for observed integer key IDs are shown below.
+</p>
+
+<table>
+	<tr>
+		<th>Key Value (Hex)</th>
+		<th>Attribute Value Type</th>
+		<th>Attribute Content</th>
+	</tr>
+	</tr><td>01</td><td>Integer, or<br>Integer Array</td><td>User ID</td></tr>
+	</tr><td>02</td><td>String, or <br>String Array</td><td>Name?  In some cases it appears to be a username, in at least one other it was just a name or title string (e.g. channel name)</td></tr>
+	</tr><td>04</td><td>DID Array</td><td>?</td></tr>
+	</tr><td>06</td><td>String</td><td>? Specific preference, value only "1" when present ?</td></tr>
+	</tr><td>08</td><td>String</td><td>?</td></tr>
+	</tr><td>09</td><td>String</td><td>? Specific preference: value "0" disables view of Offline Friends ?</td></tr>
+	</tr><td>0b</td><td>String</td><td>? Specific preference ?</td></tr>
+	</tr><td>0d</td><td>String Array</td><td>Nickname string?</td></tr>
+	</tr><td>12</td><td>Integer Array</td><td>? Something related to friend groups</td></tr>
+	</tr><td>19</td><td>Integer Array</td><td>Friend Group ID</td></tr>
+	</tr><td>1a</td><td>String Array</td><td>A Custom Friend Group Name?</td></tr>
+	</tr><td>1f</td><td>Integer</td><td>? User avatar image identifier ?</td></tr>
+	</tr><td>21</td><td>Integer, or<br>Integer Array</td><td>?  Flags?  It appears in packet 450, but has the value 0.</td></tr>
+	</tr><td>22</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>23</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>2e</td><td>String</td><td>Status text message; only known appearance is packet <a href="#pkt32">32</a></td></tr>
+	</tr><td>34</td><td>Integer, or<br>Integer Array</td><td>A friend group type?</td></tr>
+	</tr><td>4c</td><td>Attribute Map, integer keys</td><td>?  Observed map keys 0x06, 0x08, 0x09, 0x0b</td></tr>
+	</tr><td>4f</td><td>Integer, or<br>Integer Array</td><td>Channel ID/number</td></tr>
+	</tr><td>50</td><td>Integer, or<br>Integer Array</td><td>Time stamp? (it appears as a timestamp in e.g. Channel1000.ini in the Xfire client)</td></tr>
+	</tr><td>51</td><td>Integer Array</td><td>?  This appears to be a fileid.  It appears in Channel1000.ini and in downloads metadata .ini files)</td></tr>
+	</tr><td>52</td><td>Integer Array</td><td>?  Possibly either a AddTime or ModifyTime for a fileID.  See Channel1000.ini.</td></tr>
+	</tr><td>53</td><td>Integer Array</td><td>?  Possibly either a AddTime or ModifyTime for a fileID.  See Channel1000.ini.</td></tr>
+	</tr><td>54</td><td>String Array??</td><td>? This was an Integer array in packet 182, but previously was string array ?</td></tr>
+	</tr><td>55</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>56</td><td>String</td><td>This was a checksum string in packet <a href="#pkt452">452</a>, related to download files.</td></tr>
+	</tr><td>5c</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>5d</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>5e</td><td>String Array</td><td>?</td></tr>
+	</tr><td>6c</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>6d</td><td>String Array</td><td>?</td></tr>
+	</tr><td>72</td><td>String Array</td><td>?</td></tr>
+	</tr><td>81</td><td>String Array</td><td>?</td></tr>
+	</tr><td>91</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>93</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>94</td><td>String Array</td><td>?</td></tr>
+	</tr><td>95</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>96</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>97</td><td>Integer Array</td><td>?</td></tr>
+	</tr><td>98</td><td>Integer Array</td><td>?</td></tr>
+</table>
+
+<p>
+The specific key domain for a packet is listed with each packet in <a href="#sec4">Section 4</a>.
+</p>
+
+<!-- NEW SECTION  **************** -->
+<h3>Attribute Values</h3>
+
+<p>
+Attribute values are typed data streams.  Each attribute value starts with a one-byte type ID field that uniquely
+indicates how to decode the remaining data for that attribute value.  Known value types and their encoding is
+indicated below.
+</p>
+
+<table>
+	<tr>
+		<th>Type ID</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>0x01</td>
+		<td>A variable length string. The first two bytes of the data contain a 16-bit integer indicating the length
+			of the string (number of bytes, not number of characters), followed by the string data.  Strings use UTF-8
+			encoding.</td>
+	</tr>
+	<tr>
+		<td>0x02</td>
+		<td>A 32-bit integer.  Signedness appears to depend upon the context, but usually appears to be unsigned.</td>
+	</tr>
+	<tr>
+		<td>0x03</td>
+		<td>A 128-bit value.  This is likely a UUID (or GUID) given it is used for session identifiers.</td>
+	</tr>
+	<tr>
+		<td>0x04</td>
+		<td>An array of any other type.  The first byte of an array indicates the type of each element in the array,
+			using the Type IDs from this table.  The next two bytes contains the number of entries in the array.  The
+			remaining bytes contain each value in consecutive order with no bytes in between.</td>
+	</tr>
+	<tr>
+		<td>0x05</td>
+		<td>An attribute map using string-encoded keys.  The attribute map follows the same rules as defined for the
+			main attribute map in the packet.</td>
+	</tr>
+	<tr>
+		<td>0x06</td>
+		<td>A 21-byte value.  It always appears associated with something called a DID (possibly "download ID"), but
+			it's exact purpose is unknown as of this writing.</td>
+	</tr>
+	<tr>
+		<td>0x07</td>
+		<td>In observed data this appeared to be a 64 bit (8 byte) integer.</td>
+	</tr>
+	<tr>
+		<td>0x08</td>
+		<td><span style="color:red;">TBD</span> In some observed data this appeared to be a 1 byte integer.
+			I will not commit to this definition until more data is analyzed.</td>
+	</tr>
+	<tr>
+		<td>0x09</td>
+		<td>An attribute map using integer-encoded keys.  The attribute map follows the same rules as defined for the
+			main attribute map in the packet.</td>
+	</tr>
+</table>
+
+
+<p>
+An example of a simple packet is the <a href="#pk3">Client Version</a> packet, which has a single attribute named
+"version".  It looks like this (with each byte's value displayed in hexadecimal, or the character equivalent where
+appropriate) :
+</p>
+
+<table>
+	<tr>
+		<th></th>
+		<th>0</th>
+		<th>1</th>
+		<th>2</th>
+		<th>3</th>
+		<th>4</th>
+		<th>5</th>
+		<th>6</th>
+		<th>7</th>
+	</tr>
+	<tr>
+		<th rowspan=2>0</th>
+		<td class=int16>12</td>
+		<td class=int16>00</td>
+		<td class=int16>03</td>
+		<td class=int16>00</td>
+		<td class=int8>01</td>
+		<td class=int8>07</td>
+		<td class=string>76</td>
+		<td class=string>65</td>
+	</tr>
+	<tr>
+		<td colspan=2>Pkt Len</td>
+		<td colspan=2>Pkt ID</td>
+		<td>Attr Cnt</td>
+		<td>Key Len</td>
+		<td class=string>v</td>
+		<td class=string>e</td>
+	</tr>
+	<tr>
+		<th rowspan=2>8</th>
+		<td class=string>72</td>
+		<td class=string>73</td>
+		<td class=string>69</td>
+		<td class=string>6f</td>
+		<td class=string>6e</td>
+		<td class=int8>02<br/></td>
+		<td class=int32>55<br/></td>
+		<td class=int32>00<br/></td>
+	</tr>
+	<tr>
+		<td class=string>r</td>
+		<td class=string>s</td>
+		<td class=string>i</td>
+		<td class=string>o</td>
+		<td class=string>n</td>
+		<td>Val Type</td>
+		<td colspan=2>Value 85</td>
+	</tr>
+	<tr>
+		<th rowspan=2>16</th>
+		<td class=int32>00<br/></td>
+		<td class=int32>00<br/></td>
+		<td colspan=6 class=end></td>
+	</tr>
+	<tr>
+		<td colspan=2>Value 85</td>
+		<td colspan=6 class=end></td>
+	</tr>
+</table>
+
+<p>
+The total number of bytes in the packet is 18 (0x0012).  The packet ID is 3 (0x0003), which makes this a
+<a href="#pkt3">Client Version</a> packet.  There is one attribute in the map.  The attribute key is length 7
+("version").  The value type is 2 (integer), and the value is 85 (0x00000055).
+</p>
+
+
+<!-- NEW SECTION  **************** -->
+<h2><a id="sec4">Packet Descriptions</a></h2>
+
+<p>
+All known packets are listed below.  Generally, packets sent from the client to the server use IDs between 0 and 127.  Packets sent from the server to the client
+use IDs 128 and above.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<th>Description</th>
+		<th>Key Encoding</th>
+	</tr>
+	<tr><td><a href="#pkt1">1</a></td><td>Authentication Data</td><td>String</td></tr>
+	<tr><td><a href="#pkt2">2</a></td><td>Chat Message</td><td>String</td></tr>
+	<tr><td><a href="#pkt3">3</a></td><td>Client Version</td><td>String</td></tr>
+	<tr><td><a href="#pkt5">5</a></td><td>Request Info for Friend of Friend</td><td>String</td></tr>
+	<tr><td><a href="#pkt6">6</a></td><td>Add Friend Request</td><td>String</td></tr>
+	<tr><td><a href="#pkt7">7</a></td><td>Accept Add Friend Request</td><td>String</td></tr>
+	<tr><td><a href="#pkt8">8</a></td><td>Decline Add Friend Request</td><td>String</td></tr>
+	<tr><td><a href="#pkt9">9</a></td><td>Remove Friend</td><td>String</td></tr>
+	<tr><td><a href="#pkt10">10</a></td><td>Change Preferences?</td><td>String</td></tr>
+	<tr><td><a href="#pkt12">12</a></td><td>Look up User</td><td>String</td></tr>
+	<tr><td><a href="#pkt13">13</a></td><td>Keep-Alive</td><td>String</td></tr>
+	<tr><td><a href="#pkt14">14</a></td><td>Change Nickname</td><td>String</td></tr>
+	<tr><td><a href="#pkt16">16</a></td><td>Client Information</td><td>String</td></tr>
+	<tr><td><a href="#pkt17">17</a></td><td>Client Network Information</td><td>String</td></tr>
+	<tr><td><a href="#pkt18">18</a></td><td>Client Skin (deprecated)</td><td>String</td></tr>
+	<tr><td><a href="#pkt23">23</a></td><td>Unknown - Download information request?</td><td>String</td></tr>
+	<tr><td><a href="#pkt24">24</a></td><td>Unknown - Channel information request?</td><td>String</td></tr>
+	<tr><td><a href="#pkt26">26</a></td><td>Create New Custom Friend Group</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt27">27</a></td><td>Delete Friend Group</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt28">28</a></td><td>Rename Friend Group</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt29">29</a></td><td>Add Friend to Custom Group</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt30">30</a></td><td>Remove Friend from Custom Group</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt32">32</a></td><td>Status Text Change</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt36">36</a></td><td>Change Friend Group List</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt37">37</a></td><td>Info View Request?</td><td>Integer</td></tr>
+	
+	<tr><td><a href="#pkt128">128</a></td><td>Login Challenge</td><td>String</td></tr>
+	<tr><td><a href="#pkt129">129</a></td><td>Login Failure</td><td>String</td></tr>
+	<tr><td><a href="#pkt130">130</a></td><td>Login Success</td><td>String</td></tr>
+	<tr><td><a href="#pkt131">131</a></td><td>Friends List</td><td>String</td></tr>
+	<tr><td><a href="#pkt132">132</a></td><td>Session ID Change</td><td>String</td></tr>
+	<tr><td><a href="#pkt133">133</a></td><td>Server routed chat message</td><td>String</td></tr>
+	<tr><td><a href="#pkt134">134</a></td><td>New version available</td><td>String</td></tr>
+	<tr><td><a href="#pkt135">135</a></td><td>Game Status Change</td><td>String</td></tr>
+	<tr><td><a href="#pkt136">136</a></td><td>Friends of Friends Info</td><td>String</td></tr>
+	<tr><td><a href="#pkt137">137</a></td><td>Outgoing Add Friend Request Confirmation</td><td>String</td></tr>
+	<tr><td><a href="#pkt138">138</a></td><td>Incoming Add-Friend Request</td><td>String</td></tr>
+	<tr><td><a href="#pkt139">139</a></td><td>Friend removed</td><td>String</td></tr>
+	<tr><td><a href="#pkt141">141</a></td><td>User Preferences</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt143">143</a></td><td>User Search Results</td><td>String</td></tr>
+	<tr><td><a href="#pkt144">144</a></td><td>Keepalive Response</td><td>String</td></tr>
+	<tr><td><a href="#pkt145">145</a></td><td>Disconnect Notice</td><td>String</td></tr>
+	<tr><td><a href="#pkt147">147</a></td><td>Voice Chat Info</td><td>String</td></tr>
+	<tr><td><a href="#pkt148">148</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt151">151</a></td><td>Custom Friend Group Names</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt152">152</a></td><td>Custom Friend Group Members</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt153">153</a></td><td>New Custom Friend Group ID</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt154">154</a></td><td>Friend status</td><td>String</td></tr>
+	<tr><td><a href="#pkt155">155</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt156">156</a></td><td>In-Game Information Change</td><td>String</td></tr>
+	<tr><td><a href="#pkt157">157</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt161">161</a></td><td>Nickname Changed</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt163">163</a></td><td>Friend Group Information</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt172">172</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt173">173</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt174">174</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt176">176</a></td><td>User Clan Information (for InfoView)</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt177">177</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt179">179</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt182">182</a></td><td>Unknown</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt400">400</a></td><td>DID (?)</td><td>String</td></tr>
+	<tr><td><a href="#pkt401">401</a></td><td>Unknown - Download info; response to packet 23</td><td>String</td></tr>
+	<tr><td><a href="#pkt402">402</a></td><td>Unknown - DIDs for a specific download file ID?</td><td>String</td></tr>
+	<tr><td><a href="#pkt404">404</a></td><td>Unknown - Information about a specific download file ID?</td><td>String</td></tr>
+	<tr><td><a href="#pkt406">406</a></td><td>Unknown - Information about a specific downlaod file ID?</td><td>String</td></tr>
+	<tr><td><a href="#pkt450">450</a></td><td>Channel information (?)</td><td>Integer</td></tr>
+	<tr><td><a href="#pkt452">452</a></td><td>Unknown - Meta checksum for a specific download file ID?</td><td>Integer</td></tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt1">Authentication Data Packet</a></h3>
+
+<p>
+This packet contains the client's username and a hashed password (the authentication data for the user).
+It is sent from the client to the server in response to a <a href="#pkt128">Login Challenge</a> packet.
+The server will respond with one of three known packets:
+<ul>
+	<li><a href="#pkt130">Login Success</a> packet, upon successful authentication.</li>
+	<li><a href="#pkt129">Login Failure</a> packet, if the username/password pair don't match.</li>
+	<li><a href="#pkt134">New Version Available</a> packet, if the client's version is too old.  After
+		sending this packet, the server will no longer respond to any communication.</li>
+</ul>
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>1</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>String</td>
+		<td>The user name of the user that is attempting to log in.</td>
+	</tr>
+	<tr>
+		<td>password</td>
+		<td>String</td>
+		<td>The salted username and password of the user that is attempting to log in.  The string is
+			exactly 40 characters long and represents an SHA-1 hash computed per the following pseudocode:
+<pre>
+String a = username + password + "UltimateArena";
+int128 a_hash = ComputeSHA1(a);
+String b = ToHexString(a_hash) + salt;
+int128 b_hash = ComputeSHA1(b);
+String result = ToHexString(b_hash);
+</pre>
+			The 'salt' value is that provided in the <a href="#pkt128">Login Challenge</a> packet.  The ToHexString
+			function must return lower case characters for the SHA1 hash to be computed correctly.  The "+" operators
+			indicate string concatenation.  The SHA-1 hash is computed on the string data, encoded to UTF-8.
+		</td>
+	</tr>
+	<tr>
+		<td>flags</td>
+		<td>Integer</td>
+		<td>The purpose of this integer value is unknown.  In all observed data it has been 0.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt2">Chat Message Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message is sent by the client to the server, or directly to another
+user via UDP. The message can represent a number of things:
+</p>
+
+<ul>
+	<li>An content message (e.g. "hi there")</li>
+	<li>An indication of whether the user is typing or not</li>
+	<li>A list of the client's details (IP address, open UDP port, etc)</li>
+	<li>An acknowledgement of that a message from the peer was received</li> 
+</ul> 
+
+<p>
+When chat messages are sent via the server, they will be received by the peer as
+a <a href="#pkt133">Server Routed Chat Message</a>.
+</p> 
+
+<p>
+If communication is to be routed via the XFire server, client information
+messages should be sent regularly to prevent "high latency warnings" where
+the peer is a real XFire client. In OpenFire, these are sent with each real
+message, up to once every 5 seconds. It has not been determined what the
+threshold is for the XFire client to start reporting latency warnings.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>2</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server, Client to Client</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>sid</td>
+		<td>Session ID</td>
+		<td>The session ID of the peer this message is intended for.</td>
+	</tr>
+	<tr>
+		<td>peermsg</td>
+		<td>string keyed map</td>
+		<td>Contains the real content of the message. See below for the
+		    structure of each payload.
+		</td>
+	</tr>
+</table>
+
+<p>
+The contents of the peermsg map vary depending on what this chat message
+represents. What is represented is indicated in the "msgtype" attribute
+in the map, a 32-bit integer value.
+</p>
+
+<ul>
+	<li>
+		<p><em>msgtype = 0</em> - a content message:</p>
+		<table>
+			<tr>
+				<th>Attribute Name</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+			<tr>
+				<td>imindex</td>
+				<td>32-bit integer</td>
+				<td>The "index" of this message within the conversation log.
+				    Used as a hint of message order, incremented for each
+				    message sent.</td>
+			</tr>
+			<tr>
+				<td>im</td>
+				<td>string</td>
+				<td>The actual message (e.g. "hello")
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li>
+		<p><em>msgtype = 1</em> - an acknowledgement message:</p>
+		<table>
+			<tr>
+				<th>Attribute Name</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+			<tr>
+				<td>imindex</td>
+				<td>32-bit integer</td>
+				<td>The "index" of the message we are acknowledging. Corresponds
+				    to the imindex in the message the peer sent.
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li>
+		<p><em>msgtype = 2</em> - a client information message:</p>
+		<table>
+			<tr>
+				<th>Attribute Name</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+			<tr>
+				<td>ip</td>
+				<td>IPv4 address (32-bit int)</td>
+				<td>The public IPv4 address of this user.</td>
+			</tr>
+			<tr>
+				<td>port</td>
+				<td>32-bit int (legal range 0-65535)</td>
+				<td>The public UDP port of this user.</td>
+			</tr>
+			<tr>
+				<td>localip</td>
+				<td>IPv4 address (32-bit int)</td>
+				<td>The LAN IPv4 address of this user.</td>
+			</tr>
+			<tr>
+				<td>localport</td>
+				<td>32-bit int (legal range 0-65535)</td>
+				<td>The LAN UDP port of this user (not necessarily
+				    the same as the public port, depending on how
+				    the use of NAT or firewall)</td>
+			</tr>
+			<tr>
+				<td>status</td>
+				<td>32-bit int</td>
+				<td>
+					The purpose of this field has not been determined, in
+				    all analysed data to date it has been 0.
+				</td>
+			</tr>
+			<tr>
+				<td>salt</td>
+				<td>string</td>
+				<td>
+					A salt string; it is not known what this is used for
+				    (it is always present but does not appear to be used when 
+				    communicating via the server)
+				</td>
+			</tr>
+		</table>
+	</li>
+	<li>
+		<p><em>msgtype = 3</em> - a typing notification:</p>
+		<table>
+			<tr>
+				<th>Attribute Name</th>
+				<th>Type</th>
+				<th>Details</th>
+			</tr>
+			<tr>
+				<td>imindex</td>
+				<td>32-bit integer</td>
+				<td>The "index" of the message that will be sent if the
+				    user sends the pending content message.
+				</td>
+			</tr>
+			<tr>
+				<td>typing</td>
+				<td>32-bit integer</td>
+				<td>A boolean indicating whether the user is typing or not
+				    (1 is typing, 0 is not typing).
+				</td>
+			</tr>
+		</table>
+	</li>
+</ul>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt3">Client Version Packet</a></h3>
+
+<p>
+This contains a number identifying the Xfire client version.  It should be the first packet sent
+from the client to the server immediately after the "UA01" synchronization key.  The number appears to
+reflect the minor revision of the official Xfire client.  So, for example, the official Xfire client
+version 1.85 sends number 85 in this packet.  After successful authentication (see
+<a href="#pkt1">Authentication Data Packet</a>), the Xfire server may respond with a
+<a href="#pkt134">Version Too Old</a> packet if the number indicated in this packet is older than the
+current official Xfire client version.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>3</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>version</td>
+		<td>Integer</td>
+		<td>The version number of the client.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt5">Request Info for Friend of Friend</a></h3>
+
+<p>
+This packet is used to request information for Friends of Friends.  The client uses the session IDs sent to
+it by the initial <a href="#pkt135">Game Status</a> packet.  That packet may contain session IDs for people
+that are not Friends.  This packet is used to request information about them.  The response is a
+<a href="#pkt136">Friend of Friend Info</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>5</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>sid</td>
+		<td>UUID Array</td>
+		<td>Array of the session IDs for which the client is requesting information.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt6">Add Friend Request Packet</a></h3>
+
+<p>
+This packet requests that a friend be added.  The other user must accept the friendship request for the
+user to be added to your friends list.  The request includes a personalized message.  The server will
+respond with a <a href="#pkt137">confirmation</a>, that may indicate an error occurred.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>6</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>String</td>
+		<td>The username of the user to invite.</td>
+	</tr>
+	<tr>
+		<td>msg</td>
+		<td>String</td>
+		<td>The personalized message to be displayed to the recipient.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt7">Accept Add Friend Request</a></h3>
+
+<p>
+The client sends this packet in response to an <a href="#pkt138">Incoming Add Friend Request</a> when the
+user wishes to accept the invitation.  It simply contains the username of the requestor.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>7</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>string</td>
+		<td>The username of the invitation to accept.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt8">Decline Add Friend Request</a></h3>
+
+<p>
+The client sends this packet in response to an <a href="#pkt138">Incoming Add Friend Request</a> when the
+user wishes to decline the invitation.  It simply contains the username of the requestor.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>8</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>string</td>
+		<td>The username of the invitation to decline.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt9">Remove Friend Packet</a></h3>
+
+<p>
+This packet requests that a friendship be terminated.  The other user recieves a
+<a href="#pkt139">Friend Removed</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>9</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer</td>
+		<td>The user ID of the friend to remove.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt10">Change Preferences Packet (?)</a></h3>
+
+<p>
+This appears to contain a change-to-preferences packet.  Best guess is that the primary packet attribute
+(<code>prefs</code>) contains a map, the keys of that map represent specific preference settings.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>10</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>prefs</td>
+		<td>Attribute Map (Integer Key)</td>
+		<td>Preference settings (see below).</td>
+	</tr>
+</table></p>
+
+<p>The content of the <code>prefs</code> attribute map depends upon the specific settings being changed.
+It appears that the presence or absense assumes some default settings (best guess).
+<table>
+	<tr><th>Key</th><th>Type</th><th>Preference Default</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show my friends" option.</td>
+	</tr>
+	<tr>
+		<td>0x02</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show my game server data" option.</td>
+	</tr>
+	<tr>
+		<td>0x03</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show on my profile and miniprofile" option.</td>
+	</tr>
+	<tr>
+		<td>0x06</td>
+		<td>String</td>
+		<td>0</td>
+		<td>This enables/disables the Chat tab's "Show time stamp in chat window" option.</td>
+	</tr>
+	<tr>
+		<td>0x08</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show friends of my friends" option.</td>
+	</tr>
+	<tr>
+		<td>0x09</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show my offline friends" option.</td>
+	</tr>
+	<tr>
+		<td>0x0A</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Game Status "Show nicknames when available" option.</td>
+	</tr>
+	<tr>
+		<td>0x0B</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Other Activity "Show my voice chat server to my friends" option.</td>
+	</tr>
+	<tr>
+		<td>0x0C</td>
+		<td>String</td>
+		<td>1</td>
+		<td>This enables/disables the Other Activity "Show people when I type to them" option.</td>
+	</tr>
+</table</p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt12">Look up User Packet</a></h3>
+
+<p>
+This is sent by a client to search for other users.  It's part of the Add Friend dialog.  The Xfire client
+puts up one text box that populates the "name" attribute of this packet.  The server responds with a
+<a href="#pkt143">User Search Results</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>12</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>String</td>
+		<td>The main search string.  Matches against username, first name, last name, and/or email address.</td>
+	</tr>
+	<tr>
+		<td>fname</td>
+		<td>String</td>
+		<td>A search string which will match only on first names.</td>
+	</tr>
+	<tr>
+		<td>lname</td>
+		<td>String</td>
+		<td>A search string which will match only on last names.</td>
+	</tr>
+	<tr>
+		<td>email</td>
+		<td>String</td>
+		<td>A search string which will match only on email addresses.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt13">Connection Keep-alive Packet</a></h3>
+
+<p>
+This packet must be sent periodically by the client to notify the server that it is still alive.  The
+maximum period that a client can wait between messages is not known.  Every 60 seconds appears to work
+properly.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>13</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>value</td>
+		<td>Integer</td>
+		<td>Unknown.  In all analyzed data it has had the value zero.</td>
+	</tr>
+	<tr>
+		<td>stats</td>
+		<td>Integer Array</td>
+		<td>Unknown.  In all observed data this been an empty array.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt14">Change Nickname Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to change their nickname.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>14</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>nick</td>
+		<td>String</td>
+		<td>The new nickname.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt16">Client Information Packet</a></h3>
+
+<p>
+The client sends this packet to the Xfire server as soon as it has successfully logged in (received a
+<a href="#pkt130">Login Success</a> packet).  It indicates the language in use by the client as well as
+the skin and associated theme.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>16</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>lang</td>
+		<td>String</td>
+		<td>A language or locale string for the client's configuration.  Not all exact values and
+			their associated meanings are known, but "us" appears to mean United States English.</td>
+	</tr>
+	<tr>
+		<td>skin</td>
+		<td>String</td>
+		<td>The skin currently being used by the user's client.  The default skin in new Xfire
+			installations (as of this writing) was "Shadow".</td>
+	</tr>
+	<tr>
+		<td>theme</td>
+		<td>String</td>
+		<td>The currently selected theme (associated with the skin) in the user's client.  The default
+			theme in new Xfire installations (as of this writing) was "default".</td>
+	</tr>
+	<tr>
+		<td>partner</td>
+		<td>String</td>
+		<td>A string of unknown purpose.  In all observed data, this has been an empty string.</td>
+	</tr>
+</table></p>
+
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt17">Client Network Information Packet</a></h3>
+
+<p>
+The client sends this packet to indicate its view of the network configuration.  It is sent shortly
+after a succeful log in (see <a href="#pkt130">Login Success</a> packet).
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>17</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>conn</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose, possibly indicating the type of connection.  In all
+			observed data this has had the value 2.</td>
+	</tr>
+	<tr>
+		<td>nat</td>
+		<td>Integer</td>
+		<td>This appears to be a boolean value indicating whether the client is behind a NAT device.</td>
+	</tr>
+	<tr>
+		<td>sec</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose.  In all analyzed data this has had the value 5.</td>
+	</tr>
+	<tr>
+		<td>clientip</td>
+		<td>Integer</td>
+		<td>This appears to be the client's local IP address in non-network byte order (that is, little
+			endian.  This is the direct IP address of the client's machine.</td>
+	</tr>
+	<tr>
+		<td>naterr</td>
+		<td>Integer</td>
+		<td>This appears to be a boolean value indicating whether NAT override errors were detected.  The
+			official Xfire client supports UPnP and thus can create openings in certain NAT devices to
+			allow peer to peer communication.</td>
+	</tr>
+	<tr>
+		<td>upnpinfo</td>
+		<td>String</td>
+		<td>A string indicating the UPnP configuration string the client managed to successfully use.  This
+			may be an empty string.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt18">Client Skin Packet</a> (Deprecated)</h3>
+
+<p>This packet was once used to communicate client skin and theme information to the Xfire server.
+It appears to have been abandoned in favor of the <a href="#pkt16">Client Information</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>18</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt24">Unknown Packet 24</a></h3>
+
+<p>
+This appears to be related to using a download channel.  When climsg = 17700, it apears to be a request
+for update (new file?) information for a channel.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>24</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>climsg</td>
+		<td>Integer</td>
+		<td>This appears to be a command, similar to chat message packets.</td>
+	</tr>
+	<tr>
+		<td>msg</td>
+		<td>Attribute Map (Integer Key)</td>
+		<td>This appears to have different content depending upon the climsg attribute value.</td>
+	</tr>
+</table></p>
+
+<p>The content of the <code>msg</code> attribute depends upon the <code>climsg</code> attribute.
+<ul>
+	<li>
+		<p><em>When climsg = 0</em> - A request for channel update information?
+			<table>
+			<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+			<tr>
+				<td>0x4f</td>
+				<td>Integer Array</td>
+				<td>Appears to be the channel number</td>
+			</tr>
+			<tr>
+				<td>0x50</td>
+				<td>Integer Array</td>
+				<td>This appears to be the last known timestamp.  Guess is the server uses this to
+					determine the range of files updated in the channel when returning results via
+					packet <a href="#pkt450">450</a>.</td>
+			</tr>
+			</table>
+		</p>
+	</li>
+</ul></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt26">Create New Custom Friend Group Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to request an ID for a new custom friend group.  The server
+responds with a <a href="#pkt153">New Custom Friend Group ID</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>26</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x1A</td>
+		<td>String</td>
+		<td>The new custom friend group's name.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt27">Delete Custom Friend Group Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to delete a custom friend group.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>27</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer</td>
+		<td>The custom friend group's ID to delete.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt28">Rename Custom Friend Group Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to rename a custom friend group.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>28</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer</td>
+		<td>The custom friend group's ID.</td>
+	</tr>
+	<tr>
+		<td>0x1A</td>
+		<td>String</td>
+		<td>The new name for the custom friend group</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt29">Add Friend to Custom Friend Group Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to add a friend to a custom friend group.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>29</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>The friend's user ID to add to the custom group.</td>
+	</tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer</td>
+		<td>The custom friend group ID to which to add the friend.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt30">Remove Friend from Custom Friend Group Packet</a></h3>
+
+<p>
+The client sends this to the Xfire server to remove a friend from a custom friend group.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>30</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>The friend's user ID to remove from the custom group.</td>
+	</tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer</td>
+		<td>The custom friend group ID from which to remove the friend.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt32">Status Text Change Packet</a></h3>
+
+<p>
+This packet changes the client status text message.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>32</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x2e</td>
+		<td>String</td>
+		<td>The new status text string.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt36">Change Friend Group List</a></h3>
+
+<p>
+This packet appears to reflect a change to the friend group list.  It appears to be analagous to
+<a href="#pkt163">Packet 163</a>.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>36</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer Array</td>
+		<td>Group ID.  Looks like group IDs zero (0), one (1), and two (2) may be the default groups for
+			Online Friends, Friends of Friends Playing, and Offline Friends.  Otherwise it appears to contain
+			a custom group ID.
+			<br>Value 2 appears to reflect the Offline Friends group.
+		</td>
+	</tr>
+	<tr>
+		<td>0x34</td>
+		<td>Integer Array</td>
+		<td>Possibly a group type.  A value of zero (0) was observed to be associated with a custom group, while
+			the value two (2) was associated with what are assumed to be standard groups.
+		</td>
+	</tr>
+	<tr>
+		<td>0x12</td>
+		<td>Integer Array</td>
+		<td>Unknown.  In all observed data the entries of this array were zeros.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt37">Info View Request ?</a></h3>
+
+<p>
+This packet appears to be a request for information for the Info View display.  The server appears to respond with
+packets <a href="#pkt172">172</a>, <a href="#pkt174">174</a>, <a href="#pkt182">182</a>, and <a href="#pkt176">176</a>.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>37</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Client to Server</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>This appears to be a user ID.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt128">Login Challenge Packet</a></h3>
+
+<p>
+This packet is sent from the server to the client once the server receives a <a href="#pkt3">Client Version</a>
+packet.  It contains a "salt" value that is required to compute the hashed password.  The client must
+respond with an <a href="#pkt1">Authentication Data</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>128</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>salt</td>
+		<td>String</td>
+		<td>The salt string (apparently representing a hexadecimal number) used to log in.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt129">Login Failure Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message is sent in response to a <a href="#pkt1">login request message</a>
+if the user's password was incorrect.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>129</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>reason</td>
+		<td>Integer</td>
+		<td>
+			A code perhaps used to indicate the reason for the failed login. 
+			In all analysed data this has had the value "0".
+		</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt130">Login Success Packet</a></h3>
+
+<p>
+This packet is one possible response to an <a href="#pkt1">Authentication Data</a> packet.  It is only
+sent if the version number from a <a href="#pkt3">Client Version</a> packet is new enough and the hashed
+username/password combination is correct.  It indicates a successful log-in.  After sending this packet,
+the Xfire server responds with a variety of packets that configure the client to communicate with
+contacts on the network.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>130</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer</td>
+		<td>The user's unique identifier on the network.</td>
+	</tr>
+	<tr>
+		<td>sid</td>
+		<td>UUID</td>
+		<td>The unique session identifier for this connection.  It is distinct from all other connections,
+			active or past.</td>
+	</tr>
+	<tr>
+		<td>nick</td>
+		<td>String</td>
+		<td>The user's nick name.  This is displayed in the Xfire GUI if set.</td>
+	</tr>
+	<tr>
+		<td>status</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose.  It has taken on several different values but the exact meaning of those numbers is indeterminant.</td>
+	</tr>
+	<tr>
+		<td>dlset</td>
+		<td>String</td>
+		<td>A string of unknown purpose.  In all observed data this has been an empty string.</td>
+	</tr>
+	<tr>
+		<td>p2pset</td>
+		<td>String</td>
+		<td>A string of unknown purpose.  In all observed data this has been an empty string.</td>
+	</tr>
+	<tr>
+		<td>clntset</td>
+		<td>string</td>
+		<td>A string of unknown purpose.  In all observed data this has been an empty string.</td>
+	</tr>
+	<tr>
+		<td>minrect</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose.  In all observed data this has been the value 1 (0x1).</td>
+	</tr>
+	<tr>
+		<td>maxrect</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose.  In all observed data this has been the value 900 (0x384).</td>
+	</tr>
+	<tr>
+		<td>ctry</td>
+		<td>Integer</td>
+		<td>An integer of unknown purpose.  In all observed data this has been the value 840 (0x348).
+			One guess is this is a unique country code for the geographic location of the client.</td>
+	</tr>
+	<tr>
+		<td>n1</td>
+		<td>Integer</td>
+		<td>This appears to be an IP address in non-network order (that is, little endian).
+			<br>
+			MS- In all observed data this has had the value 0xcedc2893, or 206.220.40.147, which
+			resolves to nat1.xfire.com.
+			<br>
+			IM- In all observed data this has had the value 204.71.190.131, which resolves to nat1.sv.xfire.com.
+		</td>
+	</tr>
+	<tr>
+		<td>n2</td>
+		<td>Integer</td>
+		<td>This appears to be an IP address in non-network order (that is, little endian).
+			<br>
+			MS- In all observed data this has had the value 0xcedc2894, or 206.220.40.148, which
+			resolves to nat2.xfire.com.
+			<br>
+			IM- In all observed data this has had the value 204.71.190.132, which resolves to nat2.sv.xfire.com.
+		</td>
+	</tr>
+	<tr>
+		<td>n3</td>
+		<td>Integer</td>
+		<td>This appears to be an IP address in non-network order (that is, little endian).
+			<br>
+			MS- In all observed data this has had the value 0xcedc2895, or 206.220.40.149, which
+			resolves to nat3.xfire.com.
+			<br>
+			IM- In all observed data this has had the value 204.71.190.133, which resolves to nat3.sv.xfire.com.
+		</td>
+	</tr>
+	<tr>
+		<td>pip</td>
+		<td>Integer</td>
+		<td>This appears to be the indicated public IP address of the client in non-network order (that is,
+			little endian).  This is the IP address of the client as viewed by the Xfire server.  This may be
+			different from the client's local IP address if the client is behind a NAT.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt131">Friend List Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message provides the list of friends for the current user after a successful login,
+with some essential
+details for future operations dealing with these friends.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>131</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer list</td>
+		<td>A list containing the unique ID of each friend.</td>
+	</tr>
+	<tr>
+		<td>friends</td>
+		<td>String list</td>
+		<td>A list containing the usernames of each friend.</td>
+	</tr>
+	<tr>
+		<td>nick</td>
+		<td>String list</td>
+		<td>A list containing the "nick name" of each friend, i.e. the name that will be displayed instead
+			of the username if set. If no nick name has been set, this will be an empty string.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt132">Session ID List Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message provides a list of session IDs for friends who are currently online,
+or for friends who
+have just come online mid-way through a session. This message
+type is also used to indicate when friends
+have gone offline.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>132</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer list</td>
+		<td>A list containing the unique ID of each who has come online or gone offline.</td>
+	</tr>
+	<tr>
+		<td>sid</td>
+		<td>Session ID list</td>
+		<td>A list containing the session IDs for each user. If the session ID is 0, this indicates that
+			the friend has gone offline. Otherwise, it is a real session ID and indicates the user is
+			online.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt133">Server Routed Chat Message Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message type is identical to a normal <a href="#pkt2">chat message</a>, but
+is sent down to the client
+via the TCP link to the server. This allows
+clients to communicate where they cannot open a public UDP port
+and directly
+communicate with peers.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>133</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to client</td>
+	</tr>
+</table>
+
+<p>
+See the description of the normal <a href="#pkt2">chat message</a> for a full
+description of the contents
+of the message.
+</p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt134">New Version Available Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+<p>
+This message is sent by the server to the client if it reports a version number
+which is lower than the currently released XFire client. It contains the
+details to download newer client versions. The message is composed of a number
+of string lists, where values at matching indices in these lists collectively
+represent a new version.
+</p>
+
+<table>
+	<tr>
+		<th>Packet ID</th>
+		<td>134</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>string</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>version</td>
+		<td>Integer list</td>
+		<td>
+			The list of new version numbers available.
+		</td>
+	</tr>
+	<tr>
+		<td>file</td>
+		<td>string list</td>
+		<td>
+			The links to the new XFire client versions. An example of a URL
+			sent is "<code>http://seed2.da.xfire.com/79.exe</code>".
+			All files observed to date have been .exe update installers which 
+			must be run within the XFire installation path.
+		</td>
+	</tr>
+	<tr>
+		<td>command</td>
+		<td>Integer list</td>
+		<td>
+			An integer list of unknown purpose. In all data observed so far,
+			the integers have had the value "1".
+		</td>
+	</tr>
+	<tr>
+		<td>fileid</td>
+		<td>Integer list</td>
+		<td>
+			An integer list of unknown purpose. In all data observed so far,
+			the integers have had the value "0".
+		</td>
+	</tr>
+	<tr>
+		<td>flags</td>
+		<td>Integer</td>
+		<td>
+			A 32-bit integer of unknown purpose. In all data observed so far
+			this has had the value 0.
+		</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt135">Game Status Change Packet</a></h3>
+
+<p>
+This packet notifies of a change in the associated user's gaming status.  The users are identified by
+their session IDs.  The game IDs are the numbers used in the xfire_games.ini file of the official Xfire
+client.  They are not listed in this document.  Note that the session IDs listed in this packet may be
+associated with a friend of a friend, and not a friend.  Refer to <a href="#FoFDesc">Friends of Friends</a>.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>135</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>sid</td>
+		<td>UUID Array</td>
+		<td>The session IDs of the user who's game status is changing.</td>
+	</tr>
+	<tr>
+		<td>gameid</td>
+		<td>Integer Array</td>
+		<td>The game ID for what the user is now playing.  Is 0 when the user leaves a game.
+			Note that the value here appears to have extra data.  The least significant 16 bits represent the
+			normal TCP port.  It is not yet clear what the most significant 16 bits represent.
+		</td>
+	</tr>
+	<tr>
+		<td>gip</td>
+		<td>Integer Array</td>
+		<td>The IP address of the server the person is playing in, if any; 0 otherwise.</td>
+	</tr>
+	<tr>
+		<td>gport</td>
+		<td>Integer Array</td>
+		<td>The port on the game server to use for querying, if available; 0 otherwise.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt136">Friends of Friends Info</a></h3>
+
+<p>
+This packet is sent in response to a <a href="#pkt5">Friend of Friend</a> information request.  It contains
+the username, nickname, and how we know this person (the friend ID of the mutual friend).
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>136</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>fnsid</td>
+		<td>UUID Array</td>
+		<td>The session ID of the Friend of Friend.</td>
+	</tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer Array</td>
+		<td>The user ID of the Friend of Friend.</td>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>String Array</td>
+		<td>The user name of the Friend of Friend.</td>
+	</tr>
+	<tr>
+		<td>nick</td>
+		<td>String Array</td>
+		<td>The nick name of the Friend of Friend.</td>
+	</tr>
+	<tr>
+		<td>friends</td>
+		<td>Array of Array of Integer</td>
+		<td>Each top-level array contains an array of Integers (so, it's kind of a 2D array).  Those
+			integers represent the user IDs of the mutual friends.  The Xfire client displays these in
+			a tooltip when hovering over the user name in the list.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt137">Outgoing Add-Friend Request Confirmation Packet</a></h3>
+
+<p>
+This packet is sent to confirm that the friend addition will be conveyed to the other user.  It is sent
+in response to an <a href="#pkt6">Add Friend Request</a> packet.  This does not indicate whether the other
+user accepted or declined the request.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>137</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<th>Attribute Name</th>
+		<th>Type</th>
+		<th>Details</th>
+	</tr>
+	<tr>
+		<td>name</td>
+		<td>String</td>
+		<td>The username of the user to invite.</td>
+	</tr>
+	<tr>
+		<td>result</td>
+		<td>Integer</td>
+		<td>The result.  0 = success (the message will be conveyed).  Anything else = fail?</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt138">Incoming Add Friend Request Packet</a></h3>
+
+<p>
+This packet is sent to the client when another user wants to be your friend (via an <a href="#pkt6">Add
+Friend Request</a> packet.  It includes the personalized message from the other user.  The client must respond
+with either an <a href="#pkt7">Accept</a> or <a href="#pkt8">Decline</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>138</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>String Array</td>
+		<td>The user names of the users that are inviting you.</td>
+	</tr>
+	<tr>
+		<td>nick</td>
+		<td>String Array</td>
+		<td>The nick names of the users that are inviting you.</td>
+	</tr>
+	<tr>
+		<td>msg</td>
+		<td>String Array</td>
+		<td>The personalized messages from the users that are inviting you.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt139">Friend Removed Packet</a></h3>
+
+<p>
+This packet is to notify that a friend has removed you from their friend list (via a <a href="#pkt9">Remove
+Friend</a> packet).
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>139</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>userid</td>
+		<td>Integer</td>
+		<td>The user ID of the friend that removed you.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt141">User Preferences Packet</a></h3>
+
+<p>
+This packet appears to contain settings specific to the user that is logged in.  It is sent from the server
+to the client shortly after successful log-in.  Refer to the <a href="#pkt10">Change Preferences</a> packet
+for a list of definitions for the <code>0x4c</code> attribute map.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>141</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x4c</td>
+		<td>Attribute Map (Integer Keys)</td>
+		<td>Various.  See <a href="#pkt10">here</a> for definitions</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt143">User Search Results Packet</a></h3>
+
+<p>
+This is the server's response to a <a href="#pkt12">user search</a>.  It contains the details for Xfire
+users that matched the search criteria.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>143</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>name</td>
+		<td>String Array</td>
+		<td>User names of matching users.</td>
+	</tr>
+	<tr>
+		<td>fname</td>
+		<td>String Array</td>
+		<td>First names of matching users.</td>
+	</tr>
+	<tr>
+		<td>lname</td>
+		<td>String Array</td>
+		<td>Last names of matching users.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt144">Server Keep-alive Response</a></h3>
+
+<p>
+This packet is the server's response to the <a href="#pkt13">Keep-alive</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>144</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>value</td>
+		<td>Integer</td>
+		<td>Unknown.  In observed data it has had the value zero.</td>
+	</tr>
+</table></p>
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt145">Disconnect Notice Packet</a></h3>
+
+<p>
+This packet appears to be sent to notify the client that the session will be terminated.  For example, if
+you log in from another location the first session will receive this notice and will no longer respond to
+packets.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>145</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>reason</td>
+		<td>Integer</td>
+		<td>Reason code for the disconnect.  A value of 1 indicates the user is now logged in elsewhere.</td>
+	</tr>
+	<tr>
+		<td>minrect</td>
+		<td>Integer</td>
+		<td>Unknown.  In observed data it has had the value zero.</td>
+	</tr>
+	<tr>
+		<td>maxrect</td>
+		<td>Integer</td>
+		<td>Unknown.  In observed data it has had the value zero.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt147">Voice Chat Info</a></h3>
+
+<p>
+This packet appears to uniquely identify the voice chat information in use.  It identifies whether the
+specific session is using TeamSpeak or Ventrilo, and the host and port for the connection.  Those are the
+only two known applications on the xfire_games.ini file that are not games, and their information is
+indicated here instead of via a <a href="#pkt135">Game Status Change</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>147</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>sid</td>
+		<td>UUID Array</td>
+		<td>Session ID of the friend.</td>
+	</tr>
+	<tr>
+		<td>vid</td>
+		<td>Integer Array</td>
+		<td>Game ID of the application in use (32 for TeamSpeak and 33 for Ventrilo).</td>
+	</tr>
+	<tr>
+		<td>vip</td>
+		<td>Integer Array</td>
+		<td>IP address of the server to which the friend is connected.</td>
+	</tr>
+	<tr>
+		<td>vport</td>
+		<td>Integer Array</td>
+		<td>Port on the server to which the friend is connected.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt151">Custom Friend Group Names</a></h3>
+
+<p>
+This packet identifies the custom friend groups and the display names of those groups.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>151</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer Array</td>
+		<td>Contains a list of friend group identifiers (integers).</td>
+	</tr>
+	<tr>
+		<td>0x1a</td>
+		<td>String Array</td>
+		<td>The name of the friend group.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt152">Custom Friend Group Members</a></h3>
+
+<p>
+This packet identifies the members of custom friend groups.  Note that a given user ID may be a member of
+more than one group (or no groups).
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>152</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer Array</td>
+		<td>Friend user ID.</td>
+	</tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer Array</td>
+		<td>Custom friend group ID.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt153">New Custom Friend Group Name</a></h3>
+
+<p>
+This packet returns the identifier of the new friend group.  This is sent in response to the
+<a href="#pkt26">Create Custom Friend Group</a> packet.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>151</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer</td>
+		<td>The identifier of the new group.</td>
+	</tr>
+	<tr>
+		<td>0x1a</td>
+		<td>String</td>
+		<td>The name of the friend group.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt154">Friend Status Text Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt161">Nickname Changed</a></h3>
+
+<p>
+This packet is sent to the client when a nickname changes.  This may also be sent to the client when
+the user's own nickname is changed from their web profile page on www.xfire.com.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>161</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>User ID</td>
+	</tr>
+	<tr>
+		<td>0x0d</td>
+		<td>String</td>
+		<td>The new nickname.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt163">Friend Group Information Packet</a></h3>
+
+<p>
+This packet's purpose is not entirely clear.  It contains a list of friend groups (but not all friend
+groups).  It includes the standard groups (IDs 0, 1, and 2), which don't appear in any of the other
+group management packets.  It lists some of the custom groups identified by the <a href="#pkt151">Custom
+Friend Group Name</a> packet, but not all of them.  In one case, where the group had no current members,
+it was displayed in the official Xfire client's list at the end but was not included in this packet.  It
+is not known why that group was not included in this packet, so this packet must likely contain flags or
+settings for specific friend groups.
+</p>
+<p>
+In some cases reported by MacFire users, apparently this list does <em>not</em> identify the list of groups
+to display.  In fact, the <a href="#pkt141">user options</a> packet showed that all groups should have been
+displayed but there was nothing included in this packet.  So, this may simply list specific options or ordering
+or something.  For now, it should be assumed that the user <a href="#pkt141">options packet</a> identifies which
+groups should be displayed.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>163</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x19</td>
+		<td>Integer Array</td>
+		<td>Group ID.  Standard group IDs are as follows:
+			<br>0 = Online Friends (guess)
+			<br>1 = Friends of Friends Playing
+			<br>2 = Offline Friends
+			<br>Otherwise it contains a custom group ID per the <a href="#pkt151">Custom Friend Group Name</a> packet.
+		</td>
+	</tr>
+	<tr>
+		<td>0x34</td>
+		<td>Integer Array</td>
+		<td>Possibly a group type.  A value of zero (0) was observed to be associated with a custom group, while
+			the value two (2) was associated with what are assumed to be standard groups.
+		</td>
+	</tr>
+	<tr>
+		<td>0x12</td>
+		<td>Integer Array</td>
+		<td>Unknown.  In all observed data the entries of this array were zeros.</td>
+	</tr>
+</table>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt172">Unknown Packet 172</a></h3>
+
+<p>
+This packet is of unknown purpose.  It appears to be a response to <a href="#pkt37">Unknown Packet 37</a>
+which contains a user ID.  This is likely information for the Info View display.  It may relate to either game
+info or clan info.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>172</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>This appears to be a user ID.</td>
+	</tr>
+	<tr>
+		<td>0x5c</td>
+		<td>Integer Array</td>
+		<td>Unknown.  In one instance this appeared to contain IDs of some sort, but the numbers were too high for
+			user IDs.  In all other observed data this has been an empty array (zero entries).</td>
+	</tr>
+	<tr>
+		<td>0x21</td>
+		<td>Integer Array</td>
+		<td>Unkonwn.  Best guess is it's a game ID.  In all other observed data this has been an empty
+		array (zero entries) so it's hard to be certain.</td>
+	</tr>
+	<tr>
+		<td>0x22</td>
+		<td>Integer Array</td>
+		<td>Unknown.  Best guess is it's an IP address.  In all other observed data this has been an empty
+			array (zero entries).</td>
+	</tr>
+	<tr>
+		<td>0x23</td>
+		<td>Integer Array</td>
+		<td>Unknown.  Could be port numbers, but it's hard to be sure.  It had several different values.
+			In all other observed data this has been an empty array (zero entries).</td>
+	</tr>
+	<tr>
+		<td>0x54</td>
+		<td>String Array</td>
+		<td>Unknown.  These are comment strings of some sort.  They <em>could</em> be the custom status messages
+			for users related to the person whose ID appears above in item 0x01.  In all other observed data
+			this has been an empty array (zero entries).</td>
+	</tr>
+	<tr>
+		<td>0x50</td>
+		<td>Integer Array</td>
+		<td>Unknown.  Could be IP addresses of some sort.  In all other observed data this has been an empty
+		array (zero entries).</td>
+	</tr>
+	<tr>
+		<td>0x5e</td>
+		<td>String Array</td>
+		<td>Unknown.  In some observed data it contained a UUID string enclosed in curly braces:
+			"{XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX}".  The purpose of the UUID strings is unknown.
+			In all other observed data this has been an empty array (zero entries).</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt173">Unknown Packet 173</a></h3>
+
+<p>
+This packet is of unknown purpose.  It contains a user ID.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>173</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>This appears to be a user ID.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt174">Unknown Packet 174</a></h3>
+
+<p>
+This packet is sent to the client when a friend's avatar is changed from the website.  It appears to be a second response to <a href="#pkt37">Unknown Packet 37</a>
+which contains a user ID.  This is likely additional information for the Info View display.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>174</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>user ID.</td>
+	</tr>
+	<tr>
+		<td>0x34</td>
+		<td>Integer</td>
+		<td>Avatar Type <br />
+			<dl><dt>00
+			</dt><dd>No avatar to display. The user either chose "No avatar" or "External avatar"
+			</dd><dd>avatarNumber value will be '00 00 00 00'
+			</dd><dt>01
+			</dt><dd>Using one of the stock avatars in Xfire's avatar gallery.
+			</dd><dd>avatarNumber value is the index number. For example '01 00 00 00' stands for 001.gif.
+			</dd><dt>02
+			</dt><dd>Using uploaded avatar. Avatars cut from screenshots also qualify as uploaded avatars.
+			</dd><dd>avatarNumber value is the revision number, increasing each time the user updates his avatar.
+			</dd><dt>03
+			</dt><dd>Using the default avatar.
+			</dd><dd>avatarNumber value '00 00 00 00' stands for xfire.gif.
+			</dd></dl>
+		</td>
+	</tr>
+	<tr>
+		<td>0x1f</td>
+		<td>Integer</td>
+		<td>Avatar Number: Depends on value of Avatar Type, see above. <br/></td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt176">User Clan Affiliation</a></h3>
+
+<p>
+This packet appears to be a fourth response to packet <a href="#pkt37">37</a>.  It appears to contain a
+list of clans this person is a member of.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>176</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>This appears to be a user ID.</td>
+	</tr>
+	<tr>
+		<td>0x6c</td>
+		<td>Integer Array</td>
+		<td>Unknown, probably a clan ID.</td>
+	</tr>
+	<tr>
+		<td>0x72</td>
+		<td>String Array</td>
+		<td>It appears to be a clan name (same purpose as a friend's username)</td>
+	</tr>
+	<tr>
+		<td>0x81</td>
+		<td>String Array</td>
+		<td>It appears to be a clan display name (same purpose as a friend's nickname)</td>
+	</tr>
+	<tr>
+		<td>0x6d</td>
+		<td>String Array</td>
+		<td>It appears to be the user's name within the clan.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt182">Unknown Packet 182</a></h3>
+
+<p>
+This packet is of unknown purpose.  It appears to be a third response to <a href="#pkt37">Unknown Packet 37</a>
+which contains a user ID.  This is likely additional information for the Info View display.  Contents are unknown.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>182</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x01</td>
+		<td>Integer</td>
+		<td>This appears to be a user ID.</td>
+	</tr>
+	<tr>
+		<td>0x93</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x94</td>
+		<td>String Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x55</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x95</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x96</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x97</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x98</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x21</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x50</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+	<tr>
+		<td>0x54</td>
+		<td>Integer Array</td>
+		<td>Unknown.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt400">DID Packet</a></h3>
+<p><div style="color:red;">SECTION NEEDS UPDATES</div></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt401">Unknown Packet 401</a></h3>
+
+<p>
+This packet appears to contain more information about a specific DID.  It appears to include information
+on where to go get this DID.  I'm wondering if a DID is one part (chunk?) of an entire file.  It appears
+to be a response to a packet <a href="#pkt23">23</a>.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>401</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>did</td>
+		<td>DID</td>
+		<td>The DID.</td>
+	</tr>
+	<tr>
+		<td>ip</td>
+		<td>Integer</td>
+		<td>IPv4 address, not sure of what (the remove computer to get it from?)</td>
+	</tr>
+	<tr>
+		<td>port</td>
+		<td>Integer</td>
+		<td>Presumably the port on the remote computer.</td>
+	</tr>
+	<tr>
+		<td>localip</td>
+		<td>Integer</td>
+		<td>IPv4 address, not sure of what</td>
+	</tr>
+	<tr>
+		<td>localport</td>
+		<td>Integer</td>
+		<td>Presumably the port associated with the localip</td>
+	</tr>
+	<tr>
+		<td>status</td>
+		<td>Integer</td>
+		<td>Unknown</td>
+	</tr>
+	<tr>
+		<td>origin</td>
+		<td>Integer</td>
+		<td>Unknown</td>
+	</tr>
+	<tr>
+		<td>salt</td>
+		<td>String</td>
+		<td>A salt string, not sure what it is used for</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt402">Unknown Packet 402</a></h3>
+
+<p>
+This packet appears to contain a set of DIDs for a download file ID.  Still not 100% sure what the DIDs
+are used for (I still think they are "Download IDs").
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>402</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>fileid</td>
+		<td>Integer</td>
+		<td>The file ID.</td>
+	</tr>
+	<tr>
+		<td>withheld</td>
+		<td>Integer</td>
+		<td>Unknown</td>
+	</tr>
+	<tr>
+		<td>did</td>
+		<td>DID Array</td>
+		<td>Unknkown</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt404">Unknown Packet 404</a></h3>
+
+<p>
+This packet appears to contain more information about a file ID, including it's filename and the number of
+chunks required to download the file.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>404</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>String</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>fileid</td>
+		<td>Integer</td>
+		<td>The file ID.</td>
+	</tr>
+	<tr>
+		<td>size</td>
+		<td>Integer</td>
+		<td>Unknown</td>
+	</tr>
+	<tr>
+		<td>chunkcnt</td>
+		<td>Integer</td>
+		<td>Presumably the number of chunks to download to create a full file.</td>
+	</tr>
+	<tr>
+		<td>chunksize</td>
+		<td>Integer</td>
+		<td>Presumably the maximum size (in bytes) of each chunk.</td>
+	</tr>
+	<tr>
+		<td>filename</td>
+		<td>String</td>
+		<td>The name of the file after downloading and assembling.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt450">Channel Information (?)</a></h3>
+
+<p>
+This packet appears to contain information about a download channel's available updates.  It appears to
+be sent in response to packet <a href="#pkt24">24</a>.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>450</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x4f</td>
+		<td>Integer</td>
+		<td>The channel number.</td>
+	</tr>
+	<tr>
+		<td>0x50</td>
+		<td>Integer</td>
+		<td>Timestamp</td>
+	</tr>
+	<tr>
+		<td>0x21</td>
+		<td>Integer</td>
+		<td>Unknown</td>
+	</tr>
+	<tr>
+		<td>0x02</td>
+		<td>String</td>
+		<td>Appears to be the channel's name (e.g. channel 1000's name is "Xfire Updates").</td>
+	</tr>
+	<tr>
+		<td>0x51</td>
+		<td>Integer Array</td>
+		<td>Available file IDs.  These numbers appear in the associated channel .ini file, and as individual downloads metadata .ini files.</td>
+	</tr>
+	<tr>
+		<td>0x52</td>
+		<td>Integer Array</td>
+		<td>This appears to be a timestamp representing either the AddTime or ModifyTime for the file ID.</td>
+	</tr>
+	<tr>
+		<td>0x53</td>
+		<td>Integer Array</td>
+		<td>This appears to be a timestamp representing either the AddTime or ModifyTime for the file ID.</td>
+	</tr>
+</table></p>
+
+
+<!-- ************************************************************************************************ -->
+
+<h3><a id="pkt452">File ID Information (?)</a></h3>
+
+<p>
+This packet appears to contain a download file ID's "meta checksum".  The attribute <code>0x56</code> appears
+in the fileids.ini section for the associated file ID as the MetaChecksum.
+</p>
+
+<p><table>
+	<tr>
+		<th>Packet ID</th>
+		<td>452</td>
+	</tr>
+	<tr>
+		<th>Attribute Key Domain</th>
+		<td>Integer</td>
+	</tr>
+	<tr>
+		<th>Direction</th>
+		<td>Server to Client</td>
+	</tr>
+</table></p>
+
+<p>Attribute Map Contents:
+<table>
+	<tr><th>Key</th><th>Type</th><th>Details</th></tr>
+	<tr>
+		<td>0x51</td>
+		<td>Integer</td>
+		<td>The file ID.</td>
+	</tr>
+	<tr>
+		<td>0x56</td>
+		<td>String</td>
+		<td>Checksum string, 42 characters in length.  It is unknown how to compute this checksum.</td>
+	</tr>
+</table></p>
+
+
+</body>
+</html>

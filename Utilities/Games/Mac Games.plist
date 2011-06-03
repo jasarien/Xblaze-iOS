@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>AppPath</key>
+		<string>Age of Empires II</string>
+		<key>GameID</key>
+		<integer>4124</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Age of Empires III.app</string>
+		<key>GameID</key>
+		<integer>4679</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Age of Mythology</string>
+		<key>GameID</key>
+		<integer>4139</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Army Operations 2.5.0.app</string>
+		<key>GameID</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Athena Sword.app</string>
+		<key>GameID</key>
+		<integer>4275</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Battlefield 1942.app</string>
+		<key>GameID</key>
+		<integer>4105</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Breakthrough</string>
+		<key>GameID</key>
+		<integer>4150</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty 2 Demo.app</string>
+		<key>GameID</key>
+		<integer>4656</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty 2 Multiplayer.app</string>
+		<key>GameID</key>
+		<integer>4684</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty 2.app</string>
+		<key>GameID</key>
+		<integer>4683</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty 4.app</string>
+		<key>GameID</key>
+		<integer>5185</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty 4 Multiplayer.app</string>
+		<key>GameID</key>
+		<integer>5186</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty MP.app</string>
+		<key>GameID</key>
+		<integer>4120</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Call of Duty SP.app</string>
+		<key>GameID</key>
+		<integer>4119</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>CoD United Offensive MP.app</string>
+		<key>GameID</key>
+		<integer>4311</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>CoD United Offensive SP.app</string>
+		<key>GameID</key>
+		<integer>4310</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Civilization IV Warlords.app</string>
+		<key>GameID</key>
+		<integer>4866</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Close Combat First to Fight.app</string>
+		<key>GameID</key>
+		<integer>4446</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Command and Conquer 3.app</string>
+		<key>GameID</key>
+		<integer>5013</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Darwinia.app</string>
+		<key>GameID</key>
+		<integer>4431</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>DEFCON.app</string>
+		<key>GameID</key>
+		<integer>4920</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Diablo II (Carbon)</string>
+		<key>GameID</key>
+		<integer>4285</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Doom 3.app</string>
+		<key>GameID</key>
+		<integer>4271</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Dungeon Siege.app</string>
+		<key>GameID</key>
+		<integer>4100</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Elite Force HM 1.2</string>
+		<key>GameID</key>
+		<integer>4208</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Elite Force HM Carbon</string>
+		<key>GameID</key>
+		<integer>4208</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Elite Force Holomatch</string>
+		<key>GameID</key>
+		<integer>4208</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Empire at War.app</string>
+		<key>GameID</key>
+		<integer>4726</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Freecell.app</string>
+		<key>GameID</key>
+		<integer>4745</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Full Tilt Poker.app</string>
+		<key>GameID</key>
+		<integer>4995</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Galactic Battlegrounds</string>
+		<key>GameID</key>
+		<integer>4384</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Halo.app</string>
+		<key>GameID</key>
+		<integer>4107</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Heroes of Might and Magic V.app</string>
+		<key>GameID</key>
+		<integer>4815</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Homeworld 2.app</string>
+		<key>GameID</key>
+		<integer>4389</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>iostvoyHM-1.37.app</string>
+		<key>GameID</key>
+		<integer>4208</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Jedi Academy MP.app</string>
+		<key>GameID</key>
+		<integer>4158</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Jedi Knight II MP</string>
+		<key>GameID</key>
+		<integer>4160</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Klondike Forever.app</string>
+		<key>GameID</key>
+		<integer>4148</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Knights of the Old Republic.app</string>
+		<key>GameID</key>
+		<integer>4121</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>LEGO Star Wars.app</string>
+		<key>GameID</key>
+		<integer>4445</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Legion Arena.app</string>
+		<key>GameID</key>
+		<integer>4628</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Lineage.app</string>
+		<key>GameID</key>
+		<integer>4113</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>MAME OS X.app</string>
+		<key>GameID</key>
+		<integer>4268</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>MacMAME.app</string>
+		<key>GameID</key>
+		<integer>4268</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Maelstrom.app</string>
+		<key>GameID</key>
+		<integer>4986</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Medal of Honor</string>
+		<key>GameID</key>
+		<integer>4114</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Myst</string>
+		<key>GameID</key>
+		<integer>4764</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Nascar 2003</string>
+		<key>GameID</key>
+		<integer>4207</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Neverwinter Nights.app</string>
+		<key>GameID</key>
+		<integer>4108</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>NOLF2.app</string>
+		<key>GameID</key>
+		<integer>4305</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Prey.app</string>
+		<key>GameID</key>
+		<integer>4858</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Quake 4.app</string>
+		<key>GameID</key>
+		<integer>4678</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Quake3.app</string>
+		<key>GameID</key>
+		<integer>4111</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Raven Shield.app</string>
+		<key>GameID</key>
+		<integer>4141</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Rise of Nations Gold.app</string>
+		<key>GameID</key>
+		<integer>4135</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Sauerbraten.app</string>
+		<key>GameID</key>
+		<integer>5055</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Second Life.app</string>
+		<key>GameID</key>
+		<integer>4179</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>SimCity 4.app</string>
+		<key>GameID</key>
+		<integer>4127</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Spearhead</string>
+		<key>GameID</key>
+		<integer>4152</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Starcraft (Carbon)</string>
+		<key>GameID</key>
+		<integer>4101</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Stronghold</string>
+		<key>GameID</key>
+		<integer>4604</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>The Sims 2.app</string>
+		<key>GameID</key>
+		<integer>4322</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>The Sims Carbon</string>
+		<key>GameID</key>
+		<integer>4293</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>The Sims Vacation</string>
+		<key>GameID</key>
+		<integer>4293</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Tremulous.app</string>
+		<key>GameID</key>
+		<integer>5079</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Unreal Tournament 2004.app</string>
+		<key>GameID</key>
+		<integer>4181</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Unreal Tournament 2004 Demo.app</string>
+		<key>GameID</key>
+		<integer>4162</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Unreal Tournament OS X</string>
+		<key>GameID</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Warcraft II</string>
+		<key>GameID</key>
+		<integer>4390</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Warcraft III</string>
+		<key>GameID</key>
+		<integer>4112</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Warcraft III.app</string>
+		<key>GameID</key>
+		<integer>4112</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Wolfenstein ET.app</string>
+		<key>GameID</key>
+		<integer>4097</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>WoP.app</string>
+		<key>GameID</key>
+		<integer>5065</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Worms 3D</string>
+		<key>GameID</key>
+		<integer>4367</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>World of Warcraft.app</string>
+		<key>GameID</key>
+		<integer>4216</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Zero Hour.app</string>
+		<key>GameID</key>
+		<integer>4156</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Zoo Tycoon 2.app</string>
+		<key>GameID</key>
+		<integer>4364</integer>
+	</dict>
+	<dict>
+		<key>AppPath</key>
+		<string>Ghost Recon</string>
+		<key>GameID</key>
+		<integer>4154</integer>
+	</dict>
+</array>
+</plist>
