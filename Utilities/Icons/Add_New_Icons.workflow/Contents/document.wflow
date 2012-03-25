@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>246</string>
+	<string>330</string>
 	<key>AMApplicationVersion</key>
-	<string>2.1</string>
+	<string>2.2.2</string>
 	<key>AMDocumentVersion</key>
 	<string>2</string>
 	<key>actions</key>
@@ -25,7 +25,11 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.1</string>
+				<string>1.1.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
 				<key>AMParameterProperties</key>
 				<dict>
 					<key>fileNames</key>
@@ -47,16 +51,157 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>fileNames</key>
-					<array/>
+					<array>
+						<string>~/Desktop/Icons/afis.ico</string>
+						<string>~/Desktop/Icons/airmech.ico</string>
+						<string>~/Desktop/Icons/ak1.ico</string>
+						<string>~/Desktop/Icons/alordx.ico</string>
+						<string>~/Desktop/Icons/anno2070.ico</string>
+						<string>~/Desktop/Icons/arcfos.ico</string>
+						<string>~/Desktop/Icons/asscrdr.ico</string>
+						<string>~/Desktop/Icons/at2.ico</string>
+						<string>~/Desktop/Icons/atbf.ico</string>
+						<string>~/Desktop/Icons/basoww2.ico</string>
+						<string>~/Desktop/Icons/batac.ico</string>
+						<string>~/Desktop/Icons/battlela.ico</string>
+						<string>~/Desktop/Icons/bbbr.ico</string>
+						<string>~/Desktop/Icons/bingob.ico</string>
+						<string>~/Desktop/Icons/blktm.ico</string>
+						<string>~/Desktop/Icons/bmws.ico</string>
+						<string>~/Desktop/Icons/boh.ico</string>
+						<string>~/Desktop/Icons/botf.ico</string>
+						<string>~/Desktop/Icons/brlbst.ico</string>
+						<string>~/Desktop/Icons/btlknt.ico</string>
+						<string>~/Desktop/Icons/btrtrt.ico</string>
+						<string>~/Desktop/Icons/civ3comp.ico</string>
+						<string>~/Desktop/Icons/clpsblst.ico</string>
+						<string>~/Desktop/Icons/codmw3mp.ico</string>
+						<string>~/Desktop/Icons/codmw3sp.ico</string>
+						<string>~/Desktop/Icons/crucis.ico</string>
+						<string>~/Desktop/Icons/cstlmpr.ico</string>
+						<string>~/Desktop/Icons/cstory.ico</string>
+						<string>~/Desktop/Icons/ctsxl12.ico</string>
+						<string>~/Desktop/Icons/cv.ico</string>
+						<string>~/Desktop/Icons/cyphers.ico</string>
+						<string>~/Desktop/Icons/d2n.ico</string>
+						<string>~/Desktop/Icons/darkon.ico</string>
+						<string>~/Desktop/Icons/ddrsng2otr.ico</string>
+						<string>~/Desktop/Icons/dehrml.ico</string>
+						<string>~/Desktop/Icons/demo.ico</string>
+						<string>~/Desktop/Icons/desmume.ico</string>
+						<string>~/Desktop/Icons/dota2.ico</string>
+						<string>~/Desktop/Icons/drgnatlnts.ico</string>
+						<string>~/Desktop/Icons/drgnsl.ico</string>
+						<string>~/Desktop/Icons/dundef.ico</string>
+						<string>~/Desktop/Icons/dungover.ico</string>
+						<string>~/Desktop/Icons/edgwrld.ico</string>
+						<string>~/Desktop/Icons/efz.ico</string>
+						<string>~/Desktop/Icons/empr.ico</string>
+						<string>~/Desktop/Icons/ewom.ico</string>
+						<string>~/Desktop/Icons/fifam12.ico</string>
+						<string>~/Desktop/Icons/fo3cad.ico</string>
+						<string>~/Desktop/Icons/frntv.ico</string>
+						<string>~/Desktop/Icons/frtx.ico</string>
+						<string>~/Desktop/Icons/fsf.ico</string>
+						<string>~/Desktop/Icons/ftblmngr12.ico</string>
+						<string>~/Desktop/Icons/gampd.ico</string>
+						<string>~/Desktop/Icons/gt2.ico</string>
+						<string>~/Desktop/Icons/gundgne.ico</string>
+						<string>~/Desktop/Icons/gundrec.ico</string>
+						<string>~/Desktop/Icons/gwh.ico</string>
+						<string>~/Desktop/Icons/hctr102.ico</string>
+						<string>~/Desktop/Icons/hctr103.ico</string>
+						<string>~/Desktop/Icons/hitohap.ico</string>
+						<string>~/Desktop/Icons/hntbld.ico</string>
+						<string>~/Desktop/Icons/ibombdef.ico</string>
+						<string>~/Desktop/Icons/ins2.ico</string>
+						<string>~/Desktop/Icons/jasf.ico</string>
+						<string>~/Desktop/Icons/jptg.ico</string>
+						<string>~/Desktop/Icons/lanoire.ico</string>
+						<string>~/Desktop/Icons/lcyspc.ico</string>
+						<string>~/Desktop/Icons/lhpy57.ico</string>
+						<string>~/Desktop/Icons/lotrwitn.ico</string>
+						<string>~/Desktop/Icons/ma9.ico</string>
+						<string>~/Desktop/Icons/mafwar2.ico</string>
+						<string>~/Desktop/Icons/md.ico</string>
+						<string>~/Desktop/Icons/mnstrmnd.ico</string>
+						<string>~/Desktop/Icons/mpon.ico</string>
+						<string>~/Desktop/Icons/mshso.ico</string>
+						<string>~/Desktop/Icons/ncis.ico</string>
+						<string>~/Desktop/Icons/nd.ico</string>
+						<string>~/Desktop/Icons/ndrm.ico</string>
+						<string>~/Desktop/Icons/nfsrun.ico</string>
+						<string>~/Desktop/Icons/nr.ico</string>
+						<string>~/Desktop/Icons/nvg.ico</string>
+						<string>~/Desktop/Icons/offrd.ico</string>
+						<string>~/Desktop/Icons/ok.ico</string>
+						<string>~/Desktop/Icons/omd.ico</string>
+						<string>~/Desktop/Icons/pansa.ico</string>
+						<string>~/Desktop/Icons/pasw.ico</string>
+						<string>~/Desktop/Icons/pc.ico</string>
+						<string>~/Desktop/Icons/pdayth.ico</string>
+						<string>~/Desktop/Icons/pitwar.ico</string>
+						<string>~/Desktop/Icons/pzzlbts.ico</string>
+						<string>~/Desktop/Icons/r3d.ico</string>
+						<string>~/Desktop/Icons/rchrd.ico</string>
+						<string>~/Desktop/Icons/real.ico</string>
+						<string>~/Desktop/Icons/rev2c.ico</string>
+						<string>~/Desktop/Icons/rev2l.ico</string>
+						<string>~/Desktop/Icons/rgops.ico</string>
+						<string>~/Desktop/Icons/rotmg.ico</string>
+						<string>~/Desktop/Icons/sag.ico</string>
+						<string>~/Desktop/Icons/sbk09.ico</string>
+						<string>~/Desktop/Icons/sd.ico</string>
+						<string>~/Desktop/Icons/sdgcfo.ico</string>
+						<string>~/Desktop/Icons/sf2.ico</string>
+						<string>~/Desktop/Icons/shold3.ico</string>
+						<string>~/Desktop/Icons/skyrim.ico</string>
+						<string>~/Desktop/Icons/slugger.ico</string>
+						<string>~/Desktop/Icons/sonicgen.ico</string>
+						<string>~/Desktop/Icons/sror.ico</string>
+						<string>~/Desktop/Icons/srtt9.ico</string>
+						<string>~/Desktop/Icons/srtt11.ico</string>
+						<string>~/Desktop/Icons/ssam3.ico</string>
+						<string>~/Desktop/Icons/ssdd.ico</string>
+						<string>~/Desktop/Icons/starsiege.ico</string>
+						<string>~/Desktop/Icons/stka.ico</string>
+						<string>~/Desktop/Icons/swrdgrls.ico</string>
+						<string>~/Desktop/Icons/swtor.ico</string>
+						<string>~/Desktop/Icons/synoak.ico</string>
+						<string>~/Desktop/Icons/tbout.ico</string>
+						<string>~/Desktop/Icons/tboutcc.ico</string>
+						<string>~/Desktop/Icons/teraon.ico</string>
+						<string>~/Desktop/Icons/tg.ico</string>
+						<string>~/Desktop/Icons/thang.ico</string>
+						<string>~/Desktop/Icons/thodrk.ico</string>
+						<string>~/Desktop/Icons/tribesa.ico</string>
+						<string>~/Desktop/Icons/trine2.ico</string>
+						<string>~/Desktop/Icons/troy.ico</string>
+						<string>~/Desktop/Icons/ttmoon.ico</string>
+						<string>~/Desktop/Icons/tu.ico</string>
+						<string>~/Desktop/Icons/tzar.ico</string>
+						<string>~/Desktop/Icons/vox.ico</string>
+						<string>~/Desktop/Icons/vw.ico</string>
+						<string>~/Desktop/Icons/warcmdr.ico</string>
+						<string>~/Desktop/Icons/warwoh.ico</string>
+						<string>~/Desktop/Icons/wbpm.ico</string>
+						<string>~/Desktop/Icons/wcpriv.ico</string>
+						<string>~/Desktop/Icons/westward.ico</string>
+						<string>~/Desktop/Icons/wos3lu.ico</string>
+						<string>~/Desktop/Icons/wrc2fwrc.ico</string>
+						<string>~/Desktop/Icons/wrmsum.ico</string>
+						<string>~/Desktop/Icons/x3ap.ico</string>
+						<string>~/Desktop/Icons/ys1.ico</string>
+						<string>~/Desktop/Icons/ys2.ico</string>
+						<string>~/Desktop/Icons/ys6.ico</string>
+						<string>~/Desktop/Icons/ysf.ico</string>
+						<string>~/Desktop/Icons/zone4.ico</string>
+					</array>
 				</dict>
-				<key>Application</key>
-				<array>
-					<string>Finder</string>
-				</array>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.SpecifiedFiles</string>
 				<key>CFBundleVersion</key>
-				<string>1.1</string>
+				<string>1.1.1</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -103,7 +248,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>302.000000:670.000000</string>
+				<string>302.000000:686.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -125,7 +270,11 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.3</string>
+				<string>1.3.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
 				<key>AMParameterProperties</key>
 				<dict>
 					<key>caseIndicator</key>
@@ -185,7 +334,7 @@
 				<key>ActionBundlePath</key>
 				<string>/System/Library/Automator/Rename Finder Items.action</string>
 				<key>ActionName</key>
-				<string>Change Case of Finder Item Names</string>
+				<string>Change Case</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>caseIndicator</key>
@@ -233,14 +382,10 @@
 					<key>useLeadingZeros</key>
 					<false/>
 				</dict>
-				<key>Application</key>
-				<array>
-					<string>Finder</string>
-				</array>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.AddNumbersToFinderNames</string>
 				<key>CFBundleVersion</key>
-				<string>1.3</string>
+				<string>1.3.1</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -250,7 +395,7 @@
 					<string>AMCategoryFilesAndFolders</string>
 				</array>
 				<key>Class Name</key>
-				<string>RenameFinderItemsClass</string>
+				<string>AMRenameFinderItemsAction</string>
 				<key>InputUUID</key>
 				<string>F50360D0-3ACD-45AE-AC47-3236F5EB1842</string>
 				<key>Keywords</key>
@@ -572,7 +717,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>302.000000:432.000000</string>
+				<string>302.000000:448.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Rename Finder Items.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -594,7 +739,11 @@
 					</array>
 				</dict>
 				<key>AMActionVersion</key>
-				<string>1.3</string>
+				<string>1.3.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
 				<key>AMParameterProperties</key>
 				<dict>
 					<key>caseIndicator</key>
@@ -654,7 +803,7 @@
 				<key>ActionBundlePath</key>
 				<string>/System/Library/Automator/Rename Finder Items.action</string>
 				<key>ActionName</key>
-				<string>Add Text to Finder Item Names</string>
+				<string>Add Text</string>
 				<key>ActionParameters</key>
 				<dict>
 					<key>caseIndicator</key>
@@ -702,14 +851,10 @@
 					<key>useLeadingZeros</key>
 					<false/>
 				</dict>
-				<key>Application</key>
-				<array>
-					<string>Finder</string>
-				</array>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.AddNumbersToFinderNames</string>
 				<key>CFBundleVersion</key>
-				<string>1.3</string>
+				<string>1.3.1</string>
 				<key>CanShowSelectedItemsWhenRun</key>
 				<false/>
 				<key>CanShowWhenRun</key>
@@ -719,7 +864,7 @@
 					<string>AMCategoryFilesAndFolders</string>
 				</array>
 				<key>Class Name</key>
-				<string>RenameFinderItemsClass</string>
+				<string>AMRenameFinderItemsAction</string>
 				<key>InputUUID</key>
 				<string>B8B71E3B-8A50-4A6E-9BC6-58A014A2B24D</string>
 				<key>Keywords</key>
@@ -1041,7 +1186,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>302.000000:221.000000</string>
+				<string>302.000000:229.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Rename Finder Items.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
@@ -1051,14 +1196,14 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>08E996E8-4F66-4A51-8473-389984EF96B6</key>
+		<key>596A32C6-EF76-4A64-9FC9-EABB4CD44529</key>
 		<dict>
 			<key>from</key>
 			<string>57D6C23C-F966-4903-BBEC-DC0C047B24A1 - 57D6C23C-F966-4903-BBEC-DC0C047B24A1</string>
 			<key>to</key>
 			<string>C94E17BA-E13F-40A5-96C3-BEEB35F49ABF - C94E17BA-E13F-40A5-96C3-BEEB35F49ABF</string>
 		</dict>
-		<key>5392B637-BE43-416D-9CDE-32206CC423E2</key>
+		<key>CCA8DA96-A202-4B00-B07B-8055A34A1AED</key>
 		<dict>
 			<key>from</key>
 			<string>C94E17BA-E13F-40A5-96C3-BEEB35F49ABF - C94E17BA-E13F-40A5-96C3-BEEB35F49ABF</string>

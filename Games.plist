@@ -110,6 +110,14 @@
 		</dict>
 		<dict>
 			<key>ID</key>
+			<integer>4095</integer>
+			<key>LongName</key>
+			<string>Grand Theft Auto IV: Multiplayer</string>
+			<key>ShortName</key>
+			<string>ivmulti</string>
+		</dict>
+		<dict>
+			<key>ID</key>
 			<integer>4096</integer>
 			<key>LongName</key>
 			<string>The Temple of Elemental Evil</string>
@@ -777,7 +785,7 @@
 			<key>ID</key>
 			<integer>4166</integer>
 			<key>LongName</key>
-			<string>Deathmatch Classic (Steam)</string>
+			<string>Deathmatch Classic</string>
 			<key>ShortName</key>
 			<string>hldmc</string>
 		</dict>
@@ -785,7 +793,7 @@
 			<key>ID</key>
 			<integer>4167</integer>
 			<key>LongName</key>
-			<string>Half-Life (Steam)</string>
+			<string>Half-Life</string>
 			<key>ShortName</key>
 			<string>hl</string>
 		</dict>
@@ -793,7 +801,7 @@
 			<key>ID</key>
 			<integer>4168</integer>
 			<key>LongName</key>
-			<string>Opposing Force (Steam)</string>
+			<string>Opposing Force</string>
 			<key>ShortName</key>
 			<string>hlof</string>
 		</dict>
@@ -801,7 +809,7 @@
 			<key>ID</key>
 			<integer>4169</integer>
 			<key>LongName</key>
-			<string>Ricochet (Steam)</string>
+			<string>Ricochet</string>
 			<key>ShortName</key>
 			<string>hlr</string>
 		</dict>
@@ -809,7 +817,7 @@
 			<key>ID</key>
 			<integer>4170</integer>
 			<key>LongName</key>
-			<string>Team Fortress Classic (Steam)</string>
+			<string>Team Fortress Classic</string>
 			<key>ShortName</key>
 			<string>hltfc</string>
 		</dict>
@@ -1480,7 +1488,7 @@
 			<key>ID</key>
 			<integer>4251</integer>
 			<key>LongName</key>
-			<string>GetAmped</string>
+			<string>Get Amped</string>
 			<key>ShortName</key>
 			<string>gampd</string>
 		</dict>
@@ -1637,7 +1645,7 @@
 			<key>ID</key>
 			<integer>4270</integer>
 			<key>LongName</key>
-			<string>Warcraft III - The Frozen Throne</string>
+			<string>Warcraft III: The Frozen Throne</string>
 			<key>ShortName</key>
 			<string>w3ft</string>
 		</dict>
@@ -3762,7 +3770,7 @@
 			<key>ID</key>
 			<integer>4627</integer>
 			<key>LongName</key>
-			<string>Half-Life: Blue Shift (Steam)</string>
+			<string>Half-Life: Blue Shift</string>
 			<key>ShortName</key>
 			<string>hlsbs</string>
 		</dict>
@@ -3990,7 +3998,7 @@
 			<key>ID</key>
 			<integer>4655</integer>
 			<key>LongName</key>
-			<string>Star Wars Battlefront II</string>
+			<string>Star Wars: Battlefront II</string>
 			<key>ShortName</key>
 			<string>swbf2</string>
 		</dict>
@@ -4330,7 +4338,7 @@
 			<key>ID</key>
 			<integer>4695</integer>
 			<key>LongName</key>
-			<string>Gun</string>
+			<string>GUN</string>
 			<key>ShortName</key>
 			<string>gun</string>
 		</dict>
@@ -4554,7 +4562,7 @@
 			<key>ID</key>
 			<integer>4723</integer>
 			<key>LongName</key>
-			<string>NavyField</string>
+			<string>Navy Field</string>
 			<key>ShortName</key>
 			<string>nf</string>
 		</dict>
@@ -4958,7 +4966,7 @@
 			<key>ID</key>
 			<integer>4772</integer>
 			<key>LongName</key>
-			<string>SWAT 4 - The Stetchkov Syndicate</string>
+			<string>SWAT 4: The Stetchkov Syndicate</string>
 			<key>ShortName</key>
 			<string>swat4tss</string>
 		</dict>
@@ -4998,7 +5006,7 @@
 			<key>ID</key>
 			<integer>4777</integer>
 			<key>LongName</key>
-			<string>Red Orchestra Ostfront 41-45 (Steam)</string>
+			<string>Red Orchestra Ostfront 41-45</string>
 			<key>ShortName</key>
 			<string>ros</string>
 		</dict>
@@ -5038,7 +5046,7 @@
 			<key>ID</key>
 			<integer>4782</integer>
 			<key>LongName</key>
-			<string>Sin (Steam)</string>
+			<string>SiN</string>
 			<key>ShortName</key>
 			<string>sins</string>
 		</dict>
@@ -5046,7 +5054,7 @@
 			<key>ID</key>
 			<integer>4783</integer>
 			<key>LongName</key>
-			<string>Sin Multiplayer (Steam)</string>
+			<string>SiN Multiplayer</string>
 			<key>ShortName</key>
 			<string>sinmps</string>
 		</dict>
@@ -5294,7 +5302,7 @@
 			<key>ID</key>
 			<integer>4814</integer>
 			<key>LongName</key>
-			<string>Sin Episodes - Emergence</string>
+			<string>SiN Episodes: Emergence</string>
 			<key>ShortName</key>
 			<string>sine1</string>
 		</dict>
@@ -6550,7 +6558,7 @@
 			<key>ID</key>
 			<integer>4969</integer>
 			<key>LongName</key>
-			<string>Trickster Revolution</string>
+			<string>Trickster Online</string>
 			<key>ShortName</key>
 			<string>trickstero</string>
 		</dict>
@@ -6878,7 +6886,7 @@
 			<key>ID</key>
 			<integer>5009</integer>
 			<key>LongName</key>
-			<string>S.T.A.L.K.E.R. - Shadow of Chernobyl</string>
+			<string>S.T.A.L.K.E.R.: Shadow of Chernobyl</string>
 			<key>ShortName</key>
 			<string>stalker</string>
 		</dict>
@@ -7218,7 +7226,7 @@
 			<key>ID</key>
 			<integer>5051</integer>
 			<key>LongName</key>
-			<string>Broken Sword - The Sleeping Dragon</string>
+			<string>Broken Sword III: The Sleeping Dragon</string>
 			<key>ShortName</key>
 			<string>bstsd</string>
 		</dict>
@@ -7234,7 +7242,7 @@
 			<key>ID</key>
 			<integer>5053</integer>
 			<key>LongName</key>
-			<string>Syberia2</string>
+			<string>Syberia II</string>
 			<key>ShortName</key>
 			<string>syber2</string>
 		</dict>
@@ -8014,7 +8022,7 @@
 			<key>ID</key>
 			<integer>5150</integer>
 			<key>LongName</key>
-			<string>KartRider</string>
+			<string>Kart Rider</string>
 			<key>ShortName</key>
 			<string>kartr</string>
 		</dict>
@@ -9134,7 +9142,7 @@
 			<key>ID</key>
 			<integer>5289</integer>
 			<key>LongName</key>
-			<string>Secret of the Solstice</string>
+			<string>Solstice: Reborn</string>
 			<key>ShortName</key>
 			<string>secret</string>
 		</dict>
@@ -9622,7 +9630,7 @@
 			<key>ID</key>
 			<integer>5350</integer>
 			<key>LongName</key>
-			<string>Osu!</string>
+			<string>osu!</string>
 			<key>ShortName</key>
 			<string>osu</string>
 		</dict>
@@ -9734,7 +9742,7 @@
 			<key>ID</key>
 			<integer>5364</integer>
 			<key>LongName</key>
-			<string>Yu-Gi-Oh! Online: Duel Evolution</string>
+			<string>Yu-Gi-Oh! Online: Duel Accelerator</string>
 			<key>ShortName</key>
 			<string>yugioh</string>
 		</dict>
@@ -9958,7 +9966,7 @@
 			<key>ID</key>
 			<integer>5392</integer>
 			<key>LongName</key>
-			<string>Age of Conan: Hyborian Adventures</string>
+			<string>Age of Conan: Unchained</string>
 			<key>ShortName</key>
 			<string>aoc</string>
 		</dict>
@@ -10142,7 +10150,7 @@
 			<key>ID</key>
 			<integer>5415</integer>
 			<key>LongName</key>
-			<string>Requiem: Bloodymare</string>
+			<string>Requiem: Memento Mori</string>
 			<key>ShortName</key>
 			<string>requiem</string>
 		</dict>
@@ -13054,7 +13062,7 @@
 			<key>ID</key>
 			<integer>5779</integer>
 			<key>LongName</key>
-			<string>X-Com Enforcer</string>
+			<string>X-COM: Enforcer</string>
 			<key>ShortName</key>
 			<string>xcome</string>
 		</dict>
@@ -13062,7 +13070,7 @@
 			<key>ID</key>
 			<integer>5780</integer>
 			<key>LongName</key>
-			<string>X-Com Interceptor</string>
+			<string>X-COM: Interceptor</string>
 			<key>ShortName</key>
 			<string>xcomi</string>
 		</dict>
@@ -13854,7 +13862,7 @@
 			<key>ID</key>
 			<integer>5879</integer>
 			<key>LongName</key>
-			<string>The Secret of Monkey Island</string>
+			<string>The Secret of Monkey Island: Special Edition</string>
 			<key>ShortName</key>
 			<string>scrmi</string>
 		</dict>
@@ -14174,7 +14182,7 @@
 			<key>ID</key>
 			<integer>5919</integer>
 			<key>LongName</key>
-			<string>AI War</string>
+			<string>AI War: Fleet Command</string>
 			<key>ShortName</key>
 			<string>aiwar</string>
 		</dict>
@@ -16182,7 +16190,7 @@
 			<key>ID</key>
 			<integer>6170</integer>
 			<key>LongName</key>
-			<string>RailWorks</string>
+			<string>RailWorks 3: Train Simulator 2012</string>
 			<key>ShortName</key>
 			<string>railwrk</string>
 		</dict>
@@ -16646,7 +16654,7 @@
 			<key>ID</key>
 			<integer>6228</integer>
 			<key>LongName</key>
-			<string>Camon Hero</string>
+			<string>Cardmon Hero</string>
 			<key>ShortName</key>
 			<string>chro</string>
 		</dict>
@@ -16654,7 +16662,7 @@
 			<key>ID</key>
 			<integer>6229</integer>
 			<key>LongName</key>
-			<string>APB: All Points Bulletin</string>
+			<string>APB: Reloaded</string>
 			<key>ShortName</key>
 			<string>apb</string>
 		</dict>
@@ -16886,7 +16894,7 @@
 			<key>ID</key>
 			<integer>6258</integer>
 			<key>LongName</key>
-			<string>Frontierville</string>
+			<string>The Pioneer Trail</string>
 			<key>ShortName</key>
 			<string>frntv</string>
 		</dict>
@@ -17302,7 +17310,7 @@
 			<key>ID</key>
 			<integer>6310</integer>
 			<key>LongName</key>
-			<string>Monkey Island 2 Special Edition: LeChuck's Revenge</string>
+			<string>Monkey Island 2 Special Edition: LeChuck’s Revenge</string>
 			<key>ShortName</key>
 			<string>mi2selr</string>
 		</dict>
@@ -17886,7 +17894,7 @@
 			<key>ID</key>
 			<integer>6383</integer>
 			<key>LongName</key>
-			<string>Poxnora</string>
+			<string>PoxNora</string>
 			<key>ShortName</key>
 			<string>pxnra</string>
 		</dict>
@@ -18614,7 +18622,7 @@
 			<key>ID</key>
 			<integer>6474</integer>
 			<key>LongName</key>
-			<string>Forsaken World BETA</string>
+			<string>Forsaken World</string>
 			<key>ShortName</key>
 			<string>frskwrld</string>
 		</dict>
@@ -18786,8 +18794,4952 @@
 			<key>ShortName</key>
 			<string>trnev</string>
 		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6496</integer>
+			<key>LongName</key>
+			<string>Dragon Age: Legends</string>
+			<key>ShortName</key>
+			<string>dagel</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6497</integer>
+			<key>LongName</key>
+			<string>Everybody Edits</string>
+			<key>ShortName</key>
+			<string>ebedits</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6498</integer>
+			<key>LongName</key>
+			<string>Adventure Quest Worlds</string>
+			<key>ShortName</key>
+			<string>advqw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6499</integer>
+			<key>LongName</key>
+			<string>Dolphin</string>
+			<key>ShortName</key>
+			<string>dlpn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6500</integer>
+			<key>LongName</key>
+			<string>Resident Evil</string>
+			<key>ShortName</key>
+			<string>resev</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6501</integer>
+			<key>LongName</key>
+			<string>Mortal Online</string>
+			<key>ShortName</key>
+			<string>mrtonl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6502</integer>
+			<key>LongName</key>
+			<string>Battlefield Play4Free</string>
+			<key>ShortName</key>
+			<string>bfp4f</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6503</integer>
+			<key>LongName</key>
+			<string>Monopoly Millionaires</string>
+			<key>ShortName</key>
+			<string>mnplymlns</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6504</integer>
+			<key>LongName</key>
+			<string>The Oregon Trail</string>
+			<key>ShortName</key>
+			<string>torgtrl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6505</integer>
+			<key>LongName</key>
+			<string>Superhero City</string>
+			<key>ShortName</key>
+			<string>sprcty</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6506</integer>
+			<key>LongName</key>
+			<string>Knight's Quest</string>
+			<key>ShortName</key>
+			<string>kghtqst</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6507</integer>
+			<key>LongName</key>
+			<string>World of Vampires</string>
+			<key>ShortName</key>
+			<string>wrldvmprs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6508</integer>
+			<key>LongName</key>
+			<string>My City Life</string>
+			<key>ShortName</key>
+			<string>myctylf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6509</integer>
+			<key>LongName</key>
+			<string>Salon Street</string>
+			<key>ShortName</key>
+			<string>slnstrt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6510</integer>
+			<key>LongName</key>
+			<string>Juggernaut (web)</string>
+			<key>ShortName</key>
+			<string>jggrnt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6511</integer>
+			<key>LongName</key>
+			<string>ARGO Online</string>
+			<key>ShortName</key>
+			<string>argo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6512</integer>
+			<key>LongName</key>
+			<string>Atom Zombie Smasher</string>
+			<key>ShortName</key>
+			<string>azs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6513</integer>
+			<key>LongName</key>
+			<string>Darkspore</string>
+			<key>ShortName</key>
+			<string>dspore</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6514</integer>
+			<key>LongName</key>
+			<string>Lego Star Wars III: The Clone Wars</string>
+			<key>ShortName</key>
+			<string>legosw3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6515</integer>
+			<key>LongName</key>
+			<string>Anomaly: Warzone Earth</string>
+			<key>ShortName</key>
+			<string>anomwze</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6516</integer>
+			<key>LongName</key>
+			<string>Major League Baseball 2K11</string>
+			<key>ShortName</key>
+			<string>mlb2k11</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6517</integer>
+			<key>LongName</key>
+			<string>Counter-Strike Online</string>
+			<key>ShortName</key>
+			<string>cso</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6518</integer>
+			<key>LongName</key>
+			<string>The Witcher: VERSUS</string>
+			<key>ShortName</key>
+			<string>twitchv</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6519</integer>
+			<key>LongName</key>
+			<string>Baseball Mogul 2011</string>
+			<key>ShortName</key>
+			<string>bbmog11</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6520</integer>
+			<key>LongName</key>
+			<string>Baseball Mogul 2012</string>
+			<key>ShortName</key>
+			<string>bbmog12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6521</integer>
+			<key>LongName</key>
+			<string>Portal 2</string>
+			<key>ShortName</key>
+			<string>port2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6522</integer>
+			<key>LongName</key>
+			<string>Quadra</string>
+			<key>ShortName</key>
+			<string>qdra</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6523</integer>
+			<key>LongName</key>
+			<string>Runaway 2: The Dream of the Turtle</string>
+			<key>ShortName</key>
+			<string>rawaytdott</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6524</integer>
+			<key>LongName</key>
+			<string>Runaway: A Twist of Fate</string>
+			<key>ShortName</key>
+			<string>rawayatof</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6525</integer>
+			<key>LongName</key>
+			<string>Xonotic</string>
+			<key>ShortName</key>
+			<string>xonot</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6526</integer>
+			<key>LongName</key>
+			<string>Music Challenge</string>
+			<key>ShortName</key>
+			<string>mscchllg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6527</integer>
+			<key>LongName</key>
+			<string>Zombie Lane</string>
+			<key>ShortName</key>
+			<string>zlane</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6528</integer>
+			<key>LongName</key>
+			<string>PyramidVille</string>
+			<key>ShortName</key>
+			<string>pyrvlle</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6529</integer>
+			<key>LongName</key>
+			<string>Habbo Hotel</string>
+			<key>ShortName</key>
+			<string>habboh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6530</integer>
+			<key>LongName</key>
+			<string>Gray Matter</string>
+			<key>ShortName</key>
+			<string>grmttr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6531</integer>
+			<key>LongName</key>
+			<string>Gemini Rue</string>
+			<key>ShortName</key>
+			<string>gmnrue</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6532</integer>
+			<key>LongName</key>
+			<string>CSI: Fatal Conspiracy</string>
+			<key>ShortName</key>
+			<string>csi6</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6533</integer>
+			<key>LongName</key>
+			<string>GooBox</string>
+			<key>ShortName</key>
+			<string>gobx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6534</integer>
+			<key>LongName</key>
+			<string>Tony Hawk's Pro Skater 2</string>
+			<key>ShortName</key>
+			<string>thps2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6535</integer>
+			<key>LongName</key>
+			<string>Lord of Ultima</string>
+			<key>ShortName</key>
+			<string>lrdltm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6536</integer>
+			<key>LongName</key>
+			<string>Toki Tori</string>
+			<key>ShortName</key>
+			<string>tkitri</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6537</integer>
+			<key>LongName</key>
+			<string>Scourge of War: Gettysburg</string>
+			<key>ShortName</key>
+			<string>sowgb</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6538</integer>
+			<key>LongName</key>
+			<string>BIT.TRIP RUNNER</string>
+			<key>ShortName</key>
+			<string>bttrprr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6539</integer>
+			<key>LongName</key>
+			<string>VisualBoyAdvance</string>
+			<key>ShortName</key>
+			<string>vba</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6540</integer>
+			<key>LongName</key>
+			<string>Warhammer 40.000: Fire Warrior</string>
+			<key>ShortName</key>
+			<string>wh40kfw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6541</integer>
+			<key>LongName</key>
+			<string>Magic: The Gathering - Tactics</string>
+			<key>ShortName</key>
+			<string>mtgt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6542</integer>
+			<key>LongName</key>
+			<string>Faxion Beta</string>
+			<key>ShortName</key>
+			<string>fxion</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6543</integer>
+			<key>LongName</key>
+			<string>Metal Assault</string>
+			<key>ShortName</key>
+			<string>mtlaslt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6544</integer>
+			<key>LongName</key>
+			<string>Clonk Rage</string>
+			<key>ShortName</key>
+			<string>clra</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6545</integer>
+			<key>LongName</key>
+			<string>The Next Big Thing</string>
+			<key>ShortName</key>
+			<string>tnbt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6546</integer>
+			<key>LongName</key>
+			<string>BlackShot</string>
+			<key>ShortName</key>
+			<string>blksh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6547</integer>
+			<key>LongName</key>
+			<string>Crime City</string>
+			<key>ShortName</key>
+			<string>crimec</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6548</integer>
+			<key>LongName</key>
+			<string>1... 2... 3... KICK IT! (Drop That Beat Like an Ugly Baby)</string>
+			<key>ShortName</key>
+			<string>123kick</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6549</integer>
+			<key>LongName</key>
+			<string>Zuma Blitz</string>
+			<key>ShortName</key>
+			<string>zblz</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6550</integer>
+			<key>LongName</key>
+			<string>Tower Stack</string>
+			<key>ShortName</key>
+			<string>twrstk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6551</integer>
+			<key>LongName</key>
+			<string>netKar Pro</string>
+			<key>ShortName</key>
+			<string>netkar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6552</integer>
+			<key>LongName</key>
+			<string>Wizardry 8</string>
+			<key>ShortName</key>
+			<string>wiz8</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6553</integer>
+			<key>LongName</key>
+			<string>RUSH</string>
+			<key>ShortName</key>
+			<string>rush</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6554</integer>
+			<key>LongName</key>
+			<string>Oni</string>
+			<key>ShortName</key>
+			<string>oni</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6555</integer>
+			<key>LongName</key>
+			<string>FIFA Online 2</string>
+			<key>ShortName</key>
+			<string>fifaonl2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6556</integer>
+			<key>LongName</key>
+			<string>Age of Empires Online</string>
+			<key>ShortName</key>
+			<string>aoeonl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6557</integer>
+			<key>LongName</key>
+			<string>Bitefight</string>
+			<key>ShortName</key>
+			<string>btft</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6558</integer>
+			<key>LongName</key>
+			<string>The Whispered World</string>
+			<key>ShortName</key>
+			<string>twwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6559</integer>
+			<key>LongName</key>
+			<string>Crazy Tao</string>
+			<key>ShortName</key>
+			<string>crytao</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6560</integer>
+			<key>LongName</key>
+			<string>Bar World</string>
+			<key>ShortName</key>
+			<string>bwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6561</integer>
+			<key>LongName</key>
+			<string>Tomb Raider III</string>
+			<key>ShortName</key>
+			<string>tmb3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6562</integer>
+			<key>LongName</key>
+			<string>Tomb Raider: The Last Revelation</string>
+			<key>ShortName</key>
+			<string>tmb4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6563</integer>
+			<key>LongName</key>
+			<string>Black Mirror III</string>
+			<key>ShortName</key>
+			<string>bmiii</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6564</integer>
+			<key>LongName</key>
+			<string>Yar's Revenge</string>
+			<key>ShortName</key>
+			<string>yare</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6565</integer>
+			<key>LongName</key>
+			<string>R2 Online</string>
+			<key>ShortName</key>
+			<string>r2o</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6566</integer>
+			<key>LongName</key>
+			<string>Daikatana</string>
+			<key>ShortName</key>
+			<string>daka</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6567</integer>
+			<key>LongName</key>
+			<string>Operation Flashpoint: Red River</string>
+			<key>ShortName</key>
+			<string>opflshrr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6568</integer>
+			<key>LongName</key>
+			<string>Back to the Future: The Game: Episode 4</string>
+			<key>ShortName</key>
+			<string>bfgep4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6569</integer>
+			<key>LongName</key>
+			<string>Hector: Badge of Carnage - Episode 1</string>
+			<key>ShortName</key>
+			<string>hctr101</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6570</integer>
+			<key>LongName</key>
+			<string>Snes9X</string>
+			<key>ShortName</key>
+			<string>sns9x</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6571</integer>
+			<key>LongName</key>
+			<string>Elsword</string>
+			<key>ShortName</key>
+			<string>elswrd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6572</integer>
+			<key>LongName</key>
+			<string>Little Big Adventure 1: Twinsen's Adventure</string>
+			<key>ShortName</key>
+			<string>lba1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6573</integer>
+			<key>LongName</key>
+			<string>Little Big Adventure 2: Twinsen's Odyssey</string>
+			<key>ShortName</key>
+			<string>lba2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6574</integer>
+			<key>LongName</key>
+			<string>Max Games</string>
+			<key>ShortName</key>
+			<string>mxgms</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6575</integer>
+			<key>LongName</key>
+			<string>Starship Command</string>
+			<key>ShortName</key>
+			<string>strspcmd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6576</integer>
+			<key>LongName</key>
+			<string>Mount &amp; Blade: With Fire and Sword</string>
+			<key>ShortName</key>
+			<string>mbwfas</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6577</integer>
+			<key>LongName</key>
+			<string>Tomb Raider II: Golden mask</string>
+			<key>ShortName</key>
+			<string>tmb2g</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6578</integer>
+			<key>LongName</key>
+			<string>Tomb Raider: Chronicles</string>
+			<key>ShortName</key>
+			<string>tmb5</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6579</integer>
+			<key>LongName</key>
+			<string>Sherwood Dungeon</string>
+			<key>ShortName</key>
+			<string>shrwdd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6580</integer>
+			<key>LongName</key>
+			<string>Risk Factions</string>
+			<key>ShortName</key>
+			<string>riskfct</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6581</integer>
+			<key>LongName</key>
+			<string>The First Templar</string>
+			<key>ShortName</key>
+			<string>tftmplr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6582</integer>
+			<key>LongName</key>
+			<string>Total Influence</string>
+			<key>ShortName</key>
+			<string>ttlfln</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6583</integer>
+			<key>LongName</key>
+			<string>Dead Meets Lead</string>
+			<key>ShortName</key>
+			<string>dml</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6584</integer>
+			<key>LongName</key>
+			<string>Section 8: Prejudice</string>
+			<key>ShortName</key>
+			<string>sec8p</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6585</integer>
+			<key>LongName</key>
+			<string>Spele.nl</string>
+			<key>ShortName</key>
+			<string>spele</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6586</integer>
+			<key>LongName</key>
+			<string>Sanctum</string>
+			<key>ShortName</key>
+			<string>snctm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6587</integer>
+			<key>LongName</key>
+			<string>Star Trek Armada II: Fleet Operations</string>
+			<key>ShortName</key>
+			<string>starm2fo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6588</integer>
+			<key>LongName</key>
+			<string>ZSNES</string>
+			<key>ShortName</key>
+			<string>zsnes</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6589</integer>
+			<key>LongName</key>
+			<string>FCEUX</string>
+			<key>ShortName</key>
+			<string>fceux</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6590</integer>
+			<key>LongName</key>
+			<string>Brink</string>
+			<key>ShortName</key>
+			<string>brnk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6591</integer>
+			<key>LongName</key>
+			<string>The Witcher 2: Assassins of Kings</string>
+			<key>ShortName</key>
+			<string>twtch2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6592</integer>
+			<key>LongName</key>
+			<string>Fable III</string>
+			<key>ShortName</key>
+			<string>fable3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6593</integer>
+			<key>LongName</key>
+			<string>Ragdoll Masters</string>
+			<key>ShortName</key>
+			<string>rgdlm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6594</integer>
+			<key>LongName</key>
+			<string>Lego Pirates of the Caribbean</string>
+			<key>ShortName</key>
+			<string>legopirates</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6595</integer>
+			<key>LongName</key>
+			<string>Vampire - The Masquerade Redemption</string>
+			<key>ShortName</key>
+			<string>vampmr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6596</integer>
+			<key>LongName</key>
+			<string>Mark Leung: Revenge of the Bitch</string>
+			<key>ShortName</key>
+			<string>mlrotb</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6597</integer>
+			<key>LongName</key>
+			<string>Patrician IV</string>
+			<key>ShortName</key>
+			<string>patr4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6598</integer>
+			<key>LongName</key>
+			<string>Patrician IV: Rise of a Dynasty</string>
+			<key>ShortName</key>
+			<string>patr4road</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6599</integer>
+			<key>LongName</key>
+			<string>Rise of Immortals</string>
+			<key>ShortName</key>
+			<string>riseofi</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6600</integer>
+			<key>LongName</key>
+			<string>Dwarfs!?</string>
+			<key>ShortName</key>
+			<string>dwarfs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6601</integer>
+			<key>LongName</key>
+			<string>Cortex Command</string>
+			<key>ShortName</key>
+			<string>corcomm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6602</integer>
+			<key>LongName</key>
+			<string>Ace of Spades</string>
+			<key>ShortName</key>
+			<string>acespades</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6603</integer>
+			<key>LongName</key>
+			<string>Spellforce - Platinum Edition</string>
+			<key>ShortName</key>
+			<string>sfpe</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6604</integer>
+			<key>LongName</key>
+			<string>Project Legacy</string>
+			<key>ShortName</key>
+			<string>proleg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6605</integer>
+			<key>LongName</key>
+			<string>StarLancer</string>
+			<key>ShortName</key>
+			<string>slancer</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6606</integer>
+			<key>LongName</key>
+			<string>BattleDawn</string>
+			<key>ShortName</key>
+			<string>btdawn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6607</integer>
+			<key>LongName</key>
+			<string>DiRT 3</string>
+			<key>ShortName</key>
+			<string>dirt3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6608</integer>
+			<key>LongName</key>
+			<string>Frozen Synapse</string>
+			<key>ShortName</key>
+			<string>frzensynps</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6609</integer>
+			<key>LongName</key>
+			<string>Wakfu</string>
+			<key>ShortName</key>
+			<string>wkfu</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6610</integer>
+			<key>LongName</key>
+			<string>Darkstone</string>
+			<key>ShortName</key>
+			<string>dkstne</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6611</integer>
+			<key>LongName</key>
+			<string>Legend of Edda</string>
+			<key>ShortName</key>
+			<string>loedda</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6612</integer>
+			<key>LongName</key>
+			<string>Stoked: Big Air Edition</string>
+			<key>ShortName</key>
+			<string>stkdbae</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6613</integer>
+			<key>LongName</key>
+			<string>Terraria</string>
+			<key>ShortName</key>
+			<string>trrria</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6614</integer>
+			<key>LongName</key>
+			<string>KKND 2: Krossfire</string>
+			<key>ShortName</key>
+			<string>kknd2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6615</integer>
+			<key>LongName</key>
+			<string>Hollywood Mogul 3</string>
+			<key>ShortName</key>
+			<string>hm3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6616</integer>
+			<key>LongName</key>
+			<string>Crazy Cabbie</string>
+			<key>ShortName</key>
+			<string>ccabbie</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6617</integer>
+			<key>LongName</key>
+			<string>Devils Ride</string>
+			<key>ShortName</key>
+			<string>devride</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6618</integer>
+			<key>LongName</key>
+			<string>Zombie Go Home 2</string>
+			<key>ShortName</key>
+			<string>zomgohome2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6619</integer>
+			<key>LongName</key>
+			<string>Bouncing balls</string>
+			<key>ShortName</key>
+			<string>bballs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6620</integer>
+			<key>LongName</key>
+			<string>UNO - Undercover</string>
+			<key>ShortName</key>
+			<string>uu</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6621</integer>
+			<key>LongName</key>
+			<string>Summoner</string>
+			<key>ShortName</key>
+			<string>smmnr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6622</integer>
+			<key>LongName</key>
+			<string>Black Prophecy</string>
+			<key>ShortName</key>
+			<string>bproph</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6623</integer>
+			<key>LongName</key>
+			<string>Eden Eternal</string>
+			<key>ShortName</key>
+			<string>edntrnl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6624</integer>
+			<key>LongName</key>
+			<string>Asda Story 2</string>
+			<key>ShortName</key>
+			<string>asda2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6625</integer>
+			<key>LongName</key>
+			<string>Caesary</string>
+			<key>ShortName</key>
+			<string>csry</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6626</integer>
+			<key>LongName</key>
+			<string>Hunted: The Demon's Forge</string>
+			<key>ShortName</key>
+			<string>hntdtdf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6627</integer>
+			<key>LongName</key>
+			<string>Duke Nukem Forever</string>
+			<key>ShortName</key>
+			<string>dknkf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6628</integer>
+			<key>LongName</key>
+			<string>Combat Mission: Battle for Normandy</string>
+			<key>ShortName</key>
+			<string>cmbn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6629</integer>
+			<key>LongName</key>
+			<string>Combat Mission: Shock Force</string>
+			<key>ShortName</key>
+			<string>cmsf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6630</integer>
+			<key>LongName</key>
+			<string>FreeJack</string>
+			<key>ShortName</key>
+			<string>frjk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6631</integer>
+			<key>LongName</key>
+			<string>GetAmped 2</string>
+			<key>ShortName</key>
+			<string>gampd2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6632</integer>
+			<key>LongName</key>
+			<string>Knights of the Crystals</string>
+			<key>ShortName</key>
+			<string>kotc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6633</integer>
+			<key>LongName</key>
+			<string>Chess.com</string>
+			<key>ShortName</key>
+			<string>chsscm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6634</integer>
+			<key>LongName</key>
+			<string>Hero City</string>
+			<key>ShortName</key>
+			<string>hrcty</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6635</integer>
+			<key>LongName</key>
+			<string>War2 Glory</string>
+			<key>ShortName</key>
+			<string>w2g</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6636</integer>
+			<key>LongName</key>
+			<string>Empires &amp; Allies</string>
+			<key>ShortName</key>
+			<string>emprsals</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6637</integer>
+			<key>LongName</key>
+			<string>Dead Frontier</string>
+			<key>ShortName</key>
+			<string>dedfrnt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6638</integer>
+			<key>LongName</key>
+			<string>Wild West Town</string>
+			<key>ShortName</key>
+			<string>wldwstwn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6639</integer>
+			<key>LongName</key>
+			<string>Cafe World</string>
+			<key>ShortName</key>
+			<string>cfwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6640</integer>
+			<key>LongName</key>
+			<string>The Sims 3: Generations</string>
+			<key>ShortName</key>
+			<string>sims3gn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6641</integer>
+			<key>LongName</key>
+			<string>Prius Online</string>
+			<key>ShortName</key>
+			<string>prsonl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6642</integer>
+			<key>LongName</key>
+			<string>Lugaru HD</string>
+			<key>ShortName</key>
+			<string>lgrhd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6643</integer>
+			<key>LongName</key>
+			<string>Guilty Gear Isuka</string>
+			<key>ShortName</key>
+			<string>ggi</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6644</integer>
+			<key>LongName</key>
+			<string>FreeOrion</string>
+			<key>ShortName</key>
+			<string>frori</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6645</integer>
+			<key>LongName</key>
+			<string>Red Faction: Armageddon</string>
+			<key>ShortName</key>
+			<string>rfarm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6646</integer>
+			<key>LongName</key>
+			<string>OMGPOP</string>
+			<key>ShortName</key>
+			<string>omgp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6647</integer>
+			<key>LongName</key>
+			<string>Nyanicorn</string>
+			<key>ShortName</key>
+			<string>nyan</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6648</integer>
+			<key>LongName</key>
+			<string>OpenArena</string>
+			<key>ShortName</key>
+			<string>oa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6649</integer>
+			<key>LongName</key>
+			<string>Alter Ego</string>
+			<key>ShortName</key>
+			<string>altg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6650</integer>
+			<key>LongName</key>
+			<string>Army Attack</string>
+			<key>ShortName</key>
+			<string>armyatk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6651</integer>
+			<key>LongName</key>
+			<string>Big Kahuna Reef</string>
+			<key>ShortName</key>
+			<string>bigkhnrf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6652</integer>
+			<key>LongName</key>
+			<string>Bush Whacker</string>
+			<key>ShortName</key>
+			<string>bshwkr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6653</integer>
+			<key>LongName</key>
+			<string>Gourmet Ranch</string>
+			<key>ShortName</key>
+			<string>grmtrnch</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6654</integer>
+			<key>LongName</key>
+			<string>Gods &amp; Heroes: Rome Rising</string>
+			<key>ShortName</key>
+			<string>gnh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6655</integer>
+			<key>LongName</key>
+			<string>Spiral Knights</string>
+			<key>ShortName</key>
+			<string>spkn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6656</integer>
+			<key>LongName</key>
+			<string>Kingdom Heroes</string>
+			<key>ShortName</key>
+			<string>knghs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6657</integer>
+			<key>LongName</key>
+			<string>Backyard Monsters</string>
+			<key>ShortName</key>
+			<string>bkydmobs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6658</integer>
+			<key>LongName</key>
+			<string>Battle Pirates</string>
+			<key>ShortName</key>
+			<string>btlprts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6659</integer>
+			<key>LongName</key>
+			<string>Spartacus: The Game</string>
+			<key>ShortName</key>
+			<string>sprtcstg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6660</integer>
+			<key>LongName</key>
+			<string>Lucent Heart</string>
+			<key>ShortName</key>
+			<string>lcnhrt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6661</integer>
+			<key>LongName</key>
+			<string>Dungeons &amp; Dragons: Daggerdale</string>
+			<key>ShortName</key>
+			<string>dnddd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6662</integer>
+			<key>LongName</key>
+			<string>Oddworld: Munch's Oddysee</string>
+			<key>ShortName</key>
+			<string>oddmo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6663</integer>
+			<key>LongName</key>
+			<string>Magic: The Gathering - Duels of the Planeswalkers 2012</string>
+			<key>ShortName</key>
+			<string>dotp12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6664</integer>
+			<key>LongName</key>
+			<string>The Polynomial</string>
+			<key>ShortName</key>
+			<string>plynml</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6665</integer>
+			<key>LongName</key>
+			<string>SpaceTrek: The New Empire</string>
+			<key>ShortName</key>
+			<string>spctrktne</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6666</integer>
+			<key>LongName</key>
+			<string>Gardens of Time</string>
+			<key>ShortName</key>
+			<string>grdnstm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6667</integer>
+			<key>LongName</key>
+			<string>Pirate Legacy</string>
+			<key>ShortName</key>
+			<string>prtlgc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6668</integer>
+			<key>LongName</key>
+			<string>Back to the Future: The Game: Episode 5</string>
+			<key>ShortName</key>
+			<string>bfgep5</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6669</integer>
+			<key>LongName</key>
+			<string>SBK 2011</string>
+			<key>ShortName</key>
+			<string>sbk11</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6670</integer>
+			<key>LongName</key>
+			<string>Dungeon Siege III</string>
+			<key>ShortName</key>
+			<string>ds3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6671</integer>
+			<key>LongName</key>
+			<string>Alice: Madness Returns</string>
+			<key>ShortName</key>
+			<string>alicemr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6672</integer>
+			<key>LongName</key>
+			<string>F.E.A.R. 3</string>
+			<key>ShortName</key>
+			<string>fear3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6673</integer>
+			<key>LongName</key>
+			<string>Pockie Ninja</string>
+			<key>ShortName</key>
+			<string>pcknnja</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6674</integer>
+			<key>LongName</key>
+			<string>Ultima 7</string>
+			<key>ShortName</key>
+			<string>u7</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6675</integer>
+			<key>LongName</key>
+			<string>Diamond Dash</string>
+			<key>ShortName</key>
+			<string>dmnddsh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6676</integer>
+			<key>LongName</key>
+			<string>Treasure Isle</string>
+			<key>ShortName</key>
+			<string>trsrisle</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6677</integer>
+			<key>LongName</key>
+			<string>My Country</string>
+			<key>ShortName</key>
+			<string>myctry</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6678</integer>
+			<key>LongName</key>
+			<string>A Mystical Land</string>
+			<key>ShortName</key>
+			<string>mystclnd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6679</integer>
+			<key>LongName</key>
+			<string>Capsized</string>
+			<key>ShortName</key>
+			<string>cpszd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6680</integer>
+			<key>LongName</key>
+			<string>Steel Storm: Burning Retribution</string>
+			<key>ShortName</key>
+			<string>ssbr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6681</integer>
+			<key>LongName</key>
+			<string>Hydrophobia: Prophecy</string>
+			<key>ShortName</key>
+			<string>hdroppcy</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6682</integer>
+			<key>LongName</key>
+			<string>Master of Orion</string>
+			<key>ShortName</key>
+			<string>moo1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6683</integer>
+			<key>LongName</key>
+			<string>Master of Orion 2</string>
+			<key>ShortName</key>
+			<string>moo2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6684</integer>
+			<key>LongName</key>
+			<string>Monster Galaxy</string>
+			<key>ShortName</key>
+			<string>mongal</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6685</integer>
+			<key>LongName</key>
+			<string>Descent</string>
+			<key>ShortName</key>
+			<string>dscnt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6686</integer>
+			<key>LongName</key>
+			<string>Descent II</string>
+			<key>ShortName</key>
+			<string>dscnt2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6687</integer>
+			<key>LongName</key>
+			<string>Descent 3</string>
+			<key>ShortName</key>
+			<string>dscnt3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6688</integer>
+			<key>LongName</key>
+			<string>ARMA 2 Free</string>
+			<key>ShortName</key>
+			<string>a2f</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6689</integer>
+			<key>LongName</key>
+			<string>Duty Calls: The Calm Before the Storm</string>
+			<key>ShortName</key>
+			<string>dtyclls</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6690</integer>
+			<key>LongName</key>
+			<string>Virtua Tennis 4</string>
+			<key>ShortName</key>
+			<string>vt4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6691</integer>
+			<key>LongName</key>
+			<string>Volvo - The Game</string>
+			<key>ShortName</key>
+			<string>voltg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6692</integer>
+			<key>LongName</key>
+			<string>SpaceChem</string>
+			<key>ShortName</key>
+			<string>spach</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6693</integer>
+			<key>LongName</key>
+			<string>Battlestar Galactica Online</string>
+			<key>ShortName</key>
+			<string>bsgo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6694</integer>
+			<key>LongName</key>
+			<string>Crazy Planets</string>
+			<key>ShortName</key>
+			<string>crzplnts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6695</integer>
+			<key>LongName</key>
+			<string>Drag Race World</string>
+			<key>ShortName</key>
+			<string>drw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6696</integer>
+			<key>LongName</key>
+			<string>Exoplanet War</string>
+			<key>ShortName</key>
+			<string>exowar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6697</integer>
+			<key>LongName</key>
+			<string>Forsakia - The Lost Clans</string>
+			<key>ShortName</key>
+			<string>frskia</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6698</integer>
+			<key>LongName</key>
+			<string>Madden NFL Superstars</string>
+			<key>ShortName</key>
+			<string>mnflss</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6699</integer>
+			<key>LongName</key>
+			<string>Maegica Online: Order in Chaos</string>
+			<key>ShortName</key>
+			<string>maegica</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6700</integer>
+			<key>LongName</key>
+			<string>Hamilton's Great Adventure</string>
+			<key>ShortName</key>
+			<string>hamga</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6701</integer>
+			<key>LongName</key>
+			<string>Hellgate: Global</string>
+			<key>ShortName</key>
+			<string>hgg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6702</integer>
+			<key>LongName</key>
+			<string>Thug Battle</string>
+			<key>ShortName</key>
+			<string>thugbttl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6703</integer>
+			<key>LongName</key>
+			<string>Social Empires</string>
+			<key>ShortName</key>
+			<string>socemp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6704</integer>
+			<key>LongName</key>
+			<string>Six Gun Galaxy</string>
+			<key>ShortName</key>
+			<string>sgg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6705</integer>
+			<key>LongName</key>
+			<string>N.O.V.A. Near Orbit Vanguard Alliance: ELITE</string>
+			<key>ShortName</key>
+			<string>novaelite</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6706</integer>
+			<key>LongName</key>
+			<string>Super Street Fighter IV - Arcade Edition</string>
+			<key>ShortName</key>
+			<string>ssfivae</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6707</integer>
+			<key>LongName</key>
+			<string>War Inc. Battlezone</string>
+			<key>ShortName</key>
+			<string>wibz</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6708</integer>
+			<key>LongName</key>
+			<string>Dungeons of Dredmor</string>
+			<key>ShortName</key>
+			<string>dngdrd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6709</integer>
+			<key>LongName</key>
+			<string>Beneath a Steel Sky</string>
+			<key>ShortName</key>
+			<string>stlsky</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6710</integer>
+			<key>LongName</key>
+			<string>SEGA Genesis &amp; Mega Drive Classics</string>
+			<key>ShortName</key>
+			<string>sgmdc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6711</integer>
+			<key>LongName</key>
+			<string>Jolly Rover</string>
+			<key>ShortName</key>
+			<string>jlyrvr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6712</integer>
+			<key>LongName</key>
+			<string>Dungeon Empires</string>
+			<key>ShortName</key>
+			<string>dunemp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6713</integer>
+			<key>LongName</key>
+			<string>Indiana Jones and the Fate of Atlantis</string>
+			<key>ShortName</key>
+			<string>ijafoa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6714</integer>
+			<key>LongName</key>
+			<string>Indiana Jones and the Last Crusade</string>
+			<key>ShortName</key>
+			<string>ijalc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6715</integer>
+			<key>LongName</key>
+			<string>Loom</string>
+			<key>ShortName</key>
+			<string>loom</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6716</integer>
+			<key>LongName</key>
+			<string>Lure of the Temptress</string>
+			<key>ShortName</key>
+			<string>lottgog</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6717</integer>
+			<key>LongName</key>
+			<string>The Dig</string>
+			<key>ShortName</key>
+			<string>thdg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6718</integer>
+			<key>LongName</key>
+			<string>Totally Spies! Fashion Agents</string>
+			<key>ShortName</key>
+			<string>tsfa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6719</integer>
+			<key>LongName</key>
+			<string>Universe Sandbox</string>
+			<key>ShortName</key>
+			<string>unsand</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6720</integer>
+			<key>LongName</key>
+			<string>Solar 2</string>
+			<key>ShortName</key>
+			<string>slr2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6721</integer>
+			<key>LongName</key>
+			<string>Alien Breed: Impact</string>
+			<key>ShortName</key>
+			<string>abreed</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6722</integer>
+			<key>LongName</key>
+			<string>Alien Breed 2: Assault</string>
+			<key>ShortName</key>
+			<string>abreed2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6723</integer>
+			<key>LongName</key>
+			<string>Alien Breed 3: Descent</string>
+			<key>ShortName</key>
+			<string>abreed3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6724</integer>
+			<key>LongName</key>
+			<string>Phosphor</string>
+			<key>ShortName</key>
+			<string>phos</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6725</integer>
+			<key>LongName</key>
+			<string>CivWorld</string>
+			<key>ShortName</key>
+			<string>cvwld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6726</integer>
+			<key>LongName</key>
+			<string>Grand Epic Online</string>
+			<key>ShortName</key>
+			<string>grndepo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6727</integer>
+			<key>LongName</key>
+			<string>Knights and Merchants</string>
+			<key>ShortName</key>
+			<string>knsndmchs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6728</integer>
+			<key>LongName</key>
+			<string>Dungeon Keeper</string>
+			<key>ShortName</key>
+			<string>dk1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6729</integer>
+			<key>LongName</key>
+			<string>Nation Red</string>
+			<key>ShortName</key>
+			<string>ntnrd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6730</integer>
+			<key>LongName</key>
+			<string>Hoard</string>
+			<key>ShortName</key>
+			<string>hard</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6731</integer>
+			<key>LongName</key>
+			<string>Lord of Ages</string>
+			<key>ShortName</key>
+			<string>loa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6732</integer>
+			<key>LongName</key>
+			<string>Runes of Magic - The Challenge</string>
+			<key>ShortName</key>
+			<string>romcha</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6733</integer>
+			<key>LongName</key>
+			<string>Algodoo</string>
+			<key>ShortName</key>
+			<string>agd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6734</integer>
+			<key>LongName</key>
+			<string>Aquanox</string>
+			<key>ShortName</key>
+			<string>aqnx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6735</integer>
+			<key>LongName</key>
+			<string>Might &amp; Magic: Heroes VI</string>
+			<key>ShortName</key>
+			<string>homm6</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6736</integer>
+			<key>LongName</key>
+			<string>Aapeli</string>
+			<key>ShortName</key>
+			<string>apli</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6737</integer>
+			<key>LongName</key>
+			<string>Jamestown</string>
+			<key>ShortName</key>
+			<string>jmstwn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6738</integer>
+			<key>LongName</key>
+			<string>Breath of Death VII</string>
+			<key>ShortName</key>
+			<string>brthdvii</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6739</integer>
+			<key>LongName</key>
+			<string>Cthulhu Saves the World</string>
+			<key>ShortName</key>
+			<string>cstw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6740</integer>
+			<key>LongName</key>
+			<string>Trucks &amp; Trailers</string>
+			<key>ShortName</key>
+			<string>tnt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6741</integer>
+			<key>LongName</key>
+			<string>ZDoom</string>
+			<key>ShortName</key>
+			<string>zdm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6742</integer>
+			<key>LongName</key>
+			<string>GZDoom</string>
+			<key>ShortName</key>
+			<string>gzdm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6743</integer>
+			<key>LongName</key>
+			<string>Gens</string>
+			<key>ShortName</key>
+			<string>gns</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6744</integer>
+			<key>LongName</key>
+			<string>X-Tension</string>
+			<key>ShortName</key>
+			<string>xten</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6745</integer>
+			<key>LongName</key>
+			<string>Star Wars: Dark Forces</string>
+			<key>ShortName</key>
+			<string>swdf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6746</integer>
+			<key>LongName</key>
+			<string>Cars 2: The Video Game</string>
+			<key>ShortName</key>
+			<string>crs2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6747</integer>
+			<key>LongName</key>
+			<string>Kerbal Space Program</string>
+			<key>ShortName</key>
+			<string>ksp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6748</integer>
+			<key>LongName</key>
+			<string>Dragon Nest</string>
+			<key>ShortName</key>
+			<string>drgnnest</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6749</integer>
+			<key>LongName</key>
+			<string>Anachronox</string>
+			<key>ShortName</key>
+			<string>anaox</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6750</integer>
+			<key>LongName</key>
+			<string>Alien Arena 2011</string>
+			<key>ShortName</key>
+			<string>alnarn11</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6751</integer>
+			<key>LongName</key>
+			<string>Miramagia</string>
+			<key>ShortName</key>
+			<string>mmgia</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6752</integer>
+			<key>LongName</key>
+			<string>Pig Up!</string>
+			<key>ShortName</key>
+			<string>pigup</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6753</integer>
+			<key>LongName</key>
+			<string>Natural Selection 2</string>
+			<key>ShortName</key>
+			<string>ns2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6754</integer>
+			<key>LongName</key>
+			<string>Chantelise: A Tale of Two Sisters</string>
+			<key>ShortName</key>
+			<string>chtltts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6755</integer>
+			<key>LongName</key>
+			<string>Rusty Hearts</string>
+			<key>ShortName</key>
+			<string>rsthrts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6756</integer>
+			<key>LongName</key>
+			<string>Dino D-Day</string>
+			<key>ShortName</key>
+			<string>ddd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6757</integer>
+			<key>LongName</key>
+			<string>Truck Racing by Renault Trucks</string>
+			<key>ShortName</key>
+			<string>trbrt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6758</integer>
+			<key>LongName</key>
+			<string>Cogs</string>
+			<key>ShortName</key>
+			<string>cgs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6759</integer>
+			<key>LongName</key>
+			<string>Hammerfight</string>
+			<key>ShortName</key>
+			<string>hmrfght</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6760</integer>
+			<key>LongName</key>
+			<string>Fortix 2</string>
+			<key>ShortName</key>
+			<string>frtx2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6761</integer>
+			<key>LongName</key>
+			<string>EpicDuel</string>
+			<key>ShortName</key>
+			<string>epcdl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6762</integer>
+			<key>LongName</key>
+			<string>Uncharted Waters Online</string>
+			<key>ShortName</key>
+			<string>uwo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6763</integer>
+			<key>LongName</key>
+			<string>Apache Air Assault</string>
+			<key>ShortName</key>
+			<string>apairaslt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6764</integer>
+			<key>LongName</key>
+			<string>House M.D.</string>
+			<key>ShortName</key>
+			<string>hsmd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6765</integer>
+			<key>LongName</key>
+			<string>Swords and Soldiers HD</string>
+			<key>ShortName</key>
+			<string>swrdsldhd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6766</integer>
+			<key>LongName</key>
+			<string>Ultima Underworld: The Stygian Abyss</string>
+			<key>ShortName</key>
+			<string>uw1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6767</integer>
+			<key>LongName</key>
+			<string>Bounty Hounds Online</string>
+			<key>ShortName</key>
+			<string>bho</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6768</integer>
+			<key>LongName</key>
+			<string>OnLive</string>
+			<key>ShortName</key>
+			<string>onlv</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6769</integer>
+			<key>LongName</key>
+			<string>Limbo</string>
+			<key>ShortName</key>
+			<string>limbo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6770</integer>
+			<key>LongName</key>
+			<string>Wolfenstein 3D: Spear of Destiny</string>
+			<key>ShortName</key>
+			<string>wolf3dsod</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6771</integer>
+			<key>LongName</key>
+			<string>Wolfenstein 3D</string>
+			<key>ShortName</key>
+			<string>wolf3d</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6772</integer>
+			<key>LongName</key>
+			<string>HeXen: Deathkings of The Dark Citadel</string>
+			<key>ShortName</key>
+			<string>hxdotdk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6773</integer>
+			<key>LongName</key>
+			<string>HeXen II</string>
+			<key>ShortName</key>
+			<string>hxn2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6774</integer>
+			<key>LongName</key>
+			<string>Heretic: Shadow of The Serpent Riders</string>
+			<key>ShortName</key>
+			<string>hrticssr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6775</integer>
+			<key>LongName</key>
+			<string>Naval Warfare</string>
+			<key>ShortName</key>
+			<string>nvlwrfr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6776</integer>
+			<key>LongName</key>
+			<string>MechWarrior: Living Legends</string>
+			<key>ShortName</key>
+			<string>mchwll</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6777</integer>
+			<key>LongName</key>
+			<string>Nosferatu: The Wrath of Malachi</string>
+			<key>ShortName</key>
+			<string>nsfrt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6778</integer>
+			<key>LongName</key>
+			<string>Astonia III</string>
+			<key>ShortName</key>
+			<string>astonia3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6779</integer>
+			<key>LongName</key>
+			<string>Commander Keen Complete Pack</string>
+			<key>ShortName</key>
+			<string>cmdrkeen</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6780</integer>
+			<key>LongName</key>
+			<string>Might and Magic - Book One: Secret of the Inner Sanctum</string>
+			<key>ShortName</key>
+			<string>mm1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6781</integer>
+			<key>LongName</key>
+			<string>Might and Magic - Book Two: Gates to Another World</string>
+			<key>ShortName</key>
+			<string>mm2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6782</integer>
+			<key>LongName</key>
+			<string>Might and Magic III: Isles of Terra</string>
+			<key>ShortName</key>
+			<string>mm3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6783</integer>
+			<key>LongName</key>
+			<string>Might and Magic IV &amp; V: World of Xeen</string>
+			<key>ShortName</key>
+			<string>mm45</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6784</integer>
+			<key>LongName</key>
+			<string>Might and Magic: Swords of Xeen</string>
+			<key>ShortName</key>
+			<string>mm5a</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6785</integer>
+			<key>LongName</key>
+			<string>Might and Magic VI: The Mandate of Heaven</string>
+			<key>ShortName</key>
+			<string>mm6</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6786</integer>
+			<key>LongName</key>
+			<string>Transcendence</string>
+			<key>ShortName</key>
+			<string>trans</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6787</integer>
+			<key>LongName</key>
+			<string>Lock On: Flaming Cliffs 2</string>
+			<key>ShortName</key>
+			<string>lofc2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6788</integer>
+			<key>LongName</key>
+			<string>DCS: A-10C Warthog</string>
+			<key>ShortName</key>
+			<string>dcsa10c</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6789</integer>
+			<key>LongName</key>
+			<string>World Series Superstars</string>
+			<key>ShortName</key>
+			<string>wssfb</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6790</integer>
+			<key>LongName</key>
+			<string>Aleph One</string>
+			<key>ShortName</key>
+			<string>alphone</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6791</integer>
+			<key>LongName</key>
+			<string>Garshasp: The Monster Slayer</string>
+			<key>ShortName</key>
+			<string>grshsp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6792</integer>
+			<key>LongName</key>
+			<string>From Dust</string>
+			<key>ShortName</key>
+			<string>frmdst</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6793</integer>
+			<key>LongName</key>
+			<string>Remnant Knights</string>
+			<key>ShortName</key>
+			<string>rknghts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6794</integer>
+			<key>LongName</key>
+			<string>Order &amp; Chaos Online</string>
+			<key>ShortName</key>
+			<string>oco</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6795</integer>
+			<key>LongName</key>
+			<string>Moonbase Alpha</string>
+			<key>ShortName</key>
+			<string>mba</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6796</integer>
+			<key>LongName</key>
+			<string>adult swim games</string>
+			<key>ShortName</key>
+			<string>adultswim</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6797</integer>
+			<key>LongName</key>
+			<string>HeroSmash</string>
+			<key>ShortName</key>
+			<string>herosmsh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6798</integer>
+			<key>LongName</key>
+			<string>ourWorld</string>
+			<key>ShortName</key>
+			<string>orwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6799</integer>
+			<key>LongName</key>
+			<string>Pogo.com</string>
+			<key>ShortName</key>
+			<string>pogo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6800</integer>
+			<key>LongName</key>
+			<string>The Sims Social</string>
+			<key>ShortName</key>
+			<string>simssocial</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6801</integer>
+			<key>LongName</key>
+			<string>18 Wheels of Steel Extreme Trucker 2</string>
+			<key>ShortName</key>
+			<string>woset2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6802</integer>
+			<key>LongName</key>
+			<string>Quake III Team Arena</string>
+			<key>ShortName</key>
+			<string>q3ta</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6803</integer>
+			<key>LongName</key>
+			<string>Tales of Monkey Island: Episode 1</string>
+			<key>ShortName</key>
+			<string>tomi101</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6804</integer>
+			<key>LongName</key>
+			<string>Tales of Monkey Island: Episode 2</string>
+			<key>ShortName</key>
+			<string>tomi102</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6805</integer>
+			<key>LongName</key>
+			<string>Tales of Monkey Island: Episode 3</string>
+			<key>ShortName</key>
+			<string>tomi103</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6806</integer>
+			<key>LongName</key>
+			<string>Tales of Monkey Island: Episode 4</string>
+			<key>ShortName</key>
+			<string>tomi104</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6807</integer>
+			<key>LongName</key>
+			<string>Tales of Monkey Island: Episode 5</string>
+			<key>ShortName</key>
+			<string>tomi105</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6808</integer>
+			<key>LongName</key>
+			<string>Colony of War</string>
+			<key>ShortName</key>
+			<string>cow</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6809</integer>
+			<key>LongName</key>
+			<string>Tidalis</string>
+			<key>ShortName</key>
+			<string>tdls</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6810</integer>
+			<key>LongName</key>
+			<string>AdventureQuest World</string>
+			<key>ShortName</key>
+			<string>aqworld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6811</integer>
+			<key>LongName</key>
+			<string>Age of Champions</string>
+			<key>ShortName</key>
+			<string>ageochamps</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6812</integer>
+			<key>LongName</key>
+			<string>downWorld</string>
+			<key>ShortName</key>
+			<string>dnwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6813</integer>
+			<key>LongName</key>
+			<string>Drakensang Online</string>
+			<key>ShortName</key>
+			<string>drakgo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6814</integer>
+			<key>LongName</key>
+			<string>Pool Live Tour</string>
+			<key>ShortName</key>
+			<string>plt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6815</integer>
+			<key>LongName</key>
+			<string>Deus Ex Human Revolution</string>
+			<key>ShortName</key>
+			<string>dexhr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6816</integer>
+			<key>LongName</key>
+			<string>BYOND</string>
+			<key>ShortName</key>
+			<string>bynd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6817</integer>
+			<key>LongName</key>
+			<string>Sam &amp; Max: The Devil's Playhouse - Episode 1</string>
+			<key>ShortName</key>
+			<string>sm301</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6818</integer>
+			<key>LongName</key>
+			<string>Sam &amp; Max: The Devil's Playhouse - Episode 2</string>
+			<key>ShortName</key>
+			<string>sm302</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6819</integer>
+			<key>LongName</key>
+			<string>Sam &amp; Max: The Devil's Playhouse - Episode 3</string>
+			<key>ShortName</key>
+			<string>sm303</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6820</integer>
+			<key>LongName</key>
+			<string>Sam &amp; Max: The Devil's Playhouse - Episode 4</string>
+			<key>ShortName</key>
+			<string>sm304</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6821</integer>
+			<key>LongName</key>
+			<string>Sam &amp; Max: The Devil's Playhouse - Episode 5</string>
+			<key>ShortName</key>
+			<string>sm305</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6822</integer>
+			<key>LongName</key>
+			<string>HeXen: Beyond Heretic</string>
+			<key>ShortName</key>
+			<string>hxenbh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6823</integer>
+			<key>LongName</key>
+			<string>E.Y.E: Divine Cybermancy</string>
+			<key>ShortName</key>
+			<string>eyedc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6824</integer>
+			<key>LongName</key>
+			<string>nQuake</string>
+			<key>ShortName</key>
+			<string>nqke</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6825</integer>
+			<key>LongName</key>
+			<string>Chronicles of Merlin</string>
+			<key>ShortName</key>
+			<string>chronom</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6826</integer>
+			<key>LongName</key>
+			<string>X-COM: Apocalypse</string>
+			<key>ShortName</key>
+			<string>xcomapoc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6827</integer>
+			<key>LongName</key>
+			<string>X-COM: UFO Defense</string>
+			<key>ShortName</key>
+			<string>xcomudef</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6828</integer>
+			<key>LongName</key>
+			<string>X-COM: Terror from the Deep</string>
+			<key>ShortName</key>
+			<string>xcomterdp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6829</integer>
+			<key>LongName</key>
+			<string>LivingPlay</string>
+			<key>ShortName</key>
+			<string>lvngply</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6830</integer>
+			<key>LongName</key>
+			<string>Mortal Kombat 4</string>
+			<key>ShortName</key>
+			<string>mk4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6831</integer>
+			<key>LongName</key>
+			<string>TrackMania 2 Canyon</string>
+			<key>ShortName</key>
+			<string>tmania2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6832</integer>
+			<key>LongName</key>
+			<string>Bastion</string>
+			<key>ShortName</key>
+			<string>bastion</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6833</integer>
+			<key>LongName</key>
+			<string>Warhammer 40,000: Space Marine</string>
+			<key>ShortName</key>
+			<string>wh40ksm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6834</integer>
+			<key>LongName</key>
+			<string>Sonic Adventure DX</string>
+			<key>ShortName</key>
+			<string>sadx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6835</integer>
+			<key>LongName</key>
+			<string>Cloning Clyde</string>
+			<key>ShortName</key>
+			<string>cclyde</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6836</integer>
+			<key>LongName</key>
+			<string>Pokemon Trading Card Game Online</string>
+			<key>ShortName</key>
+			<string>ptcg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6837</integer>
+			<key>LongName</key>
+			<string>MapleStory Adventures</string>
+			<key>ShortName</key>
+			<string>mplefb</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6838</integer>
+			<key>LongName</key>
+			<string>Harry Potter and the Deathly Hallows: Part 1</string>
+			<key>ShortName</key>
+			<string>hp7</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6839</integer>
+			<key>LongName</key>
+			<string>Harry Potter and the Deathly Hallows: Part 2</string>
+			<key>ShortName</key>
+			<string>hp8</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6840</integer>
+			<key>LongName</key>
+			<string>Alien Shooter 2: Reloaded</string>
+			<key>ShortName</key>
+			<string>alnshtr2r</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6841</integer>
+			<key>LongName</key>
+			<string>Zombie Shooter</string>
+			<key>ShortName</key>
+			<string>zmbshtr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6842</integer>
+			<key>LongName</key>
+			<string>Dead Island</string>
+			<key>ShortName</key>
+			<string>di</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6843</integer>
+			<key>LongName</key>
+			<string>Diablo III Beta</string>
+			<key>ShortName</key>
+			<string>d3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6844</integer>
+			<key>LongName</key>
+			<string>Total Domination: Nuclear Strategy</string>
+			<key>ShortName</key>
+			<string>tdns</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6845</integer>
+			<key>LongName</key>
+			<string>Ravenwood Fair</string>
+			<key>ShortName</key>
+			<string>rvnfair</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6846</integer>
+			<key>LongName</key>
+			<string>Platinum Life: Country</string>
+			<key>ShortName</key>
+			<string>plc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6847</integer>
+			<key>LongName</key>
+			<string>Starpires</string>
+			<key>ShortName</key>
+			<string>strprs</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6848</integer>
+			<key>LongName</key>
+			<string>Patrician III: Rise of the Hanse</string>
+			<key>ShortName</key>
+			<string>patr3roth</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6849</integer>
+			<key>LongName</key>
+			<string>World of Temasek</string>
+			<key>ShortName</key>
+			<string>temasek</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6850</integer>
+			<key>LongName</key>
+			<string>Maze Defense</string>
+			<key>ShortName</key>
+			<string>mzedef</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6851</integer>
+			<key>LongName</key>
+			<string>Tanoth</string>
+			<key>ShortName</key>
+			<string>tanoth</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6852</integer>
+			<key>LongName</key>
+			<string>Scarlet Legacy</string>
+			<key>ShortName</key>
+			<string>scrlt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6853</integer>
+			<key>LongName</key>
+			<string>Luvinia Online</string>
+			<key>ShortName</key>
+			<string>luvna</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6854</integer>
+			<key>LongName</key>
+			<string>B.O.D. Online</string>
+			<key>ShortName</key>
+			<string>bodonl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6855</integer>
+			<key>LongName</key>
+			<string>Bored.Com</string>
+			<key>ShortName</key>
+			<string>bored</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6856</integer>
+			<key>LongName</key>
+			<string>Lemming Ball Z</string>
+			<key>ShortName</key>
+			<string>lbz</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6857</integer>
+			<key>LongName</key>
+			<string>RIP</string>
+			<key>ShortName</key>
+			<string>rip</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6858</integer>
+			<key>LongName</key>
+			<string>RIP 2: Strike Back</string>
+			<key>ShortName</key>
+			<string>rip2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6859</integer>
+			<key>LongName</key>
+			<string>RIP 3: The Last Hero</string>
+			<key>ShortName</key>
+			<string>rip3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6860</integer>
+			<key>LongName</key>
+			<string>Hacker Evolution</string>
+			<key>ShortName</key>
+			<string>hckev</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6861</integer>
+			<key>LongName</key>
+			<string>Swarm Arena</string>
+			<key>ShortName</key>
+			<string>sa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6862</integer>
+			<key>LongName</key>
+			<string>Star Ruler</string>
+			<key>ShortName</key>
+			<string>starlr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6863</integer>
+			<key>LongName</key>
+			<string>Post Apocalyptic Mayhem</string>
+			<key>ShortName</key>
+			<string>pam</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6864</integer>
+			<key>LongName</key>
+			<string>Frets on Fire iX</string>
+			<key>ShortName</key>
+			<string>fofix</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6865</integer>
+			<key>LongName</key>
+			<string>Alien Shooter: Revisited</string>
+			<key>ShortName</key>
+			<string>alnshtrr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6866</integer>
+			<key>LongName</key>
+			<string>Red Orchestra 2: Heroes of Stalingrad</string>
+			<key>ShortName</key>
+			<string>ro2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6867</integer>
+			<key>LongName</key>
+			<string>Elven Legacy: Ranger</string>
+			<key>ShortName</key>
+			<string>elvlgyr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6868</integer>
+			<key>LongName</key>
+			<string>Hacker Evolution - Untold</string>
+			<key>ShortName</key>
+			<string>hckevu</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6869</integer>
+			<key>LongName</key>
+			<string>Two Worlds II: Castle Defense Lite</string>
+			<key>ShortName</key>
+			<string>tw2csdf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6870</integer>
+			<key>LongName</key>
+			<string>Star Wars: Clone Wars Adventures</string>
+			<key>ShortName</key>
+			<string>swcwa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6871</integer>
+			<key>LongName</key>
+			<string>King Arthur's Gold</string>
+			<key>ShortName</key>
+			<string>kngag</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6872</integer>
+			<key>LongName</key>
+			<string>Stellar Impact</string>
+			<key>ShortName</key>
+			<string>stlimp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6873</integer>
+			<key>LongName</key>
+			<string>Flora's Fruit Farm</string>
+			<key>ShortName</key>
+			<string>floraff</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6874</integer>
+			<key>LongName</key>
+			<string>Shadow Era</string>
+			<key>ShortName</key>
+			<string>shera</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6875</integer>
+			<key>LongName</key>
+			<string>New Eden City</string>
+			<key>ShortName</key>
+			<string>nec</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6876</integer>
+			<key>LongName</key>
+			<string>Ragnarok Battle Offline Extra Scenario 3</string>
+			<key>ShortName</key>
+			<string>rboe3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6877</integer>
+			<key>LongName</key>
+			<string>The One Ring</string>
+			<key>ShortName</key>
+			<string>lotrfb</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6878</integer>
+			<key>LongName</key>
+			<string>Uridium Wars</string>
+			<key>ShortName</key>
+			<string>uwars</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6879</integer>
+			<key>LongName</key>
+			<string>PRISM: Guard Shield</string>
+			<key>ShortName</key>
+			<string>pris</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6880</integer>
+			<key>LongName</key>
+			<string>Galaxy Online</string>
+			<key>ShortName</key>
+			<string>galo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6881</integer>
+			<key>LongName</key>
+			<string>Tropico 4</string>
+			<key>ShortName</key>
+			<string>trop4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6882</integer>
+			<key>LongName</key>
+			<string>Dreamland</string>
+			<key>ShortName</key>
+			<string>drmlnd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6883</integer>
+			<key>LongName</key>
+			<string>Adventure World - an Indiana Jones Game</string>
+			<key>ShortName</key>
+			<string>advwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6884</integer>
+			<key>LongName</key>
+			<string>Foldit</string>
+			<key>ShortName</key>
+			<string>fldit</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6885</integer>
+			<key>LongName</key>
+			<string>Path of Exile</string>
+			<key>ShortName</key>
+			<string>poe</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6886</integer>
+			<key>LongName</key>
+			<string>Hard Reset</string>
+			<key>ShortName</key>
+			<string>hr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6887</integer>
+			<key>LongName</key>
+			<string>Dragona</string>
+			<key>ShortName</key>
+			<string>drgna</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6888</integer>
+			<key>LongName</key>
+			<string>Earth Eternal</string>
+			<key>ShortName</key>
+			<string>earet</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6889</integer>
+			<key>LongName</key>
+			<string>Alpha Polaris</string>
+			<key>ShortName</key>
+			<string>apolar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6890</integer>
+			<key>LongName</key>
+			<string>The Baconing</string>
+			<key>ShortName</key>
+			<string>tbac</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6891</integer>
+			<key>LongName</key>
+			<string>Call of Juarez: The Cartel</string>
+			<key>ShortName</key>
+			<string>cojtc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6892</integer>
+			<key>LongName</key>
+			<string>Rock of Ages</string>
+			<key>ShortName</key>
+			<string>roa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6893</integer>
+			<key>LongName</key>
+			<string>King of Kings III</string>
+			<key>ShortName</key>
+			<string>kok3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6894</integer>
+			<key>LongName</key>
+			<string>Battlefield 3</string>
+			<key>ShortName</key>
+			<string>bf3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6895</integer>
+			<key>LongName</key>
+			<string>Heroes of Neverwinter</string>
+			<key>ShortName</key>
+			<string>dndhow</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6896</integer>
+			<key>LongName</key>
+			<string>Angry Birds Rio</string>
+			<key>ShortName</key>
+			<string>angbrdsrio</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6897</integer>
+			<key>LongName</key>
+			<string>Digimon Masters Online</string>
+			<key>ShortName</key>
+			<string>dmo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6898</integer>
+			<key>LongName</key>
+			<string>Driver: San Francisco</string>
+			<key>ShortName</key>
+			<string>drvsf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6899</integer>
+			<key>LongName</key>
+			<string>NoLimits RollerCoaster</string>
+			<key>ShortName</key>
+			<string>nolimc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6900</integer>
+			<key>LongName</key>
+			<string>Proun</string>
+			<key>ShortName</key>
+			<string>prun</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6901</integer>
+			<key>LongName</key>
+			<string>Ragnarok Battle Offline</string>
+			<key>ShortName</key>
+			<string>rbo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6902</integer>
+			<key>LongName</key>
+			<string>Rich$tate - Grand Prix</string>
+			<key>ShortName</key>
+			<string>rsgp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6903</integer>
+			<key>LongName</key>
+			<string>Starscape</string>
+			<key>ShortName</key>
+			<string>strscp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6904</integer>
+			<key>LongName</key>
+			<string>Super Smash Land</string>
+			<key>ShortName</key>
+			<string>ssml</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6905</integer>
+			<key>LongName</key>
+			<string>Ultima IV: Quest of the Avatar</string>
+			<key>ShortName</key>
+			<string>u4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6906</integer>
+			<key>LongName</key>
+			<string>Vorp!</string>
+			<key>ShortName</key>
+			<string>vorp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6907</integer>
+			<key>LongName</key>
+			<string>Wing Commander III: Heart of the Tiger</string>
+			<key>ShortName</key>
+			<string>wc3h</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6908</integer>
+			<key>LongName</key>
+			<string>F1 2011</string>
+			<key>ShortName</key>
+			<string>f111</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6909</integer>
+			<key>LongName</key>
+			<string>RAGE</string>
+			<key>ShortName</key>
+			<string>rage</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6910</integer>
+			<key>LongName</key>
+			<string>FIFA 12</string>
+			<key>ShortName</key>
+			<string>fifa12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6911</integer>
+			<key>LongName</key>
+			<string>GameFudge.com</string>
+			<key>ShortName</key>
+			<string>gfdge</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6912</integer>
+			<key>LongName</key>
+			<string>Bloodmoon</string>
+			<key>ShortName</key>
+			<string>bldmn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6913</integer>
+			<key>LongName</key>
+			<string>Immortal King</string>
+			<key>ShortName</key>
+			<string>ik</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6914</integer>
+			<key>LongName</key>
+			<string>Broken Sword: Shadow of the Templars</string>
+			<key>ShortName</key>
+			<string>bs1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6915</integer>
+			<key>LongName</key>
+			<string>Broken Sword: Shadow of the Templars - The Director's Cut</string>
+			<key>ShortName</key>
+			<string>bs1dc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6916</integer>
+			<key>LongName</key>
+			<string>X: Beyond the Frontier</string>
+			<key>ShortName</key>
+			<string>xbfro</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6917</integer>
+			<key>LongName</key>
+			<string>Pro Evolution Soccer 2012</string>
+			<key>ShortName</key>
+			<string>pes2012</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6918</integer>
+			<key>LongName</key>
+			<string>Evochron Mercenary</string>
+			<key>ShortName</key>
+			<string>evomerc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6919</integer>
+			<key>LongName</key>
+			<string>TRAUMA</string>
+			<key>ShortName</key>
+			<string>trauma</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6920</integer>
+			<key>LongName</key>
+			<string>NBA 2K12</string>
+			<key>ShortName</key>
+			<string>nba12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6921</integer>
+			<key>LongName</key>
+			<string>Happy Wheels</string>
+			<key>ShortName</key>
+			<string>hpwls</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6922</integer>
+			<key>LongName</key>
+			<string>The Binding Of Isaac</string>
+			<key>ShortName</key>
+			<string>tbdfsc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6923</integer>
+			<key>LongName</key>
+			<string>Star Trek: Klingon Academy</string>
+			<key>ShortName</key>
+			<string>stka</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6924</integer>
+			<key>LongName</key>
+			<string>Zone 4: Fight District</string>
+			<key>ShortName</key>
+			<string>zone4</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6925</integer>
+			<key>LongName</key>
+			<string>Collapse! Blast</string>
+			<key>ShortName</key>
+			<string>clpsblst</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6926</integer>
+			<key>LongName</key>
+			<string>Lucky Space</string>
+			<key>ShortName</key>
+			<string>lkyspc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6927</integer>
+			<key>LongName</key>
+			<string>Mafia Wars 2</string>
+			<key>ShortName</key>
+			<string>mafwar2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6928</integer>
+			<key>LongName</key>
+			<string>Pit of War</string>
+			<key>ShortName</key>
+			<string>pitwar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6929</integer>
+			<key>LongName</key>
+			<string>War Commander</string>
+			<key>ShortName</key>
+			<string>warcmdr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6930</integer>
+			<key>LongName</key>
+			<string>The World's Biggest PAC-MAN</string>
+			<key>ShortName</key>
+			<string>wbpm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6931</integer>
+			<key>LongName</key>
+			<string>Realm of the Mad God</string>
+			<key>ShortName</key>
+			<string>rotmg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6932</integer>
+			<key>LongName</key>
+			<string>Dragons of Atlantis</string>
+			<key>ShortName</key>
+			<string>drgnatlnts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6933</integer>
+			<key>LongName</key>
+			<string>Overkings</string>
+			<key>ShortName</key>
+			<string>ok</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6934</integer>
+			<key>LongName</key>
+			<string>Sword Girls</string>
+			<key>ShortName</key>
+			<string>swrdgrls</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6935</integer>
+			<key>LongName</key>
+			<string>Orcs Must Die!</string>
+			<key>ShortName</key>
+			<string>omd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6936</integer>
+			<key>LongName</key>
+			<string>Deus Ex: Human Revolution - The Missing Link</string>
+			<key>ShortName</key>
+			<string>dehrml</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6937</integer>
+			<key>LongName</key>
+			<string>Dungeon Overlord</string>
+			<key>ShortName</key>
+			<string>dungover</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6938</integer>
+			<key>LongName</key>
+			<string>Marvel Super Hero Squad Online</string>
+			<key>ShortName</key>
+			<string>mshso</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6939</integer>
+			<key>LongName</key>
+			<string>Monstermind</string>
+			<key>ShortName</key>
+			<string>mnstrmnd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6940</integer>
+			<key>LongName</key>
+			<string>NaviAge: The Power of Capital</string>
+			<key>ShortName</key>
+			<string>nvg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6941</integer>
+			<key>LongName</key>
+			<string>Troy Online</string>
+			<key>ShortName</key>
+			<string>troy</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6942</integer>
+			<key>LongName</key>
+			<string>Worms Ultimate Mayhem</string>
+			<key>ShortName</key>
+			<string>wrmsum</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6943</integer>
+			<key>LongName</key>
+			<string>Battle Moon Wars</string>
+			<key>ShortName</key>
+			<string>bmws</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6944</integer>
+			<key>LongName</key>
+			<string>FIFA Manager 12</string>
+			<key>ShortName</key>
+			<string>fifam12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6945</integer>
+			<key>LongName</key>
+			<string>Cities XL 2012</string>
+			<key>ShortName</key>
+			<string>ctsxl12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6946</integer>
+			<key>LongName</key>
+			<string>Off-Road Drive</string>
+			<key>ShortName</key>
+			<string>offrd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6947</integer>
+			<key>LongName</key>
+			<string>Gundemonium Recollection</string>
+			<key>ShortName</key>
+			<string>gundrec</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6948</integer>
+			<key>LongName</key>
+			<string>Westward</string>
+			<key>ShortName</key>
+			<string>westward</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6949</integer>
+			<key>LongName</key>
+			<string>WRC 2: FIA World Rally Championship</string>
+			<key>ShortName</key>
+			<string>wrc2fwrc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6950</integer>
+			<key>LongName</key>
+			<string>Starsiege</string>
+			<key>ShortName</key>
+			<string>starsiege</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6951</integer>
+			<key>LongName</key>
+			<string>BattleKnight</string>
+			<key>ShortName</key>
+			<string>btlknt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6952</integer>
+			<key>LongName</key>
+			<string>GundeadliGne</string>
+			<key>ShortName</key>
+			<string>gundgne</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6953</integer>
+			<key>LongName</key>
+			<string>Payday: The Heist</string>
+			<key>ShortName</key>
+			<string>pdayth</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6954</integer>
+			<key>LongName</key>
+			<string>Dungeon Defenders</string>
+			<key>ShortName</key>
+			<string>dundef</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6955</integer>
+			<key>LongName</key>
+			<string>Realms Online</string>
+			<key>ShortName</key>
+			<string>real</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6956</integer>
+			<key>LongName</key>
+			<string>Hunter Blade</string>
+			<key>ShortName</key>
+			<string>hntbld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6957</integer>
+			<key>LongName</key>
+			<string>Dota 2 Beta</string>
+			<key>ShortName</key>
+			<string>dota2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6958</integer>
+			<key>LongName</key>
+			<string>DeSmuME</string>
+			<key>ShortName</key>
+			<string>desmume</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6959</integer>
+			<key>LongName</key>
+			<string>Airline Tycoon 2</string>
+			<key>ShortName</key>
+			<string>at2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6960</integer>
+			<key>LongName</key>
+			<string>Dead Rising 2: Off The Record</string>
+			<key>ShortName</key>
+			<string>ddrsng2otr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6961</integer>
+			<key>LongName</key>
+			<string>Blocks That Matter</string>
+			<key>ShortName</key>
+			<string>blktm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6962</integer>
+			<key>LongName</key>
+			<string>World of Subways 3: London Underground</string>
+			<key>ShortName</key>
+			<string>wos3lu</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6963</integer>
+			<key>LongName</key>
+			<string>Voxatron</string>
+			<key>ShortName</key>
+			<string>vox</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6964</integer>
+			<key>LongName</key>
+			<string>Blazing Angels: Squadrons of WWII</string>
+			<key>ShortName</key>
+			<string>basoww2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6965</integer>
+			<key>LongName</key>
+			<string>Ys: The Oath in Felghana</string>
+			<key>ShortName</key>
+			<string>ysf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6966</integer>
+			<key>LongName</key>
+			<string>Serious Sam Double D</string>
+			<key>ShortName</key>
+			<string>ssdd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6967</integer>
+			<key>LongName</key>
+			<string>Hitogata Happa</string>
+			<key>ShortName</key>
+			<string>hitohap</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6968</integer>
+			<key>LongName</key>
+			<string>Arcania: Fall of Setarrif</string>
+			<key>ShortName</key>
+			<string>arcfos</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6969</integer>
+			<key>LongName</key>
+			<string>Risen3D</string>
+			<key>ShortName</key>
+			<string>r3d</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6970</integer>
+			<key>LongName</key>
+			<string>Emperor Online</string>
+			<key>ShortName</key>
+			<string>empr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6971</integer>
+			<key>LongName</key>
+			<string>Tera Online</string>
+			<key>ShortName</key>
+			<string>teraon</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6972</integer>
+			<key>LongName</key>
+			<string>MP Online</string>
+			<key>ShortName</key>
+			<string>mpon</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6973</integer>
+			<key>LongName</key>
+			<string>Castle Empire</string>
+			<key>ShortName</key>
+			<string>cstlmpr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6974</integer>
+			<key>LongName</key>
+			<string>Edgeworld</string>
+			<key>ShortName</key>
+			<string>edgwrld</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6975</integer>
+			<key>LongName</key>
+			<string>Brawl Busters</string>
+			<key>ShortName</key>
+			<string>brlbst</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6976</integer>
+			<key>LongName</key>
+			<string>Football Manager 2012</string>
+			<key>ShortName</key>
+			<string>ftblmngr12</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6977</integer>
+			<key>LongName</key>
+			<string>Fortix</string>
+			<key>ShortName</key>
+			<string>frtx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6978</integer>
+			<key>LongName</key>
+			<string>Ys Complete 1</string>
+			<key>ShortName</key>
+			<string>ys1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6979</integer>
+			<key>LongName</key>
+			<string>Ys Complete 2</string>
+			<key>ShortName</key>
+			<string>ys2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6980</integer>
+			<key>LongName</key>
+			<string>SD Gundam Capsule Fighter Online</string>
+			<key>ShortName</key>
+			<string>sdgcfo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6981</integer>
+			<key>LongName</key>
+			<string>Call of Duty: Modern Warfare 3 Single Player</string>
+			<key>ShortName</key>
+			<string>codmw3sp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6982</integer>
+			<key>LongName</key>
+			<string>Call of Duty: Modern Warfare 3 Multiplayer</string>
+			<key>ShortName</key>
+			<string>codmw3mp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6983</integer>
+			<key>LongName</key>
+			<string>Bunch Of Heroes</string>
+			<key>ShortName</key>
+			<string>boh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6984</integer>
+			<key>LongName</key>
+			<string>The Elder Scrolls V: Skyrim</string>
+			<key>ShortName</key>
+			<string>skyrim</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6985</integer>
+			<key>LongName</key>
+			<string>Pandora Saga</string>
+			<key>ShortName</key>
+			<string>pansa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6986</integer>
+			<key>LongName</key>
+			<string>L.A. Noire</string>
+			<key>ShortName</key>
+			<string>lanoire</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6987</integer>
+			<key>LongName</key>
+			<string>Metal Drift</string>
+			<key>ShortName</key>
+			<string>md</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6988</integer>
+			<key>LongName</key>
+			<string>Tribes: Ascend</string>
+			<key>ShortName</key>
+			<string>tribesa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6989</integer>
+			<key>LongName</key>
+			<string>Penguins Arena: Sedna's World</string>
+			<key>ShortName</key>
+			<string>pasw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6990</integer>
+			<key>LongName</key>
+			<string>The Lord of the Rings: War in the North</string>
+			<key>ShortName</key>
+			<string>lotrwitn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6991</integer>
+			<key>LongName</key>
+			<string>Sonic Generations</string>
+			<key>ShortName</key>
+			<string>sonicgen</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6992</integer>
+			<key>LongName</key>
+			<string>Tank Universal</string>
+			<key>ShortName</key>
+			<string>tu</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6993</integer>
+			<key>LongName</key>
+			<string>Tzar: The Burden of the Crown</string>
+			<key>ShortName</key>
+			<string>tzar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6994</integer>
+			<key>LongName</key>
+			<string>Renegade Ops</string>
+			<key>ShortName</key>
+			<string>rgops</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6995</integer>
+			<key>LongName</key>
+			<string>Stronghold 3</string>
+			<key>ShortName</key>
+			<string>shold3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6996</integer>
+			<key>LongName</key>
+			<string>Anno 2070</string>
+			<key>ShortName</key>
+			<string>anno2070</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6997</integer>
+			<key>LongName</key>
+			<string>LEGO Harry Potter Years 5-7</string>
+			<key>ShortName</key>
+			<string>lhpy57</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6998</integer>
+			<key>LongName</key>
+			<string>Saints Row: The Third (DX9)</string>
+			<key>ShortName</key>
+			<string>srtt9</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>6999</integer>
+			<key>LongName</key>
+			<string>Saints Row: The Third (DX11)</string>
+			<key>ShortName</key>
+			<string>srtt11</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7000</integer>
+			<key>LongName</key>
+			<string>Jurassic Park: The Game</string>
+			<key>ShortName</key>
+			<string>jptg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7001</integer>
+			<key>LongName</key>
+			<string>Girl with a Heart of</string>
+			<key>ShortName</key>
+			<string>gwh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7002</integer>
+			<key>LongName</key>
+			<string>BINGO Blitz</string>
+			<key>ShortName</key>
+			<string>bingob</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7003</integer>
+			<key>LongName</key>
+			<string>CastleVille</string>
+			<key>ShortName</key>
+			<string>cv</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7004</integer>
+			<key>LongName</key>
+			<string>Nadirim</string>
+			<key>ShortName</key>
+			<string>ndrm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7005</integer>
+			<key>LongName</key>
+			<string>J.A.S.F. Jane's Advanced Strike Fighters</string>
+			<key>ShortName</key>
+			<string>jasf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7006</integer>
+			<key>LongName</key>
+			<string>Star Wars: The Old Republic</string>
+			<key>ShortName</key>
+			<string>swtor</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7007</integer>
+			<key>LongName</key>
+			<string>FreeStyle Football</string>
+			<key>ShortName</key>
+			<string>fsf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7008</integer>
+			<key>LongName</key>
+			<string>Magu Magu</string>
+			<key>ShortName</key>
+			<string>ma9</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7009</integer>
+			<key>LongName</key>
+			<string>Dark Online</string>
+			<key>ShortName</key>
+			<string>darkon</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7010</integer>
+			<key>LongName</key>
+			<string>Cyphers Online</string>
+			<key>ShortName</key>
+			<string>cyphers</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7011</integer>
+			<key>LongName</key>
+			<string>Special Force 2</string>
+			<key>ShortName</key>
+			<string>sf2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7012</integer>
+			<key>LongName</key>
+			<string>Need For Speed: The Run</string>
+			<key>ShortName</key>
+			<string>nfsrun</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7013</integer>
+			<key>LongName</key>
+			<string>Hector: Badge of Carnage - Episode 2</string>
+			<key>ShortName</key>
+			<string>hctr102</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7014</integer>
+			<key>LongName</key>
+			<string>Batman: Arkham City</string>
+			<key>ShortName</key>
+			<string>batac</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7015</integer>
+			<key>LongName</key>
+			<string>AirMech</string>
+			<key>ShortName</key>
+			<string>airmech</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7016</integer>
+			<key>LongName</key>
+			<string>Demolition, Inc.</string>
+			<key>ShortName</key>
+			<string>demo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7017</integer>
+			<key>LongName</key>
+			<string>SBK-09: Superbike World Championship</string>
+			<key>ShortName</key>
+			<string>sbk09</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7018</integer>
+			<key>LongName</key>
+			<string>Hector: Badge of Carnage - Episode 3</string>
+			<key>ShortName</key>
+			<string>hctr103</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7019</integer>
+			<key>LongName</key>
+			<string>Assassin's Creed: Revelations</string>
+			<key>ShortName</key>
+			<string>asscrdr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7020</integer>
+			<key>LongName</key>
+			<string>Elemental: War of Magic</string>
+			<key>ShortName</key>
+			<string>ewom</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7021</integer>
+			<key>LongName</key>
+			<string>Nitronic Rush</string>
+			<key>ShortName</key>
+			<string>nr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7022</integer>
+			<key>LongName</key>
+			<string>To the Moon</string>
+			<key>ShortName</key>
+			<string>ttmoon</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7023</integer>
+			<key>LongName</key>
+			<string>Insane 2</string>
+			<key>ShortName</key>
+			<string>ins2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7024</integer>
+			<key>LongName</key>
+			<string>Archlord X: The Chronicles</string>
+			<key>ShortName</key>
+			<string>alordx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7025</integer>
+			<key>LongName</key>
+			<string>Civilization III: Complete</string>
+			<key>ShortName</key>
+			<string>civ3comp</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7026</integer>
+			<key>LongName</key>
+			<string>Star Trek: The Next Generation - Birth of the Federation</string>
+			<key>ShortName</key>
+			<string>botf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7027</integer>
+			<key>LongName</key>
+			<string>Serious Sam 3: BFE</string>
+			<key>ShortName</key>
+			<string>ssam3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7028</integer>
+			<key>LongName</key>
+			<string>NCIS</string>
+			<key>ShortName</key>
+			<string>ncis</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7029</integer>
+			<key>LongName</key>
+			<string>DragonSoul</string>
+			<key>ShortName</key>
+			<string>drgnsl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7030</integer>
+			<key>LongName</key>
+			<string>Warhammer Online: Wrath of Heroes</string>
+			<key>ShortName</key>
+			<string>warwoh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7031</integer>
+			<key>LongName</key>
+			<string>Alpha Kimori: Great Doubt - Episode One</string>
+			<key>ShortName</key>
+			<string>ak1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7032</integer>
+			<key>LongName</key>
+			<string>Wing Commander: Privateer</string>
+			<key>ShortName</key>
+			<string>wcpriv</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7033</integer>
+			<key>LongName</key>
+			<string>Afterfall: InSanity</string>
+			<key>ShortName</key>
+			<string>afis</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7034</integer>
+			<key>LongName</key>
+			<string>Throne of Darkness</string>
+			<key>ShortName</key>
+			<string>thodrk</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7035</integer>
+			<key>LongName</key>
+			<string>Breaking The Rules: The Roman Tournament</string>
+			<key>ShortName</key>
+			<string>btrtrt</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7036</integer>
+			<key>LongName</key>
+			<string>Syndicates of Arkon</string>
+			<key>ShortName</key>
+			<string>synoak</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7037</integer>
+			<key>LongName</key>
+			<string>Puzzle Bots</string>
+			<key>ShortName</key>
+			<string>pzzlbts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7038</integer>
+			<key>LongName</key>
+			<string>Trine 2</string>
+			<key>ShortName</key>
+			<string>trine2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7039</integer>
+			<key>LongName</key>
+			<string>Sagramore</string>
+			<key>ShortName</key>
+			<string>sag</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7040</integer>
+			<key>LongName</key>
+			<string>iBomber Defense</string>
+			<key>ShortName</key>
+			<string>ibombdef</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7041</integer>
+			<key>LongName</key>
+			<string>Die2Nite</string>
+			<key>ShortName</key>
+			<string>d2n</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7042</integer>
+			<key>LongName</key>
+			<string>Vampire Wars</string>
+			<key>ShortName</key>
+			<string>vw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7043</integer>
+			<key>LongName</key>
+			<string>Slugger</string>
+			<key>ShortName</key>
+			<string>slugger</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7044</integer>
+			<key>LongName</key>
+			<string>FlatOut 3: Chaos &amp; Destruction</string>
+			<key>ShortName</key>
+			<string>fo3cad</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7045</integer>
+			<key>LongName</key>
+			<string>Top Gun</string>
+			<key>ShortName</key>
+			<string>tg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7046</integer>
+			<key>LongName</key>
+			<string>Rochard</string>
+			<key>ShortName</key>
+			<string>rchrd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7047</integer>
+			<key>LongName</key>
+			<string>X3: Albion Prelude</string>
+			<key>ShortName</key>
+			<string>x3ap</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7048</integer>
+			<key>LongName</key>
+			<string>The Book of Unwritten Tales</string>
+			<key>ShortName</key>
+			<string>tbout</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7049</integer>
+			<key>LongName</key>
+			<string>Puzzle Chronicles</string>
+			<key>ShortName</key>
+			<string>pc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7050</integer>
+			<key>LongName</key>
+			<string>Eternal Fighter Zero</string>
+			<key>ShortName</key>
+			<string>efz</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7051</integer>
+			<key>LongName</key>
+			<string>The Book of Unwritten Tales: The Critter Chronicles</string>
+			<key>ShortName</key>
+			<string>tboutcc</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7052</integer>
+			<key>LongName</key>
+			<string>Battle: Los Angeles</string>
+			<key>ShortName</key>
+			<string>battlela</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7053</integer>
+			<key>LongName</key>
+			<string>Ys: The Ark of Napishtim</string>
+			<key>ShortName</key>
+			<string>ys6</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7054</integer>
+			<key>LongName</key>
+			<string>Crucis Fatal Fake</string>
+			<key>ShortName</key>
+			<string>crucis</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7055</integer>
+			<key>LongName</key>
+			<string>Big Bang Beat Revolve</string>
+			<key>ShortName</key>
+			<string>bbbr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7056</integer>
+			<key>LongName</key>
+			<string>Silkroad-R</string>
+			<key>ShortName</key>
+			<string>sror</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7057</integer>
+			<key>LongName</key>
+			<string>Grotesque Tactics 2: Dungeons and Donuts</string>
+			<key>ShortName</key>
+			<string>gt2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7058</integer>
+			<key>LongName</key>
+			<string>SkyDrift</string>
+			<key>ShortName</key>
+			<string>sd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7059</integer>
+			<key>LongName</key>
+			<string>Avadon: The Black Fortress</string>
+			<key>ShortName</key>
+			<string>atbf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7060</integer>
+			<key>LongName</key>
+			<string>Thang Global</string>
+			<key>ShortName</key>
+			<string>thang</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7061</integer>
+			<key>LongName</key>
+			<string>Cave Story+</string>
+			<key>ShortName</key>
+			<string>cstory</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7062</integer>
+			<key>LongName</key>
+			<string>Nuclear Dawn</string>
+			<key>ShortName</key>
+			<string>nd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7063</integer>
+			<key>LongName</key>
+			<string>Resident Evil 2 - Leon</string>
+			<key>ShortName</key>
+			<string>rev2l</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7064</integer>
+			<key>LongName</key>
+			<string>Resident Evil 2 - Claire</string>
+			<key>ShortName</key>
+			<string>rev2c</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7065</integer>
+			<key>LongName</key>
+			<string>Space Pirates and Zombies</string>
+			<key>ShortName</key>
+			<string>spaz</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7066</integer>
+			<key>LongName</key>
+			<string>Xotic</string>
+			<key>ShortName</key>
+			<string>xotic</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7067</integer>
+			<key>LongName</key>
+			<string>inMomentum</string>
+			<key>ShortName</key>
+			<string>inmntm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7068</integer>
+			<key>LongName</key>
+			<string>Fate of the World</string>
+			<key>ShortName</key>
+			<string>fotw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7069</integer>
+			<key>LongName</key>
+			<string>Ultima I: The First Age of Darkness</string>
+			<key>ShortName</key>
+			<string>u1</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7070</integer>
+			<key>LongName</key>
+			<string>Ultima II: The Revenge of the Enchantress</string>
+			<key>ShortName</key>
+			<string>ultima2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7071</integer>
+			<key>LongName</key>
+			<string>Ultima III: Exodus</string>
+			<key>ShortName</key>
+			<string>u3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7072</integer>
+			<key>LongName</key>
+			<string>Ultima V: Warriors of Destiny</string>
+			<key>ShortName</key>
+			<string>u5</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7073</integer>
+			<key>LongName</key>
+			<string>Ultima VI: The False Prophet</string>
+			<key>ShortName</key>
+			<string>u6</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7074</integer>
+			<key>LongName</key>
+			<string>Wasteland Angel</string>
+			<key>ShortName</key>
+			<string>wa</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7075</integer>
+			<key>LongName</key>
+			<string>Might and Magic: Clash of Heroes</string>
+			<key>ShortName</key>
+			<string>mamcoh</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7076</integer>
+			<key>LongName</key>
+			<string>Fractal: Make Blooms Not War</string>
+			<key>ShortName</key>
+			<string>frctl</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7077</integer>
+			<key>LongName</key>
+			<string>NightSky</string>
+			<key>ShortName</key>
+			<string>ntsky</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7078</integer>
+			<key>LongName</key>
+			<string>Aztaka</string>
+			<key>ShortName</key>
+			<string>aztaka</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7079</integer>
+			<key>LongName</key>
+			<string>Postal III</string>
+			<key>ShortName</key>
+			<string>postal3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7080</integer>
+			<key>LongName</key>
+			<string>Golden Age</string>
+			<key>ShortName</key>
+			<string>gldnage</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7081</integer>
+			<key>LongName</key>
+			<string>Repulse</string>
+			<key>ShortName</key>
+			<string>rep</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7082</integer>
+			<key>LongName</key>
+			<string>Ultima 7: The Black Gate</string>
+			<key>ShortName</key>
+			<string>u7bg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7083</integer>
+			<key>LongName</key>
+			<string>Unstoppable Gorg</string>
+			<key>ShortName</key>
+			<string>ug</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7084</integer>
+			<key>LongName</key>
+			<string>Ultima 7 Part Two: Serpent Isle</string>
+			<key>ShortName</key>
+			<string>u7si</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7085</integer>
+			<key>LongName</key>
+			<string>Alien Hallway</string>
+			<key>ShortName</key>
+			<string>ah</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7086</integer>
+			<key>LongName</key>
+			<string>Gabriel Knight: Sins of the Fathers</string>
+			<key>ShortName</key>
+			<string>gk1sotf</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7087</integer>
+			<key>LongName</key>
+			<string>Smash Cars</string>
+			<key>ShortName</key>
+			<string>scars</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7088</integer>
+			<key>LongName</key>
+			<string>Gabriel Knight 2: The Beast Within</string>
+			<key>ShortName</key>
+			<string>gk2tbw</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7089</integer>
+			<key>LongName</key>
+			<string>Gabriel Knight 3: Blood of the Sacred, Blood of the Damned</string>
+			<key>ShortName</key>
+			<string>gk3bsbd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7090</integer>
+			<key>LongName</key>
+			<string>Fortune Summoners: Secret of the Elemental Stone</string>
+			<key>ShortName</key>
+			<string>fsses</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7091</integer>
+			<key>LongName</key>
+			<string>Gladiatus: Hero of Rome</string>
+			<key>ShortName</key>
+			<string>gldts</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7092</integer>
+			<key>LongName</key>
+			<string>KingsAge</string>
+			<key>ShortName</key>
+			<string>ka</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7093</integer>
+			<key>LongName</key>
+			<string>WildGuns</string>
+			<key>ShortName</key>
+			<string>wg</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7094</integer>
+			<key>LongName</key>
+			<string>MStar (Thai)</string>
+			<key>ShortName</key>
+			<string>mstr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7095</integer>
+			<key>LongName</key>
+			<string>Joe Monster</string>
+			<key>ShortName</key>
+			<string>joemo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7096</integer>
+			<key>LongName</key>
+			<string>Europe 1400</string>
+			<key>ShortName</key>
+			<string>eu1400</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7097</integer>
+			<key>LongName</key>
+			<string>The Settlers Online</string>
+			<key>ShortName</key>
+			<string>sttlo</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7098</integer>
+			<key>LongName</key>
+			<string>Titan Attacks!</string>
+			<key>ShortName</key>
+			<string>titana</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7099</integer>
+			<key>LongName</key>
+			<string>War of the Immortals</string>
+			<key>ShortName</key>
+			<string>woi</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7100</integer>
+			<key>LongName</key>
+			<string>Shank 2</string>
+			<key>ShortName</key>
+			<string>shnk2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7101</integer>
+			<key>LongName</key>
+			<string>Scoregasm</string>
+			<key>ShortName</key>
+			<string>scoregasm</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7102</integer>
+			<key>LongName</key>
+			<string>Supreme Destiny</string>
+			<key>ShortName</key>
+			<string>sdst</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7103</integer>
+			<key>LongName</key>
+			<string>Kingdoms of Amalur: Reckoning</string>
+			<key>ShortName</key>
+			<string>koar</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7104</integer>
+			<key>LongName</key>
+			<string>Mass Effect 3 demo</string>
+			<key>ShortName</key>
+			<string>meffect3</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7105</integer>
+			<key>LongName</key>
+			<string>Alan Wake</string>
+			<key>ShortName</key>
+			<string>alanwake</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7106</integer>
+			<key>LongName</key>
+			<string>The Darkness II</string>
+			<key>ShortName</key>
+			<string>drknss2</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7107</integer>
+			<key>LongName</key>
+			<string>Dawn of Fantasy</string>
+			<key>ShortName</key>
+			<string>dof</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7108</integer>
+			<key>LongName</key>
+			<string>Dear Esther</string>
+			<key>ShortName</key>
+			<string>dresthr</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7109</integer>
+			<key>LongName</key>
+			<string>RPG Maker VX</string>
+			<key>ShortName</key>
+			<string>rpgvx</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7110</integer>
+			<key>LongName</key>
+			<string>Deponia</string>
+			<key>ShortName</key>
+			<string>dpn</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7111</integer>
+			<key>LongName</key>
+			<string>Star Trek: Starfleet Command - Orion Pirates</string>
+			<key>ShortName</key>
+			<string>stscop</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7112</integer>
+			<key>LongName</key>
+			<string>Sonic CD</string>
+			<key>ShortName</key>
+			<string>soniccd</string>
+		</dict>
+		<dict>
+			<key>ID</key>
+			<integer>7113</integer>
+			<key>LongName</key>
+			<string>Star Trek: Starfleet Command 2 - Empires at War</string>
+			<key>ShortName</key>
+			<string>stsceaw</string>
+		</dict>
 	</array>
 	<key>XfireGamesVersion</key>
-	<integer>44180</integer>
+	<integer>45320</integer>
 </dict>
 </plist>
