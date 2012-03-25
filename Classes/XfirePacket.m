@@ -188,7 +188,7 @@ withheld
 	return _attributes;
 }
 
-- (id)attributeForKey:(id)key
+- (XfirePacketAttributeValue *)attributeForKey:(id)key
 {
 	return [[self attributes] objectForKey:key];
 }
@@ -204,14 +204,14 @@ withheld
 	
 	if( [mainAttrVal typeID] == kXfirePacketAttributeArrayType )
 	{
-		NSArray *mainAttrValArray = [mainAttrVal value];
+		NSArray *mainAttrValArray = [mainAttrVal attributeValue];
 		NSMutableArray *attrValues = [NSMutableArray array];
 		
 		int i, cnt;
 		cnt = [mainAttrValArray count];
 		for( i = 0; i < cnt; i++ )
 		{
-			[attrValues addObject: [[mainAttrValArray objectAtIndex:i] value]];
+			[attrValues addObject: [(XfirePacketAttributeValue *)[mainAttrValArray objectAtIndex:i] attributeValue]];
 		}
 		
 		return attrValues;
@@ -219,7 +219,7 @@ withheld
 	else
 	{
 		// single value
-		return [NSArray arrayWithObject:[mainAttrVal value]];
+		return [NSArray arrayWithObject:[mainAttrVal attributeValue]];
 	}
 }
 

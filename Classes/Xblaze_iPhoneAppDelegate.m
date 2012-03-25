@@ -18,7 +18,7 @@
 #import "XBChatRoomViewController.h"
 #import "XfireFriend.h"
 #import "XfireChatRoom.h"
-#import "FlurryAPI.h"
+#import "FlurryAnalytics.h"
 
 #define LOGIN_FAILED_ALERT_TAG -1
 #define FRIEND_INVITE_ALERT_TAG 1
@@ -49,25 +49,27 @@
 
 void uncaughtExceptionHandler(NSException *exception)
 {
-	[FlurryAPI logError:@"Unhandled Exception" message:[exception reason] exception:exception];
+	[FlurryAnalytics logError:@"Unhandled Exception" message:[exception reason] exception:exception];
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-	NSLog(@"Device Token: %@", deviceToken);
-}
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//{
+//	NSLog(@"UDID: %@", [[UIDevice currentDevice] uniqueIdentifier]);
+//	NSLog(@"Device Token: %@", deviceToken);
+//}
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-	NSLog(@"Failed to register for remote notifications: %@", [error localizedDescription]);
-}
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+//{
+//	NSLog(@"Failed to register for remote notifications: %@", [error localizedDescription]);
+//}
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-	//[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
-	//[[UIApplication sharedApplication] unregisterForRemoteNotifications];
+//	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
+	
+//	[[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-	[FlurryAPI startSession:@"4Q9D27LLLVBAGJBJEU3S"];
+	[FlurryAnalytics startSession:@"4Q9D27LLLVBAGJBJEU3S"];
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	
@@ -99,7 +101,7 @@ void uncaughtExceptionHandler(NSException *exception)
 	}
 	
 	[window makeKeyAndVisible];
-	UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+	UIInterfaceOrientation orientation = (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
 	UIImage *defaultImage = nil;
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)

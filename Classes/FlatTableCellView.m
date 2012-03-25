@@ -29,7 +29,7 @@
 {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
 	{
-		contentView = [[FlatTableCellContentView alloc] initWithStyle:UITableViewCellStyleDefault];
+		contentView = [[FlatTableCellContentView alloc] init];
 		contentView.opaque = YES;
 		[self addSubview:contentView];
 		[contentView release];

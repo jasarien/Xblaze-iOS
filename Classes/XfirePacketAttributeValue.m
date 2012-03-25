@@ -309,7 +309,7 @@
 	return _typeID;
 }
 
-- (id)value
+- (id)attributeValue
 {
 	return _value;
 }

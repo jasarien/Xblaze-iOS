@@ -557,7 +557,11 @@
 
 - (void)actionButtonHit:(id)sender{
 	
-	UIActionSheet *actionSheet;
+	if (actionSheet)
+	{
+		return;
+	}
+	
 	if ([MFMailComposeViewController canSendMail]) {
 		actionSheet = [[UIActionSheet alloc] initWithTitle:@""
 																							delegate:self 
@@ -587,7 +591,7 @@
 	[actionSheet release];
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)anActionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
 	
 	[self setBarsHidden:NO];
 	
@@ -600,6 +604,18 @@
 	} else if (buttonIndex == actionSheet.firstOtherButtonIndex + 2) {
 		[self emailPhoto];
 	}
+	
+	actionSheet = nil;
+}
+
+- (void)actionSheet:(UIActionSheet *)anActionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	actionSheet = nil;
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)anActionSheet
+{
+	actionSheet = nil;
 }
 
 

@@ -281,22 +281,22 @@
 	{
 		case kXfirePacketAttributeStringType:
 			[self generateUInt8:0x01];
-			[self generateString:((NSString*)[val value])];
+			[self generateString:((NSString*)[val attributeValue])];
 			break;
 		
 		case kXfirePacketAttributeUInt32Type:
 			[self generateUInt8:0x02];
-			[self generateUInt32:[((NSNumber*)[val value]) unsignedIntValue]];
+			[self generateUInt32:[((NSNumber*)[val attributeValue]) unsignedIntValue]];
 			break;
 		
 		case kXfirePacketAttributeUUIDType:
 			[self generateUInt8:0x03];
-			[self generateUUID:((NSData *)[val value])];
+			[self generateUUID:((NSData *)[val attributeValue])];
 			break;
 		
 		case kXfirePacketAttributeDIDType:
 			[self generateUInt8:0x06];
-			[self generateDID:((NSData *)[val value])];
+			[self generateDID:((NSData *)[val attributeValue])];
 			break;
 		
 		case kXfirePacketAttributeArrayType:
@@ -306,17 +306,17 @@
 		
 		case kXfirePacketAttributeStringAttrMapType:
 			[self generateUInt8:0x05];
-			[self generateAttributeMap:((XfirePacketAttributeMap *)[val value])];
+			[self generateAttributeMap:((XfirePacketAttributeMap *)[val attributeValue])];
 			break;
 		
 		case kXfirePacketAttributeIntAttrMapType:
 			[self generateUInt8:0x09];
-			[self generateAttributeMap:((XfirePacketAttributeMap *)[val value])];
+			[self generateAttributeMap:((XfirePacketAttributeMap *)[val attributeValue])];
 			break;
 		
 		case kXfirePacketAttributeUInt8Type:
 			[self generateUInt8:0x08];
-			[self generateUInt8:[((NSNumber*)[val value]) unsignedCharValue]];
+			[self generateUInt8:[((NSNumber*)[val attributeValue]) unsignedCharValue]];
 			break;
 			
 		default:
@@ -328,7 +328,7 @@
 - (void)generateArray:(XfirePacketAttributeValue *)arrayAttr
 {
 	unsigned int i, cnt;
-	NSArray *arr = [arrayAttr value];
+	NSArray *arr = [arrayAttr attributeValue];
 	XfirePacketAttributeValue *pav;
 	
 	// simple case = empty array
@@ -355,7 +355,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateString:[pav value]];
+				[self generateString:[pav attributeValue]];
 			}
 			break;
 		
@@ -366,7 +366,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateUInt32:[((NSNumber*)[pav value]) unsignedIntValue]];
+				[self generateUInt32:[((NSNumber*)[pav attributeValue]) unsignedIntValue]];
 			}
 			break;
 		
@@ -377,7 +377,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateUUID:[pav value]];
+				[self generateUUID:[pav attributeValue]];
 			}
 			break;
 		
@@ -388,7 +388,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateDID:[pav value]];
+				[self generateDID:[pav attributeValue]];
 			}
 			break;
 		
@@ -410,7 +410,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateAttributeMap:[pav value]];
+				[self generateAttributeMap:[pav attributeValue]];
 			}
 			break;
 		
@@ -421,7 +421,7 @@
 			for( i = 0; i < cnt; i++ )
 			{
 				pav = [arr objectAtIndex:i];
-				[self generateAttributeMap:[pav value]];
+				[self generateAttributeMap:[pav attributeValue]];
 			}
 			break;
 		

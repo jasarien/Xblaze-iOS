@@ -131,7 +131,7 @@ static inline void _SetDeltaOption( NSDictionary *defaults, NSDictionary *curren
 	
 	// Create the login connection
 	[self setStatus:kXfireSessionStatusLoggingOn];
-	_loginConnection = [XfireConnection newLoginConnectionToHost:_xfireHost port:_xfirePort];
+	_loginConnection = (XfireLoginConnection *)[XfireConnection newLoginConnectionToHost:_xfireHost port:_xfirePort];
 	[_loginConnection setSession:self];
 	_connections = [[NSMutableArray alloc] init];
 	_friendGroupController = [[XfireFriendGroupController alloc] initWithSession:self];

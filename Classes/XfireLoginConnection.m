@@ -38,6 +38,7 @@
 #import "XfireFriendGroup.h"
 #import "XfireFriendGroup_Private.h"
 #import "XfirePacketAttributeMap.h"
+#import "XfirePacketAttributeValue.h"
 #import "XfireScreenshot.h"
 #import "XfireChatRoom.h"
 
@@ -690,12 +691,13 @@ static void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePack
 	// copy so we have a full identification on us
 	[[[self session] loginIdentity] setUserName:username];
 	
-	salt = [[pkt attributeForKey:kXfireAttributeSaltKey] value];
+	salt = [[pkt attributeForKey:kXfireAttributeSaltKey] attributeValue];
 	
 	// Compute hashed password
 	cur = [NSMutableString string];
 	[cur appendFormat:@"%@%@UltimateArena",username,password];
 	hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
+	NSLog(@"Password Hash Before Salt: %@", [hash stringRepresentation]);
 	cur = [NSMutableString string];
 	[cur appendFormat:@"%@%@", [hash stringRepresentation], salt];
 	hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
@@ -729,10 +731,10 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 	// Ignore: status, dlset, p2pset, clntset, minrect, maxrect, ctry, n1, n2, n3
 	XfireFriend *fr = [[self session] loginIdentity];
 	
-	NSNumber *nbr = (NSNumber *)[[pkt attributeForKey:kXfireAttributeUserIDKey] value];
+	NSNumber *nbr = (NSNumber *)[[pkt attributeForKey:kXfireAttributeUserIDKey] attributeValue];
 	[fr setUserID:[nbr unsignedIntValue]];
-	[fr setNickName:[[pkt attributeForKey:kXfireAttributeNicknameKey] value]];
-	[fr setSessionID:(NSData *)[[pkt attributeForKey:kXfireAttributeSessionIDKey] value]];
+	[fr setNickName:[[pkt attributeForKey:kXfireAttributeNicknameKey] attributeValue]];
+	[fr setSessionID:(NSData *)[[pkt attributeForKey:kXfireAttributeSessionIDKey] attributeValue]];
 	
 	// send skin packet
 	XfireSkin *skin = [[self session] delegate_skin];
@@ -766,11 +768,11 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 //   int      Login flags       (flags)  always 0?
 - (void)processVersionTooOldPacket:(XfirePacket *)pkt
 {
-	NSArray  *versions = (NSArray *)[[pkt attributeForKey:kXfireAttributeVersionKey] value];
+	NSArray  *versions = (NSArray *)[[pkt attributeForKey:kXfireAttributeVersionKey] attributeValue];
 	if( [versions isKindOfClass:[NSArray class]] && ([versions count] > 0) )
 	{
 		// For now, just get the first number
-		NSNumber *ver = (NSNumber *)[[versions objectAtIndex:0] value];
+		NSNumber *ver = (NSNumber *)[(XfirePacketAttributeValue *)[versions objectAtIndex:0] attributeValue];
 		[[self session] setLatestClientVersion:[ver unsignedIntValue]];
 	}
 	[[self session] loginFailed:kXfireVersionTooOldReason];
@@ -1104,7 +1106,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 				
 				for( j = 0; j < [common count]; j++ )
 				{
-					[fr addCommonFriendID:(NSNumber *)[[common objectAtIndex:j] value]];
+					[fr addCommonFriendID:(NSNumber *)[(XfirePacketAttributeValue *)[common objectAtIndex:j] attributeValue]];
 				}
 				
 				// move from pending to actual
@@ -1363,7 +1365,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatMessagePacket:(XfirePacket *)pkt
 {
-	NSData *sid = (NSData *)[[pkt attributeForKey:kXfireAttributeSessionIDKey] value];
+	NSData *sid = (NSData *)[[pkt attributeForKey:kXfireAttributeSessionIDKey] attributeValue];
 	XfireChat *chat = [[self session] chatForSessionID:sid];
 	
 	// no open chat yet, create one
@@ -1390,7 +1392,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processDisconnectPacket:(XfirePacket *)pkt
 {
-	NSNumber * reason = (NSNumber *)[[pkt attributeForKey:kXfireAttributeReasonKey] value];
+	NSNumber * reason = (NSNumber *)[[pkt attributeForKey:kXfireAttributeReasonKey] attributeValue];
 	if( [reason intValue] == 1 )
 	{
 		[[self session] delegate_sessionWillDisconnect:kXfireOtherSessionReason];
@@ -1411,7 +1413,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processScreenshotsInfo:(XfirePacket *)pkt
 {
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
 	XfireFriend *friend = [[self session] friendForUserID:[userID unsignedIntValue]];
 	NSArray *screenshotIndexes = [pkt attributeValuesForKey:@"0x5c"];
 	NSArray *gameIDs = [pkt attributeValuesForKey:@"0x21"];
@@ -1448,19 +1450,19 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processFriendInfoChanged:(XfirePacket *)pkt
 {
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
 	XfireFriend *friend = [[self session] friendForUserID:[userID unsignedIntValue]];
 	[[self session] requestInfoViewInfoForFriend:friend];
 }
 
 - (void)processFriendAvatarPacket:(XfirePacket *)pkt
 {
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
 	
 	XfireFriend *friend = [[self session] friendForUserID:[userID unsignedIntValue]];
 	
-	const int avatarType = [(NSNumber *)[[pkt attributeForKey:@"0x34"] value] intValue];
-	const int avatarNumber = [(NSNumber *)[[pkt attributeForKey:@"0x1f"] value] intValue];
+	const int avatarType = [(NSNumber *)[[pkt attributeForKey:@"0x34"] attributeValue] intValue];
+	const int avatarNumber = [(NSNumber *)[[pkt attributeForKey:@"0x1f"] attributeValue] intValue];
 	
 	NSURL *avatarURL = nil;
 	
@@ -1516,7 +1518,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processClanMembersPacket:(XfirePacket *)pkt
 {
-	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] value];
+	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] attributeValue];
 	NSArray *userIDs = [pkt attributeValuesForKey:@"0x01"];
 	NSArray *userNames = [pkt attributeValuesForKey:@"0x02"];
 	//NSArray *nickNames = [pkt attributeValuesForKey:@"0x0d"];
@@ -1548,8 +1550,8 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processClanMemberLeftClanPacket:(XfirePacket *)pkt
 {
-	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] value];
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
+	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] attributeValue];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
 	
 	XfireFriendGroupController *grpCtrl = [_session friendGroupController];
 	XfireFriendGroup *clan = [[grpCtrl groups] groupForID:[clanID intValue]];
@@ -1567,9 +1569,9 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processClanMemberChangedNicknamePacket:(XfirePacket *)pkt
 {
-	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] value];
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
-	NSString *newClanNickname = [[pkt attributeForKey:@"0x0d"] value];
+	NSNumber *clanID = (NSNumber *)[[pkt attributeForKey:@"0x6c"] attributeValue];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
+	NSString *newClanNickname = [[pkt attributeForKey:@"0x0d"] attributeValue];
 	
 	XfireFriend *clanMember = [_session friendForUserID:[userID unsignedIntValue]];
 	
@@ -1597,13 +1599,13 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomJoinPacket:(XfirePacket *)pkt
 {
-	NSData *chatRoomSID = (NSData *)[[pkt attributeForKey:@"0x04"] value];
+	NSData *chatRoomSID = (NSData *)[[pkt attributeForKey:@"0x04"] attributeValue];
 	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:chatRoomSID];
 	
 	if (chatRoom)
 		return; // already in that chat...
 	
-	XFGroupChatJoinResponse joinResponse = [(NSNumber *)[[pkt attributeForKey:@"0x0c"] value] intValue];
+	XFGroupChatJoinResponse joinResponse = [(NSNumber *)[[pkt attributeForKey:@"0x0c"] attributeValue] intValue];
 	
 	if (joinResponse == XFGroupChatIncorrectPassword)
 	{
@@ -1621,10 +1623,10 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 	//NSNumber *chatRoomResponse = (NSNumber *)[[pkt attributeForKey:@"0x0c"] value];
 	
 	[chatRoom setGroupChatSID:chatRoomSID];
-	[chatRoom setName:[[pkt attributeForKey:@"0x05"] value]];
-	[chatRoom setMessageOfTheDay:[[pkt attributeForKey:@"0x4d"] value]];
-	[chatRoom setDefaultPermissionLevel:[(NSNumber *)[[pkt attributeForKey:@"0x12"] value] intValue]];
-	[chatRoom setChatRoomAccess:[(NSNumber *)[[pkt attributeForKey:@"0x17"] value] intValue]];
+	[chatRoom setName:[[pkt attributeForKey:@"0x05"] attributeValue]];
+	[chatRoom setMessageOfTheDay:[[pkt attributeForKey:@"0x4d"] attributeValue]];
+	[chatRoom setDefaultPermissionLevel:[(NSNumber *)[[pkt attributeForKey:@"0x12"] attributeValue] intValue]];
+	[chatRoom setChatRoomAccess:[(NSNumber *)[[pkt attributeForKey:@"0x17"] attributeValue] intValue]];
 	[chatRoom setSession:_session];
 	
 	[_session delegate_didJoinChatRoom:chatRoom];
@@ -1632,7 +1634,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomInfoPacket:(XfirePacket *)pkt
 {
-	NSData *chatRoomSID = (NSData *)[[pkt attributeForKey:@"0x04"] value];
+	NSData *chatRoomSID = (NSData *)[[pkt attributeForKey:@"0x04"] attributeValue];
 	
 	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:chatRoomSID];
 	
@@ -1674,7 +1676,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomUserJoinedPacket:(XfirePacket *)pkt
 {
-	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] value]];
+	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] attributeValue]];
 	if (!chatRoom)
 		return; // if we don't have a chat room for this SID, then we can't add a user to it, so ignore.
 	
@@ -1683,7 +1685,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomUserLeftPacket:(XfirePacket *)pkt
 {
-	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] value]];
+	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] attributeValue]];
 	if (!chatRoom)
 		return;
 	
@@ -1692,7 +1694,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomReceivedMessagePacket:(XfirePacket *)pkt
 {
-	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] value]];
+	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] attributeValue]];
 	if (!chatRoom)
 		return;
 	
@@ -1701,7 +1703,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomInvitePacket:(XfirePacket *)pkt
 {
-	NSData *groupChatSID = (NSData *)[[pkt attributeForKey:@"0x04"] value];
+	NSData *groupChatSID = (NSData *)[[pkt attributeForKey:@"0x04"] attributeValue];
 	
 	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:groupChatSID];
 	
@@ -1712,19 +1714,19 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 	chatRoom = [[[XfireChatRoom alloc] init] autorelease];
 	
 	[chatRoom setGroupChatSID:groupChatSID];
-	[chatRoom setName:[[pkt attributeForKey:@"0x05"] value]];
-	[chatRoom setChatRoomAccess:[(NSNumber *)[[pkt attributeForKey:@"0x17"] value] intValue]];
+	[chatRoom setName:[[pkt attributeForKey:@"0x05"] attributeValue]];
+	[chatRoom setChatRoomAccess:[(NSNumber *)[[pkt attributeForKey:@"0x17"] attributeValue] intValue]];
 	[chatRoom setSession:_session];
 	
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
 	
 	XfireFriend *friend = [[_session friendForUserID:[userID unsignedIntValue]] retain];
 	if (!friend)
 	{
 		friend = [[XfireFriend alloc] init];
 		[friend setUserID:[userID unsignedIntValue]];
-		[friend setUserName:[[pkt attributeForKey:@"0x02"] value]];
-		[friend setNickName:[[pkt attributeForKey:@"0x0d"] value]];
+		[friend setUserName:[[pkt attributeForKey:@"0x02"] attributeValue]];
+		[friend setNickName:[[pkt attributeForKey:@"0x0d"] attributeValue]];
 	}
 	
 	[_session delegate_receivedChatRoomInviteFrom:friend forChatRoom:chatRoom];
@@ -1733,11 +1735,11 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 - (void)processChatRoomUserKickedPacket:(XfirePacket *)pkt
 {
-	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] value]];
+	XfireChatRoom *chatRoom = [_session chatRoomForSessionID:(NSData *)[[pkt attributeForKey:@"0x04"] attributeValue]];
 	if (!chatRoom)
 		return;
 	
-	XfireFriend *friend = [chatRoom userForUserID:[(NSNumber *)[[pkt attributeForKey:@"0x18"] value] unsignedIntValue]];
+	XfireFriend *friend = [chatRoom userForUserID:[(NSNumber *)[[pkt attributeForKey:@"0x18"] attributeValue] unsignedIntValue]];
 	
 	[_session delegate_user:friend kickedFromChatRoom:chatRoom];
 }
@@ -1746,7 +1748,7 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 
 void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePacketAttributeMap *map, NSMutableDictionary *dictionary )
 {
-	NSString *pktStr = [[map objectForKey:pktKey] value];
+	NSString *pktStr = [[map objectForKey:pktKey] attributeValue];
 	if( pktStr )
 	{
 		NSNumber *dctVal = [dictionary objectForKey:dictKey];

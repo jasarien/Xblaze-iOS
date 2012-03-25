@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		1A0E4F1C10D5C6F400F393A5 /* defaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0E4F1B10D5C6F400F393A5 /* defaultUserImage.png */; };
 		1A14065410FE856A0097E314 /* dismiss-keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A14065310FE856A0097E314 /* dismiss-keyboard.png */; };
 		1A14066A10FE8A4C0097E314 /* XBImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A14066910FE8A4C0097E314 /* XBImageCache.m */; };
+		1A1631C415169BA200262567 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A1631C315169BA200262567 /* Icon-72@2x.png */; };
 		1A16357710B4CEB200E27143 /* NSData_MFAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16357610B4CEB200E27143 /* NSData_MFAdditions.m */; };
 		1A1635AD10B4D05500E27143 /* MFDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16356610B4CE8800E27143 /* MFDataScanner.m */; };
 		1A1635AE10B4D05500E27143 /* MFDataEmitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A16356810B4CE8800E27143 /* MFDataEmitter.m */; };
@@ -31,6 +32,7 @@
 		1A20FDE011A0703B00CCE45A /* XBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A20FDDE11A0703B00CCE45A /* XBDetailViewController.m */; };
 		1A20FDE111A0703B00CCE45A /* XBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A20FDDF11A0703B00CCE45A /* XBDetailViewController.xib */; };
 		1A27E44210DC854A00F1D11B /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1A27E44110DC854A00F1D11B /* pop.wav */; };
+		1A29718A14E81F1700FC35B4 /* XBPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A29718914E81F1700FC35B4 /* XBPushManager.m */; };
 		1A3D048E1219DC3E00C88565 /* XBChatRoomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D048C1219DC3E00C88565 /* XBChatRoomListViewController.m */; };
 		1A3D048F1219DC3E00C88565 /* XBChatRoomListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3D048D1219DC3E00C88565 /* XBChatRoomListViewController.xib */; };
 		1A3E9D7A10BAE93A008AFDA6 /* XBChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3E9D7910BAE93A008AFDA6 /* XBChatController.m */; };
@@ -61,7 +63,6 @@
 		1A55397D10D2C3880011A559 /* XBAddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A55397B10D2C3880011A559 /* XBAddFriendViewController.m */; };
 		1A55397E10D2C3880011A559 /* XBAddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A55397C10D2C3880011A559 /* XBAddFriendViewController.xib */; };
 		1A6078D912219D4300FBBEAA /* typing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A6078D812219D4300FBBEAA /* typing@2x.png */; };
-		1A630D5F1335772300814D04 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A630D5E1335772300814D04 /* libFlurry.a */; };
 		1A641E8812AC701700D77958 /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1A641E7F12AC701700D77958 /* images.bundle */; };
 		1A641E8912AC701700D77958 /* XBScrollableTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A641E8412AC701700D77958 /* XBScrollableTabBar.m */; };
 		1A641E8A12AC701700D77958 /* XBTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A641E8512AC701700D77958 /* XBTabButton.m */; };
@@ -167,6 +168,9 @@
 		1AC1261B10DD4B0200A5CB41 /* Purr.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 1AC1261810DD4B0200A5CB41 /* Purr.aiff */; };
 		1AC89F3610AC548300CE30D3 /* XBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC89F3410AC548300CE30D3 /* XBLoginViewController.m */; };
 		1AC89F3710AC548300CE30D3 /* XBLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC89F3510AC548300CE30D3 /* XBLoginViewController.xib */; };
+		1AC946EC151FBAA700BE49B5 /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AC946EA151FBAA700BE49B5 /* Default-Landscape@2x.png */; };
+		1AC946ED151FBAA700BE49B5 /* Default-Portrait@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AC946EB151FBAA700BE49B5 /* Default-Portrait@2x.png */; };
+		1AC946F0151FBF5F00BE49B5 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC946EF151FBF5F00BE49B5 /* libFlurryAnalytics.a */; };
 		1ACBE2941301F91700738459 /* JSCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACBE2931301F91700738459 /* JSCoreTextView.m */; };
 		1ACCAAEA117FABBE00BEA20A /* XBScreenshotGamesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACCAAE8117FABBE00BEA20A /* XBScreenshotGamesListViewController.m */; };
 		1ACCAAEB117FABBE00BEA20A /* XBScreenshotGamesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1ACCAAE9117FABBE00BEA20A /* XBScreenshotGamesListViewController.xib */; };
@@ -2529,6 +2533,7 @@
 		1A14065310FE856A0097E314 /* dismiss-keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dismiss-keyboard.png"; sourceTree = "<group>"; };
 		1A14066810FE8A4C0097E314 /* XBImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBImageCache.h; sourceTree = "<group>"; };
 		1A14066910FE8A4C0097E314 /* XBImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBImageCache.m; sourceTree = "<group>"; };
+		1A1631C315169BA200262567 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		1A16356510B4CE8800E27143 /* MFDataScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFDataScanner.h; sourceTree = "<group>"; };
 		1A16356610B4CE8800E27143 /* MFDataScanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MFDataScanner.m; sourceTree = "<group>"; };
 		1A16356710B4CE8800E27143 /* MFDataEmitter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MFDataEmitter.h; sourceTree = "<group>"; };
@@ -2546,6 +2551,8 @@
 		1A20FDDE11A0703B00CCE45A /* XBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDetailViewController.m; sourceTree = "<group>"; };
 		1A20FDDF11A0703B00CCE45A /* XBDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBDetailViewController.xib; path = Classes/XBDetailViewController.xib; sourceTree = "<group>"; };
 		1A27E44110DC854A00F1D11B /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
+		1A29718814E81F1700FC35B4 /* XBPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPushManager.h; sourceTree = "<group>"; };
+		1A29718914E81F1700FC35B4 /* XBPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPushManager.m; sourceTree = "<group>"; };
 		1A3005C010DA70EC00728F29 /* Release Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "Release Notes.rtf"; sourceTree = "<group>"; };
 		1A3005C210DA70EC00728F29 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html.documentation; path = index.html; sourceTree = "<group>"; };
 		1A3005C310DA70EC00728F29 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
@@ -2597,8 +2604,6 @@
 		1A55397B10D2C3880011A559 /* XBAddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAddFriendViewController.m; sourceTree = "<group>"; };
 		1A55397C10D2C3880011A559 /* XBAddFriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBAddFriendViewController.xib; path = Classes/XBAddFriendViewController.xib; sourceTree = "<group>"; };
 		1A6078D812219D4300FBBEAA /* typing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "typing@2x.png"; sourceTree = "<group>"; };
-		1A630D5C1335771500814D04 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
-		1A630D5E1335772300814D04 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		1A641E7F12AC701700D77958 /* images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = images.bundle; sourceTree = "<group>"; };
 		1A641E8012AC701700D77958 /* XBScrollableTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBScrollableTabBar.h; sourceTree = "<group>"; };
 		1A641E8112AC701700D77958 /* XBTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTabButton.h; sourceTree = "<group>"; };
@@ -2763,6 +2768,10 @@
 		1AC89F3310AC548300CE30D3 /* XBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBLoginViewController.h; sourceTree = "<group>"; };
 		1AC89F3410AC548300CE30D3 /* XBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBLoginViewController.m; sourceTree = "<group>"; };
 		1AC89F3510AC548300CE30D3 /* XBLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XBLoginViewController.xib; sourceTree = "<group>"; };
+		1AC946EA151FBAA700BE49B5 /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "Resources-iPad/Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		1AC946EB151FBAA700BE49B5 /* Default-Portrait@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x.png"; path = "Resources-iPad/Default-Portrait@2x.png"; sourceTree = "<group>"; };
+		1AC946EF151FBF5F00BE49B5 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
+		1AC946F1151FBF7000BE49B5 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		1ACBE2921301F91700738459 /* JSCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCoreTextView.h; sourceTree = "<group>"; };
 		1ACBE2931301F91700738459 /* JSCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCoreTextView.m; sourceTree = "<group>"; };
 		1ACCAAE7117FABBE00BEA20A /* XBScreenshotGamesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBScreenshotGamesListViewController.h; sourceTree = "<group>"; };
@@ -5134,7 +5143,7 @@
 				1AA32FEE10EE33ED0006B286 /* AudioToolbox.framework in Frameworks */,
 				1A9809A210F673FC00AC68C7 /* MessageUI.framework in Frameworks */,
 				1A6ED822131B1B53009A2C72 /* libz.dylib in Frameworks */,
-				1A630D5F1335772300814D04 /* libFlurry.a in Frameworks */,
+				1AC946F0151FBF5F00BE49B5 /* libFlurryAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5151,6 +5160,8 @@
 				1ACBE2911301F8F700738459 /* JSCoreTextHyperlinkView */,
 				1A47613C131B059B00AF7EBF /* EGOPhotoViewer */,
 				1AA5F68B131DA6C500CB24C5 /* AutoHyperlinks */,
+				1A29718814E81F1700FC35B4 /* XBPushManager.h */,
+				1A29718914E81F1700FC35B4 /* XBPushManager.m */,
 				1D3623240D0F684500981E51 /* Xblaze_iPhoneAppDelegate.h */,
 				1D3623250D0F684500981E51 /* Xblaze_iPhoneAppDelegate.m */,
 				1AC89F3310AC548300CE30D3 /* XBLoginViewController.h */,
@@ -5635,6 +5646,7 @@
 				1A8714A8122049D1001CC3A1 /* Icon.png */,
 				1A8714A9122049D1001CC3A1 /* Icon@2x.png */,
 				1A6DCCF0133018700063B65F /* Icon-72.png */,
+				1A1631C315169BA200262567 /* Icon-72@2x.png */,
 				1A6DCCF1133018700063B65F /* Icon-Small-50.png */,
 				1A6DCCF2133018700063B65F /* Icon-Small.png */,
 				1A6DCCF3133018700063B65F /* Icon-Small@2x.png */,
@@ -8012,7 +8024,9 @@
 			isa = PBXGroup;
 			children = (
 				1ADAA0A211AC67E10008E47A /* Default-Landscape.png */,
+				1AC946EA151FBAA700BE49B5 /* Default-Landscape@2x.png */,
 				1ADAA0A311AC67E10008E47A /* Default-Portrait.png */,
+				1AC946EB151FBAA700BE49B5 /* Default-Portrait@2x.png */,
 				1A0E13E211A864AF00D1F0FF /* textField.png */,
 				1ABCEB3D11A48AA6008A9939 /* bgiPad.png */,
 				1A20FD4411A05B1400CCE45A /* modalBG.png */,
@@ -8059,7 +8073,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1A630D5C1335771500814D04 /* FlurryAPI.h */,
+				1AC946F1151FBF7000BE49B5 /* FlurryAnalytics.h */,
 				1AA32FD410EE32080006B286 /* SoundEffect.h */,
 				1AA32FD510EE32080006B286 /* SoundEffect.m */,
 				1A80A73F10B4401A0098BA9C /* Reachability.h */,
@@ -8117,7 +8131,7 @@
 				1A9809A110F673FC00AC68C7 /* MessageUI.framework */,
 				1AD385B5130200F9000E7D60 /* CoreText.framework */,
 				1A6ED821131B1B51009A2C72 /* libz.dylib */,
-				1A630D5E1335772300814D04 /* libFlurry.a */,
+				1AC946EF151FBF5F00BE49B5 /* libFlurryAnalytics.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -8148,10 +8162,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = JamSoft;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Xblaze-iPhone" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -10578,6 +10593,9 @@
 				1ADE047813831F5000455706 /* XF_ZUMA.ICO in Resources */,
 				1ADE047913831F5000455706 /* XF_ZUMAW.ICO in Resources */,
 				1ADE047A13831F5000455706 /* XF_ZUO.ICO in Resources */,
+				1A1631C415169BA200262567 /* Icon-72@2x.png in Resources */,
+				1AC946EC151FBAA700BE49B5 /* Default-Landscape@2x.png in Resources */,
+				1AC946ED151FBAA700BE49B5 /* Default-Portrait@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10675,6 +10693,7 @@
 				1AA5F694131DA6E000CB24C5 /* AHLinkLexer.l in Sources */,
 				1AA5F695131DA6E000CB24C5 /* AHHyperlinkScanner.m in Sources */,
 				1AA5F696131DA6E000CB24C5 /* AHMarkedHyperlink.m in Sources */,
+				1A29718A14E81F1700FC35B4 /* XBPushManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10701,7 +10720,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "83B7EA04-791F-4BBA-AB03-EACDD585D52F";
 				SDKROOT = iphoneos;
 			};
@@ -10711,7 +10729,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Addyman";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
@@ -10719,7 +10740,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Xblaze_iPhone_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_VERSION = 4.2;
 				GCC_WARN_UNUSED_VALUE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = "Xblaze_iPhone-Info.plist";
@@ -10735,7 +10755,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Xblaze;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC1BA41B-DC16-4F65-9C56-109FEC1ACF9E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "59560C84-491D-456B-A0C9-EC373439ED6A";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -10745,7 +10765,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = NO;
@@ -10754,7 +10777,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Xblaze_iPhone_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
-				GCC_VERSION = 4.2;
 				GCC_WARN_UNUSED_VALUE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = "Xblaze_iPhone-Info.plist";
@@ -10781,13 +10803,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Addyman";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
+				"GCC_OPTIMIZATION_LEVEL[arch=armv6]" = 0;
+				"GCC_OPTIMIZATION_LEVEL[arch=armv7]" = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Xblaze_iPhone_Prefix.pch;
-				GCC_VERSION = 4.2;
 				GCC_WARN_UNUSED_VALUE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				INFOPLIST_FILE = "Xblaze_iPhone-Info.plist";
@@ -10803,7 +10829,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Xblaze;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4496F503-93F3-435F-8537-1CC91375F548";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -10830,7 +10856,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -10855,7 +10880,6 @@
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Release;

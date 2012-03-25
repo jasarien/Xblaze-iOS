@@ -209,25 +209,25 @@
 	switch( tid )
 	{
 		case 1:
-			[desc appendFormat:@" \"%@\"\n", [val value]];
+			[desc appendFormat:@" \"%@\"\n", [val attributeValue]];
 			break;
 		
 		case 2:
 			{
-				NSNumber *nbr = [val value];
+				NSNumber *nbr = [val attributeValue];
 				unsigned int nbrVal = [nbr unsignedIntValue];
 				[desc appendFormat:@" %u (0x%08x)\n", nbrVal, nbrVal];
 			}
 			break;
 		
 		case 3:
-			[desc appendFormat:@" %@\n", [val value]];
+			[desc appendFormat:@" %@\n", [val attributeValue]];
 			break;
 		
 		case 4:
 			{
 				int i, cnt;
-				NSArray *arr = [val value];
+				NSArray *arr = [val attributeValue];
 				cnt = [arr count];
 				
 				[desc appendFormat:@" element type = %@, count = %u\n", [self nameForTypeID:[val arrayElementType]], cnt];
@@ -242,7 +242,7 @@
 		
 		case 7:
 			{
-				NSNumber *nbr = [val value];
+				NSNumber *nbr = [val attributeValue];
 				unsigned long long nbrVal = [nbr unsignedLongLongValue];
 				[desc appendFormat:@" %llu (0x%016llx)\n", nbrVal, nbrVal];
 			}
@@ -250,7 +250,7 @@
 		
 		case 8:
 			{
-				NSNumber *nbr = [val value];
+				NSNumber *nbr = [val attributeValue];
 				unsigned int nbrVal = [nbr unsignedCharValue];
 				[desc appendFormat:@" %u (0x%02x)\n", nbrVal, nbrVal];
 			}
@@ -259,14 +259,14 @@
 		case 5:
 		case 9:
 			{
-				XfirePacketAttributeMap *newMap = [val value];
+				XfirePacketAttributeMap *newMap = [val attributeValue];
 				[desc appendFormat:@" #attrs = %u\n",[newMap count]];
-				[self logMessageForMap:[val value] indent:newIndent string:desc];
+				[self logMessageForMap:[val attributeValue] indent:newIndent string:desc];
 			}
 			break;
 		
 		case 6:
-			[desc appendFormat:@" %@\n",[val value]];
+			[desc appendFormat:@" %@\n",[val attributeValue]];
 			break;
 	}
 }

@@ -11,6 +11,7 @@
 #import "XfireSession.h"
 #import "XfireSession_Private.h"
 #import "XfireFriend.h"
+#import "XfirePacketAttributeValue.h"
 
 NSString *kXfireChatRoomDidReceiveMessageNotification = @"kXfireChatRoomDidReceiveMessageNotification";
 
@@ -36,7 +37,7 @@ NSString *kXfireChatRoomDidReceiveMessageNotification = @"kXfireChatRoomDidRecei
 
 - (id)init
 {
-	if ((self == [super init]))
+	if ((self = [super init]))
 	{
 		self.messages = [NSMutableArray array];
 		self.permissions = [NSMutableDictionary dictionary];
@@ -118,11 +119,11 @@ NSString *kXfireChatRoomDidReceiveMessageNotification = @"kXfireChatRoomDidRecei
 {
 	NSLog(@"Default permission level: %@", [self stringForPermissionLevel:self.defaultPermissionLevel]);
 	
-	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] value];
-	NSData *userSID = (NSData *)[[pkt attributeForKey:@"0x11"] value];
-	NSString *username = [[pkt attributeForKey:@"0x02"] value];
-	NSString *nickname = [[pkt attributeForKey:@"0x0d"] value];
-	XFGroupChatPermissionLevel permissionLevel = [(NSNumber *)[[pkt attributeForKey:@"0x12"] value] intValue];
+	NSNumber *userID = (NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue];
+	NSData *userSID = (NSData *)[[pkt attributeForKey:@"0x11"] attributeValue];
+	NSString *username = [[pkt attributeForKey:@"0x02"] attributeValue];
+	NSString *nickname = [[pkt attributeForKey:@"0x0d"] attributeValue];
+	XFGroupChatPermissionLevel permissionLevel = [(NSNumber *)[[pkt attributeForKey:@"0x12"] attributeValue] intValue];
 	
 	XfireFriend *user = [_session friendForUserID:[userID unsignedIntValue]];
 	
@@ -158,7 +159,7 @@ NSString *kXfireChatRoomDidReceiveMessageNotification = @"kXfireChatRoomDidRecei
 
 - (void)processChatRoomUserLeftPacket:(XfirePacket *)pkt
 {
-	NSUInteger userID = [(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue];
+	NSUInteger userID = [(NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue] unsignedIntValue];
 	
 	XfireFriend *user = [self userForUserID:userID];
 	
@@ -178,7 +179,7 @@ NSString *kXfireChatRoomDidReceiveMessageNotification = @"kXfireChatRoomDidRecei
 
 - (void)processChatRoomReceivedMessagePacket:(XfirePacket *)pkt
 {
-	XfireFriend *user = [self userForUserID:[(NSNumber *)[[pkt attributeForKey:@"0x01"] value] unsignedIntValue]];
+	XfireFriend *user = [self userForUserID:[(NSNumber *)[[pkt attributeForKey:@"0x01"] attributeValue] unsignedIntValue]];
 	NSString *message = [[pkt attributeValuesForKey:@"0x2e"] objectAtIndex:0];
 	
 	NSDate *date = [NSDate date];

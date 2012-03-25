@@ -54,7 +54,7 @@
 + (id)attributeValueWithAttributeMap:(XfirePacketAttributeMap *)map;
 
 - (int)typeID;
-- (id)value;
+- (id)attributeValue;
 - (int)arrayElementType;
 
 @end

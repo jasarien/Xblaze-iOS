@@ -24,7 +24,7 @@
 
 typedef unsigned int XfirePacketID;
 
-@class XfirePacketAttributeMap;
+@class XfirePacketAttributeMap, XfirePacketAttributeValue;
 @class XfireChatRoom, XfireFriend;
 
 @interface XfirePacket : NSObject
@@ -45,7 +45,7 @@ typedef unsigned int XfirePacketID;
 - (XfirePacketID)packetID;
 - (XfirePacketAttributeMap *)attributes;
 
-- (id)attributeForKey:(id)key;
+- (XfirePacketAttributeValue *)attributeForKey:(id)key;
 
 // Compound accessor utility to get all values into an array, regardless of
 // whether the packet has a single item or multiple items

@@ -32,6 +32,8 @@
 	UITapGestureRecognizer *singleTap;
 	
 	EGOStoredBarStyles *storedStyles;
+	
+	UIActionSheet *actionSheet;
 }
 
 - (id)initWithPhotoSource:(EGOPhotoSource*)aSource;	//	multiple photos

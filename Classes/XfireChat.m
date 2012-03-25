@@ -21,6 +21,7 @@
 #import "XfireSession_Private.h"
 #import "XfireFriend.h"
 #import "XfireConnection.h"
+#import "XfirePacketAttributeValue.h"
 
 const NSTimeInterval typingDuration = 10.0;
 
@@ -121,8 +122,8 @@ const NSTimeInterval typingDuration = 10.0;
 
 - (void)receivePacket:(XfirePacket *)recvPkt
 {
-	XfirePacketAttributeMap *peermsg = (XfirePacketAttributeMap *)[[recvPkt attributeForKey:kXfireAttributePeerMessageKey] value];
-	NSNumber *msgtypeNbr = (NSNumber *)[[peermsg objectForKey:kXfireAttributeMsgTypeKey] value];
+	XfirePacketAttributeMap *peermsg = (XfirePacketAttributeMap *)[[recvPkt attributeForKey:kXfireAttributePeerMessageKey] attributeValue];
+	NSNumber *msgtypeNbr = (NSNumber *)[(XfirePacketAttributeValue *)[peermsg objectForKey:kXfireAttributeMsgTypeKey] attributeValue];
 	unsigned int msgtype = [msgtypeNbr unsignedIntValue];
 	
 	switch( msgtype )
@@ -131,11 +132,11 @@ const NSTimeInterval typingDuration = 10.0;
 		{
 			// we use the receive sequence number only to acknowledge the message
 			// otherwise we ignore it
-			NSString *msgText = [[peermsg objectForKey:kXfireAttributeIMKey] value];
-			unsigned int recvNo = [(NSNumber *)[[peermsg objectForKey:kXfireAttributeIMIndexKey] value] unsignedIntValue];
+			NSString *msgText = [(XfirePacketAttributeValue *)[peermsg objectForKey:kXfireAttributeIMKey] attributeValue];
+			unsigned int recvNo = [(NSNumber *)[(XfirePacketAttributeValue *)[peermsg objectForKey:kXfireAttributeIMIndexKey] attributeValue] unsignedIntValue];
 			[[self delegate] xfireSession:[remoteFriend session] chat:self didReceiveMessage:msgText];
 			
-			XfirePacket *sendPkt = (XfirePacket *)[XfireMutablePacket chatAcknowledgementPacketWithSID:(NSData *)[[recvPkt attributeForKey:kXfireAttributeSessionIDKey] value]
+			XfirePacket *sendPkt = (XfirePacket *)[XfireMutablePacket chatAcknowledgementPacketWithSID:(NSData *)[[recvPkt attributeForKey:kXfireAttributeSessionIDKey] attributeValue]
 																							   imIndex:recvNo];
 			[conn sendPacket:sendPkt];
 			
@@ -152,7 +153,7 @@ const NSTimeInterval typingDuration = 10.0;
 			
 		case 2: // client info message
 		{
-			NSString *salt = [[peermsg objectForKey:@"salt"] value];
+			NSString *salt = [(XfirePacketAttributeValue *)[peermsg objectForKey:@"salt"] attributeValue];
 			
 			if (!salt)
 				return;
