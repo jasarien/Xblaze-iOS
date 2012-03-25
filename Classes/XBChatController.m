@@ -23,7 +23,8 @@
 		self.chat = _chat;
 		[self.chat setDelegate:self];
 		
-		self.chatMessages = [NSMutableArray array];
+		[self loadChatTranscript];
+//		self.chatMessages = [NSMutableArray array];
 	}
 	
 	return self;
@@ -31,6 +32,7 @@
 
 - (void)dealloc
 {
+	[self saveChatTranscript];
 	[self.chat setDelegate:nil];
 	self.chat = nil;
 	self.chatMessages = nil;
@@ -46,7 +48,7 @@
 	unreadCount++;
 	NSDate *date = [NSDate date];
 	
-	NSDictionary *chatDict = [NSDictionary dictionaryWithObjectsAndKeys:[aChat remoteFriend], kChatIdentityKey, msg, kChatMessageKey, date, kChatDateKey, nil];
+	NSDictionary *chatDict = [NSDictionary dictionaryWithObjectsAndKeys:[[aChat remoteFriend] userName], kChatIdentityKey, msg, kChatMessageKey, date, kChatDateKey, nil];
 	[self.chatMessages addObject:chatDict];
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:kMessageReceivedNotification object:self];
@@ -57,7 +59,7 @@
 	XfireFriend *loginIdentity = [xfSession loginIdentity];
 	NSDate *date = [NSDate date];
 	
-	NSDictionary *chatDict = [NSDictionary dictionaryWithObjectsAndKeys:loginIdentity, kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil];
+	NSDictionary *chatDict = [NSDictionary dictionaryWithObjectsAndKeys:[loginIdentity userName], kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil];
 	[self.chatMessages addObject:chatDict];
 	
 	[self.chat sendMessage:message];
@@ -68,6 +70,91 @@
 	self.typing = isTyping;
 	NSDictionary *typingDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:isTyping], @"typing", nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kTypingNotificationRecieved object:aChat userInfo:typingDict];
+}
+
+- (void)saveChatTranscript
+{
+	NSString *appDocsPath = nil;
+	NSString *docsPath = nil;
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	if ([paths count] > 0)
+	{
+		appDocsPath = [paths objectAtIndex:0];
+	}
+	
+	if (![appDocsPath length])
+	{
+		DebugLog(@"Unable to get path for documents directory...");
+		return;
+	}
+	
+	docsPath = [appDocsPath stringByAppendingPathComponent:@"ChatTranscripts"];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:docsPath])
+	{ // create docs directory
+		NSError *error = nil;
+		[[NSFileManager defaultManager] createDirectoryAtPath:docsPath
+								  withIntermediateDirectories:YES
+												   attributes:nil
+														error:&error];
+		if (error)
+		{
+			DebugLog(@"Unable to create docs directory: %@", [error localizedDescription]);
+			return;
+		}
+	}
+	
+	NSString *filename = [docsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [[[self chat] remoteFriend] userName]]];
+	
+	if ([self.chatMessages count] <= 10)
+	{
+		[self.chatMessages writeToFile:filename atomically:YES];
+	}
+	else
+	{
+		NSArray *transcript = [self.chatMessages subarrayWithRange:NSMakeRange([self.chatMessages count] - 10, 10)];
+		[transcript writeToFile:filename atomically:YES];
+	}
+}
+
+- (void)loadChatTranscript
+{
+	NSString *appDocsPath = nil;
+	NSString *docsPath = nil;
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	if ([paths count] > 0)
+	{
+		appDocsPath = [paths objectAtIndex:0];
+	}
+	
+	if (![appDocsPath length])
+	{
+		DebugLog(@"Unable to get path for documents directory...");
+		return;
+	}
+	
+	docsPath = [appDocsPath stringByAppendingPathComponent:@"ChatTranscripts"];
+	if (![[NSFileManager defaultManager] fileExistsAtPath:docsPath])
+	{ // create docs directory
+		NSError *error = nil;
+		[[NSFileManager defaultManager] createDirectoryAtPath:docsPath
+								  withIntermediateDirectories:YES
+												   attributes:nil
+														error:&error];
+		if (error)
+		{
+			DebugLog(@"Unable to create docs directory: %@", [error localizedDescription]);
+			return;
+		}
+	}
+	
+	NSString *filename = [docsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", [[[self chat] remoteFriend] userName]]];
+	self.chatMessages = [NSMutableArray arrayWithContentsOfFile:filename];
+	if (!self.chatMessages)
+	{
+		self.chatMessages = [NSMutableArray array];
+	}
 }
 
 @end

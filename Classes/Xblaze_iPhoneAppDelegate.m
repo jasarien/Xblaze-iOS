@@ -510,6 +510,7 @@ void uncaughtExceptionHandler(NSException *exception)
 - (void)xfireSession:(XfireSession *)session chatDidEnd:(XfireChat *)aChat
 {
 	XBChatController *chatController = [self chatControllerForFriend:[aChat remoteFriend]];
+//	[chatController saveChatTranscript];
 	[[chatController retain] autorelease];
 	[_chatControllers removeObject:chatController];
 	

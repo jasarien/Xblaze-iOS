@@ -604,7 +604,16 @@ const CGFloat animationDuration = 0.3f;
     }
     	
 	NSDictionary *chatMessage = [[chatController chatMessages] objectAtIndex:[indexPath row]];
-	NSString *username = [[chatMessage objectForKey:kChatIdentityKey] displayName];
+	NSString *username = nil;
+	if ([[chatMessage objectForKey:kChatIdentityKey] isEqualToString:[[xfSession loginIdentity] userName]])
+	{
+		username = [[xfSession loginIdentity] displayName];
+	}
+	else
+	{
+		username = [[xfSession friendForUserName:[chatMessage objectForKey:kChatIdentityKey]] displayName];
+	}
+	
 	NSString *message = [chatMessage objectForKey:kChatMessageKey];
 	
 	BOOL showTimestamp = [[[xfSession userOptions] objectForKey:kXfireShowChatTimeStampsOption] boolValue];

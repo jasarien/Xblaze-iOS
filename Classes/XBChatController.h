@@ -33,5 +33,6 @@
 
 - (id)initWithXfireSession:(XfireSession *)session chat:(XfireChat *)_chat;
 - (void)sendMessage:(NSString *)message;
+- (void)saveChatTranscript;
 
 @end
