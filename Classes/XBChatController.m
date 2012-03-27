@@ -157,4 +157,9 @@
 	}
 }
 
+- (void)clearChatHistory
+{
+	self.chatMessages = [NSMutableArray array];
+}
+
 @end

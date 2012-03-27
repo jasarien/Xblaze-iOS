@@ -19,7 +19,7 @@
 	IBOutlet UITextField *messageField;
 	IBOutlet UIImageView *typingIcon;
 	
-	UIBarButtonItem *screenShotsButton;
+	UIBarButtonItem *_optionsButton;
 	
 	XBFriendSummaryViewController *friendSummary;
 	
@@ -35,6 +35,9 @@
 	
 	UIPopoverController *popoverController;
 	
+	UIActionSheet *_optionsSheet;
+	
+	BOOL _screenShotsLoaded;
 	BOOL _isTyping;
 }
 
@@ -61,4 +64,7 @@
 - (XBChatController *)chatController;
 
 - (void)handleHidePopoverNotification:(NSNotification *)note;
+
+- (void)options:(id)sender;
+- (void)clearChatHistory;
 @end

@@ -162,17 +162,21 @@ const CGFloat animationDuration = 0.3f;
 	[self updateFriendSummary:nil];
 	[self scrollTableToBottomAnimated:NO];
 	
-	screenShotsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"42-photos.png"]
-																		   style:UIBarButtonItemStyleBordered
-																		  target:self
-																		  action:@selector(showScreenshots)];
+	_optionsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"19-gear.png"]
+													  style:UIBarButtonItemStyleBordered
+													 target:self
+													 action:@selector(options:)];
 	NSDictionary *screenshots = [[[chatController chat] remoteFriend] screenshots];
 	if (screenshots)
-		[screenShotsButton setEnabled:YES];
+	{
+		_screenShotsLoaded = YES;
+	}
 	else
-		[screenShotsButton setEnabled:NO];
+	{
+		_screenShotsLoaded = NO;
+	}
 
-	[self.navigationItem setRightBarButtonItem:screenShotsButton];
+	[self.navigationItem setRightBarButtonItem:_optionsButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -298,7 +302,6 @@ const CGFloat animationDuration = 0.3f;
 		
 		[self setTitle:[[[chatController chat] remoteFriend] displayName]];
 		[tableView reloadData];
-		[screenShotsButton setEnabled:([[[[chatController chat] remoteFriend] screenshots] count])];
 		[self updateFriendSummary:nil];
 		[self updateAvatar:nil];
 		[self scrollTableToBottomAnimated:YES];
@@ -315,7 +318,6 @@ const CGFloat animationDuration = 0.3f;
 		self.title = @"";
 		[messageField resignFirstResponder];
 		[messageField setEnabled:NO];
-		[screenShotsButton setEnabled:NO];
 		[self updateFriendSummary:nil];
 		[tableView reloadData];
 	}
@@ -330,6 +332,50 @@ const CGFloat animationDuration = 0.3f;
 {
 	[messageField resignFirstResponder];
 	[self.popoverController dismissPopoverAnimated:YES];
+}
+
+- (void)options:(id)sender
+{
+	if (_optionsSheet)
+	{
+		return;
+	}
+	
+	_optionsSheet = [[[UIActionSheet alloc] initWithTitle:@"Options"
+												 delegate:self
+										cancelButtonTitle:nil
+								   destructiveButtonTitle:@"Clear chat history"
+										otherButtonTitles:nil] autorelease];
+	[_optionsSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+	BOOL addedScreensButton = NO;
+	if (_screenShotsLoaded)
+	{
+		[_optionsSheet addButtonWithTitle:@"Screenshots"];
+		addedScreensButton = YES;
+	}
+	
+	[_optionsSheet addButtonWithTitle:@"Cancel"];
+	if (addedScreensButton)
+	{
+		[_optionsSheet setCancelButtonIndex:2];
+	}
+	else {
+		[_optionsSheet setCancelButtonIndex:1];
+	}
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		[_optionsSheet showFromBarButtonItem:_optionsButton animated:YES];
+	}
+	else {
+		[_optionsSheet showInView:self.view];
+	}
+}
+
+- (void)clearChatHistory
+{
+	[self.chatController clearChatHistory];
+	[tableView reloadData];
 }
 
 - (void)showScreenshots
@@ -347,7 +393,7 @@ const CGFloat animationDuration = 0.3f;
 
 - (void)screenshotsLoaded:(NSNotification *)note
 {
-	[screenShotsButton setEnabled:YES];
+	_screenShotsLoaded = YES;
 }
 
 - (void)updateFriendSummary:(NSNotification *)note
@@ -639,15 +685,44 @@ const CGFloat animationDuration = 0.3f;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-	if (buttonIndex == [actionSheet cancelButtonIndex])
-		return;
-	
-	NSURL *url = [_tempLinks objectAtIndex:buttonIndex];
-	[_tempLinks release];
-	_tempLinks = nil;
-	
-	XBWebViewController *webView = [[[XBWebViewController alloc] initWithNibName:@"XBWebViewController" bundle:nil url:url] autorelease];
-	[self.navigationController pushViewController:webView animated:YES];
+	if (actionSheet == _optionsSheet)
+	{
+		if (buttonIndex == [actionSheet cancelButtonIndex])
+		{
+			_optionsSheet = nil;
+			return;
+		}
+		else if (buttonIndex == [actionSheet destructiveButtonIndex])
+		{
+			[self clearChatHistory];
+		}
+		else
+		{
+			[self showScreenshots];
+		}
+		
+		_optionsSheet = nil;
+	}
+	else
+	{
+		if (buttonIndex == [actionSheet cancelButtonIndex])
+			return;
+		
+		NSURL *url = [_tempLinks objectAtIndex:buttonIndex];
+		[_tempLinks release];
+		_tempLinks = nil;
+		
+		XBWebViewController *webView = [[[XBWebViewController alloc] initWithNibName:@"XBWebViewController" bundle:nil url:url] autorelease];
+		[self.navigationController pushViewController:webView animated:YES];
+	}
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet
+{
+	if (actionSheet == _optionsSheet)
+	{
+		_optionsSheet = nil;
+	}
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
