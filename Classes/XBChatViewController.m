@@ -148,7 +148,7 @@ const CGFloat animationDuration = 0.3f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-		
+	
 	[chatController setUnreadCount:0];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kResetUnreadCountNotification object:chatController];
 	
@@ -175,8 +175,17 @@ const CGFloat animationDuration = 0.3f;
 	{
 		_screenShotsLoaded = NO;
 	}
-
+	
 	[self.navigationItem setRightBarButtonItem:_optionsButton];
+	
+	if (chatController)
+	{
+		[_optionsButton setEnabled:YES];
+	}
+	else
+	{
+		[_optionsButton setEnabled:NO];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -305,7 +314,7 @@ const CGFloat animationDuration = 0.3f;
 		[self updateFriendSummary:nil];
 		[self updateAvatar:nil];
 		[self scrollTableToBottomAnimated:YES];
-		
+		[_optionsButton setEnabled:YES];
 		[chatController setUnreadCount:0];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kResetUnreadCountNotification object:chatController];
 		
@@ -319,6 +328,7 @@ const CGFloat animationDuration = 0.3f;
 		[messageField resignFirstResponder];
 		[messageField setEnabled:NO];
 		[self updateFriendSummary:nil];
+		[_optionsButton setEnabled:NO];
 		[tableView reloadData];
 	}
 }
@@ -384,11 +394,14 @@ const CGFloat animationDuration = 0.3f;
 	
 	XfireFriend *friend = [[chatController chat] remoteFriend];
 	
-	XBScreenshotGamesListViewController *screenshotsViewController = [[[XBScreenshotGamesListViewController alloc] initWithNibName:@"XBScreenshotGamesListViewController"
-																															bundle:nil
-																													   screenshots:[friend screenshots]] autorelease];
-	[screenshotsViewController setTitle:[NSString stringWithFormat:@"%@'s screenshots", [friend displayName]]];
-	[self.navigationController pushViewController:screenshotsViewController animated:YES];
+	if (friend)
+	{		
+		XBScreenshotGamesListViewController *screenshotsViewController = [[[XBScreenshotGamesListViewController alloc] initWithNibName:@"XBScreenshotGamesListViewController"
+																																bundle:nil
+																														   screenshots:[friend screenshots]] autorelease];
+		[screenshotsViewController setTitle:[NSString stringWithFormat:@"%@'s screenshots", [friend displayName]]];
+		[self.navigationController pushViewController:screenshotsViewController animated:YES];
+	}
 }
 
 - (void)screenshotsLoaded:(NSNotification *)note
