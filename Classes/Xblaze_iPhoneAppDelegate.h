@@ -11,12 +11,12 @@
 #import "XBChatController.h"
 #import "SoundEffect.h"
 #import "XBLoginViewController.h"
-//#import "FlurryAPI.h"
 #import "XBContactListViewController.h"
+#import "XBPushManager.h"
 
 @class XBContactListViewController, XBClansViewController, XBChatRoomListViewController;
 
-@interface Xblaze_iPhoneAppDelegate : NSObject <UIApplicationDelegate, XBContactListDelegate> {    
+@interface Xblaze_iPhoneAppDelegate : NSObject <UIApplicationDelegate, XBContactListDelegate, XBPushManagerDelegate> {    
 
     UIWindow *window;
     UINavigationController *navigationController;
@@ -63,9 +63,6 @@
 @property (nonatomic, assign) NSInteger unreadClansCount;
 
 - (void)continueFinishLaunching;
-
-- (void)startNetworkIndicator;
-- (void)stopNetworkIndicator;
 
 - (void)connectWithUsername:(NSString *)_username password:(NSString *)_password;
 - (void)disconnect;

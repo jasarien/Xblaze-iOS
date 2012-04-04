@@ -16,6 +16,7 @@
 //#import "FlurryAPI.h"
 #import <MessageUI/MessageUI.h>
 #import "MBProgressHUD.h"
+#import "XBNetworkActivityIndicatorManager.h"
 
 NSString *kUsernameKey = @"kUsernameKey";
 NSString *kPasswordKey = @"kPasswordKey";
@@ -381,7 +382,7 @@ NSString *kRememberKey = @"kRememberKey";
 //	}
 	
 	Xblaze_iPhoneAppDelegate *appDelegate = (Xblaze_iPhoneAppDelegate*)[[UIApplication sharedApplication] delegate];
-	[appDelegate startNetworkIndicator];
+	[XBNetworkActivityIndicatorManager showNetworkActivity];
 	[appDelegate connectWithUsername:username password:password];
 	
 	[username release];

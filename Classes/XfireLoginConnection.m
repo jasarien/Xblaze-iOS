@@ -664,7 +664,7 @@ static void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePack
 			break;
 			
 		default:
-			DebugLog(@"Unhandled packet: %@", pkt);
+			//DebugLog(@"Unhandled packet: %@", pkt);
 			break;
 	}
 	

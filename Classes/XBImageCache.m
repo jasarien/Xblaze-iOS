@@ -67,7 +67,7 @@
 	cachePath = [appCachesPath stringByAppendingPathComponent:@"AvatarCache"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:cachePath])
 	{ // create cache directory
-		DebugLog(@"AvatarCache hasn't been created yet... creating it, but returning nil because there's nothing here");
+		//DebugLog(@"AvatarCache hasn't been created yet... creating it, but returning nil because there's nothing here");
 		
 		NSError *error = nil;
 		[[NSFileManager defaultManager] createDirectoryAtPath:cachePath

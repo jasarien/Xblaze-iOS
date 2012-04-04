@@ -416,8 +416,6 @@
 												   paddingLeft:[XBChatMessageCell paddingLeft]];
 	height += [XBChatMessageCell padding] + [XBChatMessageCell nameHeight];
 	
-	NSLog(@"Height: %.2f", height);
-	
 	return height;
 }
 

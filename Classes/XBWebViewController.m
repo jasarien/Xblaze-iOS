@@ -7,6 +7,7 @@
 //
 
 #import "XBWebViewController.h"
+#import "XBNetworkActivityIndicatorManager.h"
 
 @implementation XBWebViewController
 
@@ -173,7 +174,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
 	[self.spinner stopAnimating];
-	[app stopNetworkIndicator];
+	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	[self validateButtons];
 	[self.navigationItem setTitle:[self.webView stringByEvaluatingJavaScriptFromString:@"document.title"]];
 }
@@ -181,14 +182,14 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
 	[self.spinner startAnimating];
-	[app startNetworkIndicator];
+	[XBNetworkActivityIndicatorManager showNetworkActivity];
 	[self validateButtons];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
 	[self.spinner stopAnimating];
-	[app stopNetworkIndicator];
+	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	
 	[self validateButtons];
 	
@@ -210,7 +211,7 @@
 
 - (void)dealloc
 {
-	[app stopNetworkIndicator];
+	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	self.url = nil;
 	
 	self.webView.delegate = nil;

@@ -21,7 +21,7 @@
 
 const CGFloat keyboardHeightPortrait = 216.0f;
 const CGFloat keyboardHeightLandscape = 162.0f;
-const CGFloat animationDuration = 0.3f;
+const CGFloat animationDuration = 0.2f;
 
 @implementation XBChatViewController
 

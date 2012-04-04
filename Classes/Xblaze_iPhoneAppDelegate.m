@@ -19,6 +19,7 @@
 #import "XfireFriend.h"
 #import "XfireChatRoom.h"
 #import "FlurryAnalytics.h"
+#import "XBNetworkActivityIndicatorManager.h"
 
 #define LOGIN_FAILED_ALERT_TAG -1
 #define FRIEND_INVITE_ALERT_TAG 1
@@ -52,20 +53,25 @@ void uncaughtExceptionHandler(NSException *exception)
 	[FlurryAnalytics logError:@"Unhandled Exception" message:[exception reason] exception:exception];
 }
 
-//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-//{
-//	NSLog(@"UDID: %@", [[UIDevice currentDevice] uniqueIdentifier]);
-//	NSLog(@"Device Token: %@", deviceToken);
-//}
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+	NSLog(@"Device Token: %@", deviceToken);
+	
+	NSString *pushToken = [deviceToken stringRepresentation];
+	[[XBPushManager sharedInstance] setPushToken:pushToken];
+	
+}
 
-//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-//{
-//	NSLog(@"Failed to register for remote notifications: %@", [error localizedDescription]);
-//}
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+	NSLog(@"Failed to register for remote notifications: %@", [error localizedDescription]);
+}
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-//	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
+	[[XBPushManager sharedInstance] setDelegate:self];
+	
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 	
 //	[[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
@@ -208,6 +214,66 @@ void uncaughtExceptionHandler(NSException *exception)
 	}
 }
 
+#pragma mark - XBPushManagerDelegate
+
+- (void)pushManagerDidRegister:(XBPushManager *)pushManager
+{
+	[[XBPushManager sharedInstance] downloadMissedMessages];
+}
+
+- (void)pushManager:(XBPushManager *)pushManager didFailToRegisterWithError:(NSError *)error
+{
+	
+}
+
+- (void)pushManagerDidUnregister:(XBPushManager *)pushManager
+{
+	
+}
+
+- (void)pushManager:(XBPushManager *)pushManager didFailToUnregisterWithError:(NSError *)error
+{
+	
+}
+
+- (void)pushManagerDidUnregisterDevice:(XBPushManager *)pushManager
+{
+	
+}
+
+- (void)pushManager:(XBPushManager *)pushManager didFailToUnregisterDeviceWithError:(NSError *)error
+{
+	
+}
+
+- (void)pushManager:(XBPushManager *)pushManager didLoadMissedMessages:(NSArray *)missedMessages
+{
+	for (NSDictionary *missedMessage in missedMessages)
+	{
+		NSString *chatUsername = [missedMessage objectForKey:@"username"];
+		NSString *message = [missedMessage objectForKey:@"message"];
+		NSDate *date = [missedMessage objectForKey:@"date"];
+		
+		XfireFriend *friend = [self.xfSession friendForUserName:username];
+		if (friend)
+		{
+			XfireChat *chat = [self.xfSession chatForSessionID:[friend sessionID]];
+			if (!chat)
+			{
+				chat = [self.xfSession beginChatWithFriend:friend];
+			}
+		}
+		
+		XBChatController *chatController = [self chatControllerForFriend:friend];
+		[[chatController chatMessages] addObject:[NSDictionary dictionaryWithObjectsAndKeys:chatUsername, kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil]];
+	}
+}
+
+- (void)pushManager:(XBPushManager *)pushManager didFailToLoadMissedMessagesWithError:(NSError *)error
+{
+	
+}
+
 #pragma mark -
 #pragma mark Memory management
 
@@ -255,6 +321,8 @@ void uncaughtExceptionHandler(NSException *exception)
 	[friendRequests removeAllObjects];
 	[xfSession disconnect];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
+	
+	[[XBPushManager sharedInstance] connectToServer];
 }
 
 - (void)finishConnecting
@@ -274,7 +342,14 @@ void uncaughtExceptionHandler(NSException *exception)
 	}
 	
 	[loginViewController hideConnectingOverlay];
-	[self stopNetworkIndicator];	
+	[XBNetworkActivityIndicatorManager hideNetworkActivity];
+	
+	NSString *passwordHash = [NSString stringWithFormat:@"%@%@UltimateArena", username, password];
+	passwordHash = [[[passwordHash dataUsingEncoding:NSUTF8StringEncoding] sha1Hash] stringRepresentation];
+	
+	[[XBPushManager sharedInstance] setUsername:username];
+	[[XBPushManager sharedInstance] setPasswordHash:passwordHash];
+	[[XBPushManager sharedInstance] registerToServer];
 }
 
 - (void)showTabBarController
@@ -352,23 +427,6 @@ void uncaughtExceptionHandler(NSException *exception)
 //	DebugLog(@"http://www.xfire.com/client/activity_report.php?userid=%u&signature=%@&third_party=xblaze", [me userID], signature);
 //}
 
-- (void)startNetworkIndicator
-{
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	activityCount++;
-}
-
-- (void)stopNetworkIndicator
-{
-	if (activityCount > 0)
-		activityCount--;
-	
-	if (activityCount == 0)
-	{
-		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	}
-}
-
 #pragma mark XfireSession Delegate
 
 - (void)xfireGetSession:(XfireSession *)session userName:(NSString **)aName password:(NSString **)aPassword
@@ -410,7 +468,7 @@ void uncaughtExceptionHandler(NSException *exception)
 										   cancelButtonTitle:nil
 										   otherButtonTitles:@"OK", nil] autorelease];
 	[alert show];
-	[self stopNetworkIndicator];
+	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	[loginViewController hideConnectingOverlay];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
 }
@@ -448,15 +506,22 @@ void uncaughtExceptionHandler(NSException *exception)
 	
 	if ([reason isEqualToString:kXfireNormalDisconnectReason])
 	{
-		return;
+		[[XBPushManager sharedInstance] connectToServer];
 	}
-	
-	UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Disconnected"
-													 message:reason
-													delegate:nil
-										   cancelButtonTitle:nil
-										   otherButtonTitles:@"OK", nil] autorelease];
-	[alert show];
+	else
+	{
+		if ([reason isEqualToString:kXfireOtherSessionReason] == NO)
+		{
+			[[XBPushManager sharedInstance] connectToServer];
+		}
+		
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Disconnected"
+														 message:reason
+														delegate:nil
+											   cancelButtonTitle:nil
+											   otherButtonTitles:@"OK", nil] autorelease];
+		[alert show];
+	}
 }
 
 - (void)xfireSession:(XfireSession *)session friendDidChange:(XfireFriend *)fr attribute:(XfireFriendChangeAttribute)attr
