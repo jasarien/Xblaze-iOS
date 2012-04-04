@@ -10,7 +10,7 @@
 #import "SBJson.h"
 #import "XBNetworkActivityIndicatorManager.h"
 
-NSString const *serverRoot = @"http://megalion.local:8080/";
+NSString const *serverRoot = @"http://jasarien.homelinux.com:8337/";
 NSString const *registerResource = @"register";
 NSString const *connectResource = @"connect";
 NSString const *unregisterResource = @"unregister";
