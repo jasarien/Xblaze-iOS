@@ -156,7 +156,6 @@
 		1AA778B110D08DB20054D0E6 /* XBSearchFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA778AF10D08DB20054D0E6 /* XBSearchFriendViewController.m */; };
 		1AA778B210D08DB20054D0E6 /* XBSearchFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AA778B010D08DB20054D0E6 /* XBSearchFriendViewController.xib */; };
 		1AAB8B6F110CF52700F17C74 /* XBClansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB8B6D110CF52700F17C74 /* XBClansViewController.m */; };
-		1AAB8B70110CF52700F17C74 /* XBClansViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AAB8B6E110CF52700F17C74 /* XBClansViewController.xib */; };
 		1AB6C49D152A68A100CBDA93 /* Entitlements-dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1AB6C49C152A68A100CBDA93 /* Entitlements-dev.plist */; };
 		1ABAAAE212206A9B00C9F908 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ABAAAE112206A9B00C9F908 /* back@2x.png */; };
 		1ABAAAEA12206AA900C9F908 /* forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1ABAAAE912206AA900C9F908 /* forward@2x.png */; };
@@ -3399,7 +3398,6 @@
 		1AA778B010D08DB20054D0E6 /* XBSearchFriendViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBSearchFriendViewController.xib; path = Classes/XBSearchFriendViewController.xib; sourceTree = "<group>"; };
 		1AAB8B6C110CF52700F17C74 /* XBClansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBClansViewController.h; sourceTree = "<group>"; };
 		1AAB8B6D110CF52700F17C74 /* XBClansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBClansViewController.m; sourceTree = "<group>"; };
-		1AAB8B6E110CF52700F17C74 /* XBClansViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBClansViewController.xib; path = Classes/XBClansViewController.xib; sourceTree = "<group>"; };
 		1AB6C49C152A68A100CBDA93 /* Entitlements-dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Entitlements-dev.plist"; sourceTree = "<group>"; };
 		1ABAAAE112206A9B00C9F908 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		1ABAAAE912206AA900C9F908 /* forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "forward@2x.png"; sourceTree = "<group>"; };
@@ -10079,7 +10077,6 @@
 				1A27E41310DC827800F1D11B /* Sounds */,
 				1A9ECFBA10B350E300AD5548 /* Images */,
 				1A80A6D710B421CB0098BA9C /* XBContactListViewController.xib */,
-				1AAB8B6E110CF52700F17C74 /* XBClansViewController.xib */,
 				1A088AEC110E3FB900597C52 /* XBClanListViewController.xib */,
 				1AC89F3510AC548300CE30D3 /* XBLoginViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -10207,7 +10204,6 @@
 				1A9808FD10F620CF00AC68C7 /* typing.png in Resources */,
 				1A14065410FE856A0097E314 /* dismiss-keyboard.png in Resources */,
 				1A02215711013DF100F7DF34 /* XBSettingsViewController.xib in Resources */,
-				1AAB8B70110CF52700F17C74 /* XBClansViewController.xib in Resources */,
 				1A088A1B110E288B00597C52 /* tabBarBG.png in Resources */,
 				1A088AF0110E3FB900597C52 /* XBClanListViewController.xib in Resources */,
 				1AFB82021127495300B92EB9 /* about.html in Resources */,

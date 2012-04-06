@@ -103,6 +103,12 @@
 	[self updateTabBadge];
 }
 
+- (void)xfSessionDidConnect
+{
+	[self.tableView reloadData];
+	[self updateTabBadge];	
+}
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

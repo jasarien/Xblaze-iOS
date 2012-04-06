@@ -10,17 +10,17 @@
 #import "XfireSession.h"
 #import "XfireSession_Private.h"
 
-@interface XBClanListViewController : UITableViewController {
+extern NSString *kClansListControllerDidAppear;
 
-	XfireSession *_xfSession;
+@interface XBClanListViewController : UITableViewController {
 	
 	int clanID;
-	
-	UINavigationController *navController;
 }
 
+@property (nonatomic, assign) XfireSession *xfSession;
+
 @property (nonatomic) int clanID;
-@property (nonatomic, assign) UINavigationController *navController;
+@property (nonatomic, copy) NSString *clanName;
 
 - (UIButton *)unreadButtonWithLabel:(int)count;
 - (NSString *)statusStringForFriend:(XfireFriend *)friend;

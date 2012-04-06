@@ -17,6 +17,8 @@
 
 @implementation XBSettingsViewController
 
+@synthesize xfSession;
+
 - (void)dealloc
 {
 	[super dealloc];
@@ -26,12 +28,29 @@
 {
 	[super viewDidLoad];
 	
-	xfSession = [(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] xfSession];
+	[self setTitle:@"Settings"];
 	
-	NSDictionary *currentOptions = [xfSession userOptions];
+	[self.tableView setBackgroundView:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.jpg"]] autorelease]];
+	
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+	{
+		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)] autorelease];
+		[self.navigationItem setRightBarButtonItem:doneButton];
+	}
+	
+	[self refreshSettings];
+}
+
+- (void)refreshSettings
+{
+	NSDictionary *currentOptions = [self.xfSession userOptions];
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];	
 	
-	self.model = [[IFTemporaryModel alloc] init];
+	if (!self.model)
+	{
+		self.model = [[IFTemporaryModel alloc] init];
+	}
+	
 	[self.model setObject:[currentOptions objectForKey:kXfireShowFriendsOfFriendsOption] forKey:kXfireShowFriendsOfFriendsOption];
 	[self.model setObject:[currentOptions objectForKey:kXfireShowMyOfflineFriendsOption] forKey:kXfireShowMyOfflineFriendsOption];
 	[self.model setObject:[currentOptions objectForKey:kXfireShowNicknamesOption] forKey:kXfireShowNicknamesOption];
@@ -39,50 +58,12 @@
 	[self.model setObject:[NSNumber numberWithBool:[defaults boolForKey:kAllowVibrateAlerts]] forKey:kAllowVibrateAlerts];
 	[self.model setObject:[NSNumber numberWithBool:[defaults boolForKey:kAllowAudioAlerts]] forKey:kAllowAudioAlerts];
 	
-	[self.tableView setBackgroundView:[[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bg.jpg"]] autorelease]];
-	
-	[self.navigationItem setTitle:@"Settings"];
-	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)] autorelease];
-		[self.navigationItem setRightBarButtonItem:doneButton];
-	}
+	[self constructTableGroups];
 }
 
 - (void)done
 {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
-}
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-	[super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning
-{
-	[super didReceiveMemoryWarning];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

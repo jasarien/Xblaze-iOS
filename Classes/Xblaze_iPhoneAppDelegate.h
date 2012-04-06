@@ -14,7 +14,7 @@
 #import "XBContactListViewController.h"
 #import "XBPushManager.h"
 
-@class XBContactListViewController, XBClansViewController, XBChatRoomListViewController;
+@class XBContactListViewController, XBClansViewController, XBChatRoomListViewController, XBSettingsViewController;
 
 @interface Xblaze_iPhoneAppDelegate : NSObject <UIApplicationDelegate, XBContactListDelegate, XBPushManagerDelegate> {    
 
@@ -41,20 +41,25 @@
 	XBContactListViewController *contactListController;
 	XBClansViewController *clansViewController;
 	XBChatRoomListViewController *chatRoomListViewController;
+	XBSettingsViewController *settingsViewController;
 	
 	Reachability *reach;
 	
 	NSInteger _unreadFriendsCount;
 	NSInteger _unreadClansCount;
+	
+	BOOL _goingIntoBackground;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) IBOutlet UISplitViewController *splitViewController;
 @property (nonatomic, retain) UITabBarController *tabBarController;
+@property (nonatomic, retain) IBOutlet XBLoginViewController *loginViewController;
 @property (nonatomic, retain) IBOutlet XBContactListViewController *contactListController;
 @property (nonatomic, retain) IBOutlet XBClansViewController *clansViewController;
 @property (nonatomic, retain) IBOutlet XBChatRoomListViewController *chatRoomListViewController;
+@property (nonatomic, retain) IBOutlet XBSettingsViewController *settingsViewController;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;
 @property (nonatomic, readonly) XfireSession *xfSession;

@@ -111,8 +111,7 @@ static void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePack
 - (void)keepAliveResponseTimeout:(NSTimer *)aTimer
 {
 	_keepAliveResponseTimer = nil;
-	[[self session] delegate_sessionWillDisconnect:kXfireServerStoppedRespondingReason];
-	[[self session] disconnect];
+	[[self session] disconnectWithReason:kXfireServerStoppedRespondingReason];
 }
 
 // This is called once the socket connection is established (at least, the XfireSocket is created

@@ -308,7 +308,7 @@ NSString *kRememberKey = @"kRememberKey";
 	[passwordCell setUpdateTarget:self];
 	[passwordCell setUpdateAction:@selector(connect)];
 	[passwordCell setSecureTextEntry:YES];
-	IFSwitchCellController *rememberCell = [[[IFSwitchCellController alloc] initWithLabel:@"Remember Password" atKey:kRememberKey inModel:self.model] autorelease];
+	IFSwitchCellController *rememberCell = [[[IFSwitchCellController alloc] initWithLabel:@"Automatic Login" atKey:kRememberKey inModel:self.model] autorelease];
 	[rememberCell setUpdateTarget:self];
 	[rememberCell setUpdateAction:@selector(toggleSaveCredentials)];
 	IFButtonCellController *registerCell = [[[IFButtonCellController alloc] initWithLabel:@"Get An Xfire Account..." withAction:@selector(showRegisterPage) onTarget:self] autorelease];
@@ -319,8 +319,6 @@ NSString *kRememberKey = @"kRememberKey";
 
 - (void)showRegisterPage
 {
-	//[FlurryAPI logEvent:@"Get New Xfire Account"];
-	
 	NSURL *registerURL = [NSURL URLWithString:@"http://xfire.com/register"];
 	XBWebViewController *registerController = [[[XBWebViewController alloc] initWithNibName:@"XBWebViewController" bundle:nil url:registerURL] autorelease];
 	[[self navigationController] pushViewController:registerController animated:YES];

@@ -16,31 +16,25 @@
 #import "XBChatController.h"
 #import "XBChatViewController.h"
 
+NSString *kClansListControllerDidAppear = @"kClansListController";
+
 @implementation XBClanListViewController
 
+@synthesize xfSession;
 @synthesize clanID;
-@synthesize navController;
-
-/*
-- (id)initWithStyle:(UITableViewStyle)style {
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style]) {
-    }
-    return self;
-}
-*/
+@synthesize clanName;
 
 - (void)dealloc
 {
-	_xfSession = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	self.xfSession = nil;
+	self.clanName = nil;
     [super dealloc];
 }
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
-	_xfSession = [(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] xfSession];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(messageReceived:)
@@ -64,44 +58,9 @@
 											   object:nil];
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-}
-
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
 }
 
 #pragma mark Table view methods
@@ -126,11 +85,11 @@
 {
 	if (section == 0)
 	{
-		return [[[[[_xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] count];
+		return [[[[[self.xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] count];
 	}
 	else
 	{
-		return [[[[[_xfSession friendGroupController] clans] groupForID:self.clanID] offlineMembers] count];
+		return [[[[[self.xfSession friendGroupController] clans] groupForID:self.clanID] offlineMembers] count];
 	}
 
     return 0;
@@ -148,15 +107,15 @@
     }
 	
 	XfireFriend *friend = nil;
-	XfireFriendGroup *group = [[[_xfSession friendGroupController] clans] groupForID:self.clanID];
+	XfireFriendGroup *group = [[[self.xfSession friendGroupController] clans] groupForID:self.clanID];
 	
 	if ([indexPath section] == 0)
 	{
-		friend = [[[[[_xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] objectAtIndex:[indexPath row]];
+		friend = [[[[[self.xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] objectAtIndex:[indexPath row]];
 	}
 	else if ([indexPath section] == 1)
 	{
-		friend = [[[[[_xfSession friendGroupController] clans] groupForID:self.clanID] offlineMembers] objectAtIndex:[indexPath row]];
+		friend = [[[[[self.xfSession friendGroupController] clans] groupForID:self.clanID] offlineMembers] objectAtIndex:[indexPath row]];
 	}
 	
 	NSString *displayName = [friend clanNicknameForKey:[group shortName]];
@@ -201,7 +160,7 @@
 	
 	if ([indexPath section] == 0)
 	{
-		friend = [[[[[_xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] objectAtIndex:[indexPath row]];
+		friend = [[[[[self.xfSession friendGroupController] clans] groupForID:self.clanID] onlineMembers] objectAtIndex:[indexPath row]];
 	}
 	else
 	{	//don't want to be able to open chats with offline friends
@@ -211,14 +170,13 @@
 	XBChatController *chatController = [(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] chatControllerForFriend:friend];
 	if (!chatController)
 	{
-		[_xfSession beginChatWithFriend:friend];
+		[self.xfSession beginChatWithFriend:friend];
 		chatController = [(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] chatControllerForFriend:friend];
 	}
 	XBChatViewController *chatViewController = [[[XBChatViewController alloc] initWithNibName:@"XBChatViewController" bundle:nil chatController:chatController] autorelease];
 	[[chatViewController navigationItem] setTitle:[friend displayName]];
 	
-	//UINavigationController *navController = [(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] navigationController];
-	[self.navController pushViewController:chatViewController animated:YES];
+	[self.navigationController pushViewController:chatViewController animated:YES];
 }
 
 - (UIButton *)unreadButtonWithLabel:(int)count
@@ -273,7 +231,7 @@
 {
 	NSIndexPath *indexPath = nil;
 	
-	XfireFriendGroup *group = [[[_xfSession friendGroupController] clans] groupForID:self.clanID];
+	XfireFriendGroup *group = [[[self.xfSession friendGroupController] clans] groupForID:self.clanID];
 	
 	if ([friend isOnline])
 	{

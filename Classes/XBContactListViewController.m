@@ -17,6 +17,7 @@
 #import "XfireFriendGroup_Private.h"
 #import "XfireFriendGroupController.h"
 #import "Xblaze_iPhoneAppDelegate.h"
+#import "XBLoginViewController.h"
 #import "XBSettingsViewController.h"
 #import "XBFriendRequestViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -73,9 +74,8 @@ enum {
 	{
 		self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
 	}
-	
-	else
-		[self.searchBar setBarStyle:UIBarStyleBlack];
+
+	[self.searchBar setBarStyle:UIBarStyleBlack];
 		
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(messageReceived:)
@@ -137,6 +137,18 @@ enum {
 															target:self
 															action:@selector(chooseNicknameOrStatus:)] autorelease];
 	[self.navigationItem setLeftBarButtonItem:statusNicknameButton animated:YES];
+	
+	XBLoginViewController *loginViewController = [_appDelegate loginViewController];
+	NSString *username = [[loginViewController model] objectForKey:kUsernameKey];
+	NSString *password = [loginViewController retrievePasswordForUsername:username];
+	if ([username length] && [password length])
+	{
+		[loginViewController connect];
+	}
+	else
+	{
+		[_appDelegate showLoginView];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -11,6 +11,7 @@
 #import "XBContactListViewController.h"
 #import "XBSettingsViewController.h"
 #import "XBClansViewController.h"
+#import "XBClanListViewController.h"
 #import "NSData_XfireAdditions.h"
 #import "XBDetailViewController.h"
 #import "XBChatViewController.h"
@@ -30,9 +31,11 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize splitViewController;
+@synthesize loginViewController;
 @synthesize contactListController;
 @synthesize clansViewController;
 @synthesize chatRoomListViewController;
+@synthesize settingsViewController;
 @synthesize username, password;
 @synthesize xfSession;
 @synthesize friendRequests;
@@ -93,17 +96,14 @@ void uncaughtExceptionHandler(NSException *exception)
 												 name:kReachabilityChangedNotification
 											   object:nil];
 	[reach startNotifier];
-	
+		
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-		[window addSubview:[splitViewController view]];
+		[window setRootViewController:self.splitViewController];
 	}
 	else
 	{		
-		loginViewController = (XBLoginViewController *)[[navigationController viewControllers] objectAtIndex:0]; // root view controller is at index 0
-		[loginViewController retain];																			 // root view controller is login controller
-		
-		[window addSubview:[navigationController view]];
+		[self showTabBarController];
 	}
 	
 	[window makeKeyAndVisible];
@@ -166,28 +166,18 @@ void uncaughtExceptionHandler(NSException *exception)
 {
 	[logoImage removeFromSuperview];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
-	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-	{
-		loginViewController = [[XBLoginViewController alloc] initWithNibName:@"XBLoginViewController" bundle:nil];
-		[loginViewController setTitle:@"Login to Xblaze"];
-		UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
-		[[navController navigationBar] setBarStyle:UIBarStyleBlack];
-		[navController setModalPresentationStyle:UIModalPresentationFormSheet];
-		[navController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-		[splitViewController presentModalViewController:navController animated:YES];
-	}
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+	_goingIntoBackground = YES;
 	[self disconnect];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-	[loginViewController connect];
+	[self.loginViewController connect];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -287,8 +277,11 @@ void uncaughtExceptionHandler(NSException *exception)
 	
 	self.password = nil;
 	self.username = nil;
-	[loginViewController release];
-	loginViewController = nil;
+	self.loginViewController = nil;
+	self.contactListController = nil;
+	self.clansViewController = nil;
+	self.chatRoomListViewController = nil;
+	self.settingsViewController = nil;
 	[navigationController release];
 	[window release];
 	[reach release];
@@ -306,7 +299,6 @@ void uncaughtExceptionHandler(NSException *exception)
 	self.password = _password;
 	
 	[xfSession release];
-	//xfSession = [XfireSession newSessionWithIP:self.xfireServerIP port:XfirePortNumber];
 	xfSession = [XfireSession newSessionWithHost:XfireHostName port:XfirePortNumber];
 	
 	[xfSession setDelegate:self];
@@ -327,21 +319,18 @@ void uncaughtExceptionHandler(NSException *exception)
 
 - (void)finishConnecting
 {
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-	{
-		[self showTabBarController];
-	}
-	else
-	{
-		[splitViewController dismissModalViewControllerAnimated:YES];
-		[contactListController setXfSession:xfSession];
-		[[contactListController tableView] reloadData];
-		[clansViewController setXfSession:xfSession];
-		[clansViewController xfSessionDidConnect];
-		[chatRoomListViewController setSession:xfSession];
-	}
+	[[window rootViewController] dismissModalViewControllerAnimated:YES];
 	
-	[loginViewController hideConnectingOverlay];
+	[contactListController setXfSession:xfSession];
+	[[contactListController tableView] reloadData];
+	[clansViewController setXfSession:xfSession];
+	[clansViewController xfSessionDidConnect];
+	[chatRoomListViewController setSession:xfSession];
+	[chatRoomListViewController xfSessionDidConnect];
+	[settingsViewController setXfSession:xfSession];
+	[settingsViewController refreshSettings];
+	
+	[self.loginViewController hideConnectingOverlay];
 	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	
 	NSString *passwordHash = [NSString stringWithFormat:@"%@%@UltimateArena", username, password];
@@ -360,32 +349,34 @@ void uncaughtExceptionHandler(NSException *exception)
 	[[contactsNavController tabBarItem] setTitle:@"Friends"];
 	[[contactsNavController tabBarItem] setImage:[UIImage imageNamed:@"111-user.png"]];
 	[[contactsNavController navigationBar] setBarStyle:UIBarStyleBlack];
-	contactListController = contactsListViewController;
+	self.contactListController = contactsListViewController;
 		
 	XBChatRoomListViewController *chatRoomsListViewController = [[[XBChatRoomListViewController alloc] initWithNibName:@"XBChatRoomListViewController" bundle:nil] autorelease];
 	UINavigationController *chatRoomNavController = [[[UINavigationController alloc] initWithRootViewController:chatRoomsListViewController] autorelease];
 	[[chatRoomNavController tabBarItem] setTitle:@"Chat Rooms"];
 	[[chatRoomNavController tabBarItem] setImage:[UIImage imageNamed:@"112-group.png"]];
 	[[chatRoomNavController navigationBar] setBarStyle:UIBarStyleBlack];
-	chatRoomListViewController = chatRoomsListViewController;
+	self.chatRoomListViewController = chatRoomsListViewController;
 	
-	XBClansViewController *clanListViewController = [[[XBClansViewController alloc] initWithNibName:@"XBClansViewController" bundle:nil] autorelease];
+	XBClansViewController *clanListViewController = [[[XBClansViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
 	UINavigationController *clansNavController = [[[UINavigationController alloc] initWithRootViewController:clanListViewController] autorelease];
 	[[clansNavController tabBarItem] setTitle:@"Communities"];
 	[[clansNavController tabBarItem] setImage:[UIImage imageNamed:@"101-gameplan.png"]];
 	[[clansNavController navigationBar] setBarStyle:UIBarStyleBlack];
 	[clanListViewController view]; // force views to load
+	self.clansViewController = clanListViewController;
 	
 	XBSettingsViewController *settingsController = [[[XBSettingsViewController alloc] initWithNibName:@"XBSettingsViewController" bundle:nil] autorelease];
 	UINavigationController *settingsNavController = [[[UINavigationController alloc] initWithRootViewController:settingsController] autorelease];
 	[[settingsNavController tabBarItem] setTitle:@"Settings"];
 	[[settingsNavController tabBarItem] setImage:[UIImage imageNamed:@"20-gear2.png"]];
 	[[settingsNavController navigationBar] setBarStyle:UIBarStyleBlack];
+	self.settingsViewController = settingsController;
 	
-	tabBarController = [[[UITabBarController alloc] init] autorelease];
-	tabBarController.viewControllers = [NSArray arrayWithObjects:contactsNavController, chatRoomNavController, clansNavController, settingsNavController, nil];
+	self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+	self.tabBarController.viewControllers = [NSArray arrayWithObjects:contactsNavController, chatRoomNavController, clansNavController, settingsNavController, nil];
 	
-	[loginViewController presentModalViewController:tabBarController animated:YES];
+	[window setRootViewController:tabBarController];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(updateUnreadCounter:)
@@ -444,14 +435,14 @@ void uncaughtExceptionHandler(NSException *exception)
 {
 	switch (newStatus) {
 		case kXfireSessionStatusOffline:
-			[loginViewController hideConnectingOverlay];
+			[self.loginViewController hideConnectingOverlay];
 			[[XBPushManager sharedInstance] stopHeartbeat];
 			break;
 		case kXfireSessionStatusOnline:
 			[self finishConnecting];
 			break;
 		case kXfireSessionStatusGettingFriends:
-			[loginViewController setOverlayMessage:@"Getting friends..."];
+			[self.loginViewController setOverlayMessage:@"Getting friends..."];
 		case kXfireSessionStatusLoggingOn:
 			break;
 		case kXfireSessionStatusLoggingOff:
@@ -470,40 +461,34 @@ void uncaughtExceptionHandler(NSException *exception)
 										   otherButtonTitles:@"OK", nil] autorelease];
 	[alert show];
 	[XBNetworkActivityIndicatorManager hideNetworkActivity];
-	[loginViewController hideConnectingOverlay];
+	[self.loginViewController hideConnectingOverlay];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
 }
 
 - (void)showLoginView
 {
-	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:loginViewController] autorelease];
+	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:self.loginViewController] autorelease];
 	[[navController navigationBar] setBarStyle:UIBarStyleBlack];
 	[navController setModalPresentationStyle:UIModalPresentationFormSheet];
 	[navController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-	[splitViewController presentModalViewController:navController animated:YES];
+	[[self.window rootViewController] presentModalViewController:navController animated:YES];
 }
 
 - (void)xfireSessionWillDisconnect:(XfireSession *)session reason:(NSString *)reason
 {
-	[_chatControllers removeAllObjects];
+	[[window rootViewController] dismissModalViewControllerAnimated:YES];
 	
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+	[_chatControllers removeAllObjects];
+	[contactListController setXfSession:nil];
+	[[contactListController tableView] reloadData];
+	[[chatRoomListViewController chatRooms] removeAllObjects];
+	[[chatRoomListViewController tableView] reloadData];
+	[chatRoomListViewController setSession:nil];
+	if (_goingIntoBackground == NO)
 	{
-		[self.navigationController dismissModalViewControllerAnimated:YES];
+		[self showLoginView];
 	}
-	else
-	{
-		[contactListController setXfSession:nil];
-		[[contactListController tableView] reloadData];
-		[[chatRoomListViewController chatRooms] removeAllObjects];
-		[self updateChatViewControllerWithChatController:nil];
-		[[chatRoomListViewController tableView] reloadData];
-		[chatRoomListViewController setSession:nil];
-		
-		[splitViewController dismissModalViewControllerAnimated:YES];
-		
-		[self performSelector:@selector(showLoginView) withObject:nil afterDelay:0.5];
-	}
+	_goingIntoBackground = NO;
 	
 	if ([reason isEqualToString:kXfireNormalDisconnectReason])
 	{

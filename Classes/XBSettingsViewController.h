@@ -13,8 +13,10 @@
 
 @interface XBSettingsViewController : IFGenericTableViewController <MFMailComposeViewControllerDelegate> {
 
-	XfireSession *xfSession;
-	
 }
+
+@property (nonatomic, assign) XfireSession *xfSession;
+
+- (void)refreshSettings;
 
 @end

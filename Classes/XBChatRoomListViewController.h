@@ -28,4 +28,6 @@
 
 - (void)getPasswordAndJoinChatRoom:(XfireChatRoom *)chatRoom;
 
+- (void)xfSessionDidConnect;
+
 @end

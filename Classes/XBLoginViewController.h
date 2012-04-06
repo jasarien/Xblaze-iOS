@@ -34,14 +34,15 @@ extern NSString *kRememberKey;
 - (void)nextField;
 - (void)connect;
 - (void)disconnect;
+
 - (void)toggleSaveCredentials;
 - (void)saveUsername:(NSString *)usernameToSave password:(NSString *)passwordToSave;
 - (NSString *)retrievePasswordForUsername:(NSString *)savedUsername;
 - (void)deleteSavedLoginDetails;
+- (NSMutableDictionary *)newBaseDictionaryWithServer:(NSString *)server account:(NSString *)account;
+
 - (void)hideKeyboard;
 - (void)showKeyboard:(NSNotification *)note;
-
-- (NSMutableDictionary *)newBaseDictionaryWithServer:(NSString *)server account:(NSString *)account;
 
 - (void)setOverlayMessage:(NSString *)message;
 @end
