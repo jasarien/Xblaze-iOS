@@ -12,6 +12,7 @@
 #import "XBUnregisterDevicePushWebRequest.h"
 #import "XBConnectPushWebRequest.h"
 #import "XBHeartbeatPushWebRequest.h"
+#import "XBKillHeartbeatPushWebRequest.h"
 #import "XBMissedMessagesPushWebRequest.h"
 #import "SBJson.h"
 
@@ -164,6 +165,28 @@ static XBPushManager *_sharedInstance;
 	NSString *bodyString = [dict JSONRepresentation];
 	
 	XBHeartbeatPushWebRequest *request = [[[XBHeartbeatPushWebRequest alloc] initWithBodyString:bodyString] autorelease];
+	[request setDelegate:self];
+	[_activeRequests addObject:request];
+	[request start];
+}
+
+- (void)sendKillHeartbeatToServer
+{
+	if (![self.username length] ||
+		![self.passwordHash length] ||
+		![self.pushToken length])
+	{
+		return;
+	}
+	
+	NSLog(@"Killing heartbeat");
+	
+	NSDictionary *user = [NSDictionary dictionaryWithObject:self.username forKey:@"username"];
+	NSDictionary *dict = [NSDictionary dictionaryWithObject:user forKey:@"user"];
+	
+	NSString *bodyString = [dict JSONRepresentation];
+	
+	XBKillHeartbeatPushWebRequest *request = [[[XBKillHeartbeatPushWebRequest alloc] initWithBodyString:bodyString] autorelease];
 	[request setDelegate:self];
 	[_activeRequests addObject:request];
 	[request start];

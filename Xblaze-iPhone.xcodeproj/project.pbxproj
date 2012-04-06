@@ -3125,6 +3125,7 @@
 		1AF4ABF7119F14A9009D48E0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4ABF6119F14A9009D48E0 /* MainWindow-iPad.xib */; };
 		1AF4AC0D119F7305009D48E0 /* XBiPadChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */; };
 		1AF724F0152BBE450082E279 /* XBNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF724EF152BBE450082E279 /* XBNetworkActivityIndicatorManager.m */; };
+		1AF724FC152F62180082E279 /* XBKillHeartbeatPushWebRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF724FB152F62180082E279 /* XBKillHeartbeatPushWebRequest.m */; };
 		1AF7618E117D194700477A95 /* XfireScreenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7618D117D194700477A95 /* XfireScreenshot.m */; };
 		1AF76D3D152A2D58008207B1 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF76D25152A2D58008207B1 /* NSObject+SBJson.m */; };
 		1AF76D3E152A2D58008207B1 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF76D28152A2D58008207B1 /* SBJsonParser.m */; };
@@ -6375,6 +6376,8 @@
 		1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBiPadChatViewController.xib; path = Classes/XBiPadChatViewController.xib; sourceTree = "<group>"; };
 		1AF724EE152BBE450082E279 /* XBNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
 		1AF724EF152BBE450082E279 /* XBNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		1AF724FA152F62180082E279 /* XBKillHeartbeatPushWebRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBKillHeartbeatPushWebRequest.h; sourceTree = "<group>"; };
+		1AF724FB152F62180082E279 /* XBKillHeartbeatPushWebRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBKillHeartbeatPushWebRequest.m; sourceTree = "<group>"; };
 		1AF7618C117D194700477A95 /* XfireScreenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XfireScreenshot.h; sourceTree = "<group>"; };
 		1AF7618D117D194700477A95 /* XfireScreenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XfireScreenshot.m; sourceTree = "<group>"; };
 		1AF76D24152A2D58008207B1 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -6548,6 +6551,8 @@
 				1AF76D54152A3946008207B1 /* XBConnectPushWebRequest.m */,
 				1AF76D56152A39AB008207B1 /* XBHeartbeatPushWebRequest.h */,
 				1AF76D57152A39AB008207B1 /* XBHeartbeatPushWebRequest.m */,
+				1AF724FA152F62180082E279 /* XBKillHeartbeatPushWebRequest.h */,
+				1AF724FB152F62180082E279 /* XBKillHeartbeatPushWebRequest.m */,
 				1ADC7C98152BB5C9002DEBE7 /* XBMissedMessagesPushWebRequest.h */,
 				1ADC7C99152BB5C9002DEBE7 /* XBMissedMessagesPushWebRequest.m */,
 			);
@@ -13320,6 +13325,7 @@
 				1AF76D58152A39AC008207B1 /* XBHeartbeatPushWebRequest.m in Sources */,
 				1ADC7C9A152BB5C9002DEBE7 /* XBMissedMessagesPushWebRequest.m in Sources */,
 				1AF724F0152BBE450082E279 /* XBNetworkActivityIndicatorManager.m in Sources */,
+				1AF724FC152F62180082E279 /* XBKillHeartbeatPushWebRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

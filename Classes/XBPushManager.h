@@ -46,6 +46,7 @@
 - (void)unregisterDeviceFromServer;
 - (void)connectToServer;
 - (void)sendHeartbeatToServer;
+- (void)sendKillHeartbeatToServer;
 
 - (void)startHeartbeat;
 - (void)stopHeartbeat;

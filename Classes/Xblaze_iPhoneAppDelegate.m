@@ -201,7 +201,7 @@ void uncaughtExceptionHandler(NSException *exception)
 	{
 		if ([xfSession status] == kXfireSessionStatusOnline)
 		{	
-			[xfSession disconnect];
+			[xfSession disconnectWithReason:kXfireNormalDisconnectReason];
 			
 			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"No Internet Connection"
 															 message:@"You have been disconnected because the network connection was not available."
@@ -254,7 +254,7 @@ void uncaughtExceptionHandler(NSException *exception)
 		NSString *message = [missedMessage objectForKey:@"message"];
 		NSDate *date = [missedMessage objectForKey:@"date"];
 		
-		XfireFriend *friend = [self.xfSession friendForUserName:username];
+		XfireFriend *friend = [self.xfSession friendForUserName:chatUsername];
 		if (friend)
 		{
 			XfireChat *chat = [self.xfSession chatForSessionID:[friend sessionID]];
@@ -319,7 +319,7 @@ void uncaughtExceptionHandler(NSException *exception)
 {
 	[_chatControllers removeAllObjects];
 	[friendRequests removeAllObjects];
-	[xfSession disconnect];
+	[xfSession disconnectWithReason:kXfireNormalDisconnectReason];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
 	
 	[[XBPushManager sharedInstance] connectToServer];
@@ -445,6 +445,7 @@ void uncaughtExceptionHandler(NSException *exception)
 	switch (newStatus) {
 		case kXfireSessionStatusOffline:
 			[loginViewController hideConnectingOverlay];
+			[[XBPushManager sharedInstance] stopHeartbeat];
 			break;
 		case kXfireSessionStatusOnline:
 			[self finishConnecting];
@@ -510,17 +511,24 @@ void uncaughtExceptionHandler(NSException *exception)
 	}
 	else
 	{
-		if ([reason isEqualToString:kXfireOtherSessionReason] == NO)
+		if ([reason isEqualToString:kXfireOtherSessionReason])
+		{
+			[[XBPushManager sharedInstance] sendKillHeartbeatToServer];
+		}
+		else
 		{
 			[[XBPushManager sharedInstance] connectToServer];
 		}
 		
-		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Disconnected"
-														 message:reason
-														delegate:nil
-											   cancelButtonTitle:nil
-											   otherButtonTitles:@"OK", nil] autorelease];
-		[alert show];
+		if ([reason isEqualToString:kXfireInvalidPasswordReason] == NO)
+		{
+			UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"Disconnected"
+															 message:reason
+															delegate:nil
+												   cancelButtonTitle:nil
+												   otherButtonTitles:@"OK", nil] autorelease];
+			[alert show];
+		}
 	}
 }
 

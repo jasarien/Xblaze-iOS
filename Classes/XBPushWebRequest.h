@@ -14,6 +14,7 @@ extern NSString const *connectResource;
 extern NSString const *unregisterResource;
 extern NSString const *unregisterDeviceResource;
 extern NSString const *heartbeatResource;
+extern NSString const *killHeartbeatResource;
 extern NSString const *missedMessagesResource;
 
 @class XBPushWebRequest;

@@ -131,7 +131,7 @@ typedef enum
 - (NSString *)xfireHost;
 - (NSString *)xfireIP;
 - (void)connect;
-- (void)disconnect;
+- (void)disconnectWithReason:(NSString *)reason;
 
 //------------------------------------------------------------------
 // Changing Client Status

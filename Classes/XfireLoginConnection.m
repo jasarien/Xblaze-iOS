@@ -697,7 +697,6 @@ static void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePack
 	cur = [NSMutableString string];
 	[cur appendFormat:@"%@%@UltimateArena",username,password];
 	hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
-	NSLog(@"Password Hash Before Salt: %@", [hash stringRepresentation]);
 	cur = [NSMutableString string];
 	[cur appendFormat:@"%@%@", [hash stringRepresentation], salt];
 	hash = [[cur dataUsingEncoding:NSUTF8StringEncoding] sha1Hash];
@@ -1395,14 +1394,12 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 	NSNumber * reason = (NSNumber *)[[pkt attributeForKey:kXfireAttributeReasonKey] attributeValue];
 	if( [reason intValue] == 1 )
 	{
-		[[self session] delegate_sessionWillDisconnect:kXfireOtherSessionReason];
+		[[self session] disconnectWithReason:kXfireOtherSessionReason];
 	}
 	else
 	{
-		[[self session] delegate_sessionWillDisconnect:kXfireServerHungUpReason];
+		[[self session] disconnectWithReason:kXfireServerHungUpReason];
 	}
-	
-	[[self session] disconnect];
 }
 
 - (void)processKeepAliveResponse:(XfirePacket *)pkt

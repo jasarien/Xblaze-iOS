@@ -148,12 +148,19 @@ static inline void _SetDeltaOption( NSDictionary *defaults, NSDictionary *curren
 	[_loginConnection connect];
 }
 
-- (void)disconnect
+- (void)disconnectWithReason:(NSString *)reason
 {	
 	if ([self status] == kXfireSessionStatusOffline)
 		return;
 	
-	[self delegate_sessionWillDisconnect:kXfireNormalDisconnectReason];
+	if (![reason length])
+	{
+		[self delegate_sessionWillDisconnect:kXfireNormalDisconnectReason];
+	}
+	else
+	{
+		[self delegate_sessionWillDisconnect:reason];
+	}
 	
 	[_keepAliveTimer invalidate];
 	_keepAliveTimer = nil;
@@ -843,21 +850,6 @@ static inline void _SetDeltaOption( NSDictionary *defaults, NSDictionary *curren
 	[super dealloc];
 }
 
-- (void)workspaceWillPowerOff:(NSNotification *)aNote
-{
-	if( _status != kXfireSessionStatusOffline )
-	{
-		[self disconnect];
-	}
-}
-- (void)workspaceWillSleep:(NSNotification *)aNote
-{
-	if( _status != kXfireSessionStatusOffline )
-	{
-		[self disconnect];
-	}
-}
-
 /***********************************************************************************************************************/
 #pragma mark Session status change
 /***********************************************************************************************************************/
@@ -875,7 +867,7 @@ static inline void _SetDeltaOption( NSDictionary *defaults, NSDictionary *curren
 // For XfireLoginConnection to notify of login failure for clean abort
 - (void)loginFailed:(NSString *)reason
 {
-	[self disconnect];
+	[self disconnectWithReason:reason];
 	
 	if( [[self delegate] respondsToSelector:@selector(xfireSessionLoginFailed:reason:)] )
 	{

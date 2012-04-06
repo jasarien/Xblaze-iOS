@@ -16,6 +16,7 @@ NSString const *connectResource = @"connect";
 NSString const *unregisterResource = @"unregister";
 NSString const *unregisterDeviceResource = @"unregisterDevice";
 NSString const *heartbeatResource = @"heartbeat";
+NSString const *killHeartbeatResource = @"killHeartbeat";
 NSString const *missedMessagesResource = @"missedMessages";
 
 @implementation XBPushWebRequest
