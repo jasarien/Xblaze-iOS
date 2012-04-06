@@ -13362,7 +13362,7 @@
 					armv6,
 				);
 				CODE_SIGN_ENTITLEMENTS = "Entitlements-adhoc.plist";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Addyman";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -13383,7 +13383,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Xblaze;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "59560C84-491D-456B-A0C9-EC373439ED6A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 			};

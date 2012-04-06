@@ -462,6 +462,7 @@ void uncaughtExceptionHandler(NSException *exception)
 	[alert show];
 	[XBNetworkActivityIndicatorManager hideNetworkActivity];
 	[self.loginViewController hideConnectingOverlay];
+	[self showLoginView];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kShowKeyboardNotification object:nil];
 }
 
@@ -476,7 +477,7 @@ void uncaughtExceptionHandler(NSException *exception)
 
 - (void)xfireSessionWillDisconnect:(XfireSession *)session reason:(NSString *)reason
 {
-	[[window rootViewController] dismissModalViewControllerAnimated:YES];
+//	[[window rootViewController] dismissModalViewControllerAnimated:YES];
 	
 	[_chatControllers removeAllObjects];
 	[contactListController setXfSession:nil];
