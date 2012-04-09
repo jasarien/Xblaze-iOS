@@ -21,6 +21,8 @@
 #import "XfireChatRoom.h"
 #import "FlurryAnalytics.h"
 #import "XBNetworkActivityIndicatorManager.h"
+#import "UIAlertView+BlockAdditions.h"
+#import "XBPushPurchaseViewController.h"
 
 #define LOGIN_FAILED_ALERT_TAG -1
 #define FRIEND_INVITE_ALERT_TAG 1
@@ -70,15 +72,17 @@ void uncaughtExceptionHandler(NSException *exception)
 	NSLog(@"Failed to register for remote notifications: %@", [error localizedDescription]);
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[userInfo objectForKey:@"badge"] integerValue]];
+}
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-	[[XBPushManager sharedInstance] setDelegate:self];
-	
-	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
-	
-//	[[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 	[FlurryAnalytics startSession:@"4Q9D27LLLVBAGJBJEU3S"];
+	
+	[[XBPushManager sharedInstance] setDelegate:self];
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	
@@ -206,6 +210,26 @@ void uncaughtExceptionHandler(NSException *exception)
 
 #pragma mark - XBPushManagerDelegate
 
+- (void)askForPush
+{
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:AllowPushKey])
+	{
+		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
+	}
+	else
+	{
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@""
+														 message:@""
+														delegate:nil
+											   cancelButtonTitle:@""
+											   otherButtonTitles:@"", nil] autorelease];
+		[alert setCompletionHandler:^(NSUInteger buttonIndex) {
+			
+		}];
+		[alert show];
+	}
+}
+
 - (void)pushManagerDidRegister:(XBPushManager *)pushManager
 {
 	[[XBPushManager sharedInstance] downloadMissedMessages];
@@ -257,6 +281,8 @@ void uncaughtExceptionHandler(NSException *exception)
 		XBChatController *chatController = [self chatControllerForFriend:friend];
 		[[chatController chatMessages] addObject:[NSDictionary dictionaryWithObjectsAndKeys:chatUsername, kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil]];
 	}
+	
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)pushManager:(XBPushManager *)pushManager didFailToLoadMissedMessagesWithError:(NSError *)error

@@ -15,6 +15,14 @@
 	#define DebugLog(x...)
 #endif
 
+#define AllowPushKey @"AllowPushKey"
+
+//MD5 ("com.jamsoftonline.multixfire") = 404bb4d207c54b32062f07b9b2ae6272
+//MD5 ("m0n1t0r-spr4y-d3sk") = 65b1b8462642f90bb42d77299681acd1
+
+#define MXConnectionUsername @"404bb4d207c54b32062f07b9b2ae6272"
+#define MXConnectionPassword @"65b1b8462642f90bb42d77299681acd1"
+
 #pragma mark -
 #pragma mark Xfire Server Details
 

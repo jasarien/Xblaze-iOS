@@ -19,6 +19,8 @@
 		1A0E4EA510D5A56A00F393A5 /* disclosureIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0E4EA410D5A56A00F393A5 /* disclosureIndicator.png */; };
 		1A0E4EFF10D5BCF300F393A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0E4EFE10D5BCF300F393A5 /* QuartzCore.framework */; };
 		1A0E4F1C10D5C6F400F393A5 /* defaultUserImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A0E4F1B10D5C6F400F393A5 /* defaultUserImage.png */; };
+		1A10295B1532206900D590F6 /* XBPushPurchaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1029591532206900D590F6 /* XBPushPurchaseInfoViewController.m */; };
+		1A10295C1532206900D590F6 /* XBPushPurchaseInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A10295A1532206900D590F6 /* XBPushPurchaseInfoViewController.xib */; };
 		1A14065410FE856A0097E314 /* dismiss-keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A14065310FE856A0097E314 /* dismiss-keyboard.png */; };
 		1A14066A10FE8A4C0097E314 /* XBImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A14066910FE8A4C0097E314 /* XBImageCache.m */; };
 		1A1631C415169BA200262567 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A1631C315169BA200262567 /* Icon-72@2x.png */; };
@@ -32,6 +34,7 @@
 		1A20FD4511A05B1400CCE45A /* modalBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 1A20FD4411A05B1400CCE45A /* modalBG.png */; };
 		1A20FDE011A0703B00CCE45A /* XBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A20FDDE11A0703B00CCE45A /* XBDetailViewController.m */; };
 		1A20FDE111A0703B00CCE45A /* XBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A20FDDF11A0703B00CCE45A /* XBDetailViewController.xib */; };
+		1A26E37D15321A4E0099DF82 /* UIAlertView+BlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A26E37C15321A4E0099DF82 /* UIAlertView+BlockAdditions.m */; };
 		1A27E44210DC854A00F1D11B /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 1A27E44110DC854A00F1D11B /* pop.wav */; };
 		1A29718A14E81F1700FC35B4 /* XBPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A29718914E81F1700FC35B4 /* XBPushManager.m */; };
 		1A3D048E1219DC3E00C88565 /* XBChatRoomListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3D048C1219DC3E00C88565 /* XBChatRoomListViewController.m */; };
@@ -3120,6 +3123,9 @@
 		1AE968EA151FD78100C57F28 /* XF_ZUMA.ICO in Resources */ = {isa = PBXBuildFile; fileRef = 1AE95D6F151FD77F00C57F28 /* XF_ZUMA.ICO */; };
 		1AE968EB151FD78100C57F28 /* XF_ZUMAW.ICO in Resources */ = {isa = PBXBuildFile; fileRef = 1AE95D70151FD77F00C57F28 /* XF_ZUMAW.ICO */; };
 		1AE968EC151FD78100C57F28 /* XF_ZUO.ICO in Resources */ = {isa = PBXBuildFile; fileRef = 1AE95D71151FD77F00C57F28 /* XF_ZUO.ICO */; };
+		1AEAA29D15324D2E00681312 /* XBPushPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAA29B15324D2E00681312 /* XBPushPurchaseViewController.m */; };
+		1AEAA29E15324D2E00681312 /* XBPushPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AEAA29C15324D2E00681312 /* XBPushPurchaseViewController.xib */; };
+		1AEAA2AD1532FEE300681312 /* MAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAA2AC1532FEE300681312 /* MAConfirmButton.m */; };
 		1AEEC05E11307A44005D8A73 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEC05D11307A44005D8A73 /* gradient.png */; };
 		1AF4ABF7119F14A9009D48E0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4ABF6119F14A9009D48E0 /* MainWindow-iPad.xib */; };
 		1AF4AC0D119F7305009D48E0 /* XBiPadChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */; };
@@ -3174,6 +3180,9 @@
 		1A0E4EA410D5A56A00F393A5 /* disclosureIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosureIndicator.png; sourceTree = "<group>"; };
 		1A0E4EFE10D5BCF300F393A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1A0E4F1B10D5C6F400F393A5 /* defaultUserImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultUserImage.png; sourceTree = "<group>"; };
+		1A1029581532206900D590F6 /* XBPushPurchaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPushPurchaseInfoViewController.h; sourceTree = "<group>"; };
+		1A1029591532206900D590F6 /* XBPushPurchaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPushPurchaseInfoViewController.m; sourceTree = "<group>"; };
+		1A10295A1532206900D590F6 /* XBPushPurchaseInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XBPushPurchaseInfoViewController.xib; path = Classes/XBPushPurchaseInfoViewController.xib; sourceTree = "<group>"; };
 		1A14065310FE856A0097E314 /* dismiss-keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dismiss-keyboard.png"; sourceTree = "<group>"; };
 		1A14066810FE8A4C0097E314 /* XBImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBImageCache.h; sourceTree = "<group>"; };
 		1A14066910FE8A4C0097E314 /* XBImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBImageCache.m; sourceTree = "<group>"; };
@@ -3194,6 +3203,8 @@
 		1A20FDDD11A0703B00CCE45A /* XBDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBDetailViewController.h; sourceTree = "<group>"; };
 		1A20FDDE11A0703B00CCE45A /* XBDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBDetailViewController.m; sourceTree = "<group>"; };
 		1A20FDDF11A0703B00CCE45A /* XBDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBDetailViewController.xib; path = Classes/XBDetailViewController.xib; sourceTree = "<group>"; };
+		1A26E37B15321A4E0099DF82 /* UIAlertView+BlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+BlockAdditions.h"; sourceTree = "<group>"; };
+		1A26E37C15321A4E0099DF82 /* UIAlertView+BlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+BlockAdditions.m"; sourceTree = "<group>"; };
 		1A27E44110DC854A00F1D11B /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		1A29718814E81F1700FC35B4 /* XBPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPushManager.h; sourceTree = "<group>"; };
 		1A29718914E81F1700FC35B4 /* XBPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPushManager.m; sourceTree = "<group>"; };
@@ -6369,6 +6380,11 @@
 		1AE95D6F151FD77F00C57F28 /* XF_ZUMA.ICO */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = XF_ZUMA.ICO; sourceTree = "<group>"; };
 		1AE95D70151FD77F00C57F28 /* XF_ZUMAW.ICO */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = XF_ZUMAW.ICO; sourceTree = "<group>"; };
 		1AE95D71151FD77F00C57F28 /* XF_ZUO.ICO */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = XF_ZUO.ICO; sourceTree = "<group>"; };
+		1AEAA29A15324D2E00681312 /* XBPushPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPushPurchaseViewController.h; sourceTree = "<group>"; };
+		1AEAA29B15324D2E00681312 /* XBPushPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPushPurchaseViewController.m; sourceTree = "<group>"; };
+		1AEAA29C15324D2E00681312 /* XBPushPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XBPushPurchaseViewController.xib; path = Classes/XBPushPurchaseViewController.xib; sourceTree = "<group>"; };
+		1AEAA2AB1532FEE300681312 /* MAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAConfirmButton.h; sourceTree = "<group>"; };
+		1AEAA2AC1532FEE300681312 /* MAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAConfirmButton.m; sourceTree = "<group>"; };
 		1AEEC05D11307A44005D8A73 /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gradient.png; path = Resources/Images/gradient.png; sourceTree = SOURCE_ROOT; };
 		1AF4ABF6119F14A9009D48E0 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBiPadChatViewController.xib; path = Classes/XBiPadChatViewController.xib; sourceTree = "<group>"; };
@@ -6520,6 +6536,14 @@
 				1A1EC0E912B93D7500454576 /* MBProgressHUD.m */,
 				1AF724EE152BBE450082E279 /* XBNetworkActivityIndicatorManager.h */,
 				1AF724EF152BBE450082E279 /* XBNetworkActivityIndicatorManager.m */,
+				1A26E37B15321A4E0099DF82 /* UIAlertView+BlockAdditions.h */,
+				1A26E37C15321A4E0099DF82 /* UIAlertView+BlockAdditions.m */,
+				1AEAA29A15324D2E00681312 /* XBPushPurchaseViewController.h */,
+				1AEAA29B15324D2E00681312 /* XBPushPurchaseViewController.m */,
+				1A1029581532206900D590F6 /* XBPushPurchaseInfoViewController.h */,
+				1A1029591532206900D590F6 /* XBPushPurchaseInfoViewController.m */,
+				1AEAA2AB1532FEE300681312 /* MAConfirmButton.h */,
+				1AEAA2AC1532FEE300681312 /* MAConfirmButton.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -10091,6 +10115,8 @@
 				1A8057861229690400C63B00 /* XBChatRoomViewController.xib */,
 				1A4E12CA122A8AD6004DA6BB /* XBChatRoomUsersViewController.xib */,
 				1A4E1301122AD463004DA6BB /* XBChatRoomInviteViewController.xib */,
+				1AEAA29C15324D2E00681312 /* XBPushPurchaseViewController.xib */,
+				1A10295A1532206900D590F6 /* XBPushPurchaseInfoViewController.xib */,
 				1AFB82001127495300B92EB9 /* about.html */,
 				1ABCEB3F11A48AD1008A9939 /* aboutiPad.html */,
 				1A65BEC210D49381002E26B8 /* error.html */,
@@ -13203,6 +13229,8 @@
 				1AE968EB151FD78100C57F28 /* XF_ZUMAW.ICO in Resources */,
 				1AE968EC151FD78100C57F28 /* XF_ZUO.ICO in Resources */,
 				1AB6C49D152A68A100CBDA93 /* Entitlements-dev.plist in Resources */,
+				1A10295C1532206900D590F6 /* XBPushPurchaseInfoViewController.xib in Resources */,
+				1AEAA29E15324D2E00681312 /* XBPushPurchaseViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13322,6 +13350,10 @@
 				1ADC7C9A152BB5C9002DEBE7 /* XBMissedMessagesPushWebRequest.m in Sources */,
 				1AF724F0152BBE450082E279 /* XBNetworkActivityIndicatorManager.m in Sources */,
 				1AF724FC152F62180082E279 /* XBKillHeartbeatPushWebRequest.m in Sources */,
+				1A26E37D15321A4E0099DF82 /* UIAlertView+BlockAdditions.m in Sources */,
+				1A10295B1532206900D590F6 /* XBPushPurchaseInfoViewController.m in Sources */,
+				1AEAA29D15324D2E00681312 /* XBPushPurchaseViewController.m in Sources */,
+				1AEAA2AD1532FEE300681312 /* MAConfirmButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,7 @@
 #import "XBSettingsViewController.h"
 #import "XBFriendRequestViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "XBPushPurchaseViewController.h"
 
 NSString *kContactListControllerDidAppear = @"kContactListControllerDidAppear";
 
@@ -193,20 +194,20 @@ enum {
 												  delegate:self
 										 cancelButtonTitle:nil
 									destructiveButtonTitle:@"Log Off" // 0
-										   otherButtonTitles:@"Show Friend Invites", @"Change Nickname", @"Change Status", nil]; // 1, 2, 3;
+										   otherButtonTitles:@"Show Friend Invites", @"Change Nickname", @"Change Status", @"Upgrade to Xblaze Pro", nil]; // 1, 2, 3, 4;
 	
 		if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 		{
 			[anActionSheet addButtonWithTitle:@"Cancel"];
-			[anActionSheet setCancelButtonIndex:4];
+			[anActionSheet setCancelButtonIndex:5];
 			[anActionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
 			[anActionSheet showInView:self.tabBarController.view];
 		}
 		else
 		{
-			[anActionSheet addButtonWithTitle:@"Settings"]; // 4
-			[anActionSheet addButtonWithTitle:@"Cancel"];
-			[anActionSheet setCancelButtonIndex:5]; // 5
+			[anActionSheet addButtonWithTitle:@"Settings"]; // 5
+			[anActionSheet addButtonWithTitle:@"Cancel"]; // 6
+			[anActionSheet setCancelButtonIndex:6];
 			[anActionSheet showFromBarButtonItem:self.navigationItem.leftBarButtonItem animated:YES];
 		}
 	}
@@ -216,7 +217,7 @@ enum {
 {
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-		if (buttonIndex == 4)
+		if (buttonIndex == 5)
 		{
 			XBSettingsViewController *settingsViewController = [[[XBSettingsViewController alloc] initWithNibName:@"XBSettingsViewController" bundle:nil] autorelease];
 			UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:settingsViewController] autorelease];
@@ -239,6 +240,10 @@ enum {
 	{ // Change status
 		[self changeStatus];
 	}
+	else if (buttonIndex == 4)
+	{ // upgrade
+		[self upgrade];
+	}
 	else if (buttonIndex == [actionSheet destructiveButtonIndex])
 	{ // Log off
 		[(Xblaze_iPhoneAppDelegate *)[[UIApplication sharedApplication] delegate] disconnect];
@@ -251,6 +256,14 @@ enum {
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	[anActionSheet release], anActionSheet = nil;
+}
+
+- (void)upgrade
+{
+	XBPushPurchaseViewController *vc = [[[XBPushPurchaseViewController alloc] initWithNibName:@"XBPushPurchaseViewController" bundle:nil] autorelease];
+	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+	[[navController navigationBar] setBarStyle:UIBarStyleBlack];
+	[self presentModalViewController:navController animated:YES];
 }
 
 - (void)showInvites

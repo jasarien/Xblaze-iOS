@@ -85,6 +85,25 @@ NSString const *missedMessagesResource = @"missedMessages";
 	return _responseDictionary;
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	if ([challenge previousFailureCount] > 0)
+	{
+		[[challenge sender] cancelAuthenticationChallenge:challenge];
+		return;
+	}
+	
+	NSURLCredential *credential = [NSURLCredential credentialWithUser:MXConnectionUsername
+															 password:MXConnectionPassword
+														  persistence:NSURLCredentialPersistenceForSession];
+	[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+}
+
+- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	NSLog(@"Canceled auth challenge");
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
 	[XBNetworkActivityIndicatorManager hideNetworkActivity];
