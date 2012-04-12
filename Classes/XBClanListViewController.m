@@ -175,6 +175,7 @@ NSString *kClansListControllerDidAppear = @"kClansListController";
 	}
 	XBChatViewController *chatViewController = [[[XBChatViewController alloc] initWithNibName:@"XBChatViewController" bundle:nil chatController:chatController] autorelease];
 	[[chatViewController navigationItem] setTitle:[friend displayName]];
+	[chatViewController setOpenedFromClanList:YES];
 	
 	[self.navigationController pushViewController:chatViewController animated:YES];
 }

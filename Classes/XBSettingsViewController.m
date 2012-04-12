@@ -131,12 +131,14 @@
 {
 	[[NSUserDefaults standardUserDefaults] setBool:[[self.model objectForKey:kAllowAudioAlerts] boolValue]
 											forKey:kAllowAudioAlerts];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)updateAlertSettings
 {
 	[[NSUserDefaults standardUserDefaults] setBool:[[self.model objectForKey:kAllowVibrateAlerts] boolValue]
 											forKey:kAllowVibrateAlerts];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)showAboutView

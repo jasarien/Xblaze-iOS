@@ -74,15 +74,51 @@ void uncaughtExceptionHandler(NSException *exception)
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[userInfo objectForKey:@"badge"] integerValue]];
+	NSDictionary *aps = [userInfo objectForKey:@"aps"];
+	
+	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:[[aps objectForKey:@"badge"] integerValue]];
+	
+	if ([[aps objectForKey:@"alert"] length])
+	{
+		NSString *alertString = [aps objectForKey:@"alert"];
+		NSArray *components = [alertString componentsSeparatedByString:@":"];
+		NSString *alertUsername = nil;
+		if ([components count])
+		{
+			alertUsername = [components objectAtIndex:0];
+		}
+		
+		[[NSUserDefaults standardUserDefaults] setObject:alertUsername forKey:@"lastActiveChatUsername"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"autoShowNewChat"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
 }
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+	NSDictionary *aps = [launchOptions objectForKey:@"aps"];
+	
+	if ([[aps objectForKey:@"alert"] length])
+	{
+		NSString *alertString = [aps objectForKey:@"alert"];
+		NSArray *components = [alertString componentsSeparatedByString:@":"];
+		NSString *alertUsername = nil;
+		if ([components count])
+		{
+			alertUsername = [components objectAtIndex:0];
+		}
+		
+		[[NSUserDefaults standardUserDefaults] setObject:alertUsername forKey:@"lastActiveChatUsername"];
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"autoShowNewChat"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+	
 	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
 	[FlurryAnalytics startSession:@"4Q9D27LLLVBAGJBJEU3S"];
 	
 	[[XBPushManager sharedInstance] setDelegate:self];
+	
+	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 	
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	
@@ -164,6 +200,8 @@ void uncaughtExceptionHandler(NSException *exception)
 	
 	NSString *path = [[NSBundle mainBundle] pathForResource:@"Purr" ofType:@"aiff"];
 	soundEffect = [[SoundEffect alloc] initWithContentsOfFile:path];
+	
+	return YES;
 }
 
 - (void)continueFinishLaunching
@@ -279,7 +317,7 @@ void uncaughtExceptionHandler(NSException *exception)
 		}
 		
 		XBChatController *chatController = [self chatControllerForFriend:friend];
-		[[chatController chatMessages] addObject:[NSDictionary dictionaryWithObjectsAndKeys:chatUsername, kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil]];
+		[chatController addMessage:[NSDictionary dictionaryWithObjectsAndKeys:chatUsername, kChatIdentityKey, message, kChatMessageKey, date, kChatDateKey, nil]];
 	}
 	
 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
@@ -358,6 +396,23 @@ void uncaughtExceptionHandler(NSException *exception)
 	
 	[self.loginViewController hideConnectingOverlay];
 	[XBNetworkActivityIndicatorManager hideNetworkActivity];
+	
+	NSString *lastActiveChatUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastActiveChatUsername"];
+	if ([lastActiveChatUsername length])
+	{
+		XfireFriend *friend = [xfSession friendForUserName:lastActiveChatUsername];
+		if ([friend isDirectFriend])
+		{
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"autoShowNewChat"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			[xfSession beginChatWithFriend:[xfSession friendForUserName:lastActiveChatUsername]];
+		}
+		else
+		{
+			[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastActiveChatUsername"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
+	}
 	
 	NSString *passwordHash = [NSString stringWithFormat:@"%@%@UltimateArena", username, password];
 	passwordHash = [[[passwordHash dataUsingEncoding:NSUTF8StringEncoding] sha1Hash] stringRepresentation];
@@ -469,6 +524,7 @@ void uncaughtExceptionHandler(NSException *exception)
 			break;
 		case kXfireSessionStatusGettingFriends:
 			[self.loginViewController setOverlayMessage:@"Getting friends..."];
+			break;
 		case kXfireSessionStatusLoggingOn:
 			break;
 		case kXfireSessionStatusLoggingOff:

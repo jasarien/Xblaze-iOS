@@ -343,6 +343,32 @@ enum {
 - (void)chatDidBegin:(NSNotification *)note
 {
 	[self.tableView reloadData];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoShowNewChat"])
+	{
+		NSString *lastActiveChatUsername = [[NSUserDefaults standardUserDefaults] stringForKey:@"lastActiveChatUsername"];
+		if ([lastActiveChatUsername length])
+		{
+			XBChatController *chatController = [_appDelegate chatControllerForFriend:[xfSession friendForUserName:lastActiveChatUsername]];
+			XBChatViewController *chatViewController = [[[XBChatViewController alloc] initWithNibName:@"XBChatViewController" bundle:nil chatController:chatController] autorelease];
+			[chatViewController setTitle:[[[chatController chat] remoteFriend] displayName]];
+			
+			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+			{
+				if ([self.delegate respondsToSelector:@selector(updateChatViewControllerWithChatController:)])
+				{
+					[self.delegate updateChatViewControllerWithChatController:chatController];	
+				}
+			}
+			else
+			{
+				[self.navigationController pushViewController:chatViewController animated:YES];
+			}
+		}
+		
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autoShowNewChat"];
+		[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"lastActiveChatUsername"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
 }
 
 - (void)chatDidEnd:(NSNotification *)note

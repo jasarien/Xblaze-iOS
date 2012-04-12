@@ -25,7 +25,7 @@ const CGFloat animationDuration = 0.2f;
 
 @implementation XBChatViewController
 
-@synthesize popoverController;
+@synthesize popoverController, openedFromClanList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil chatController:(XBChatController *)controller
 {
@@ -149,6 +149,11 @@ const CGFloat animationDuration = 0.2f;
 {
     [super viewDidLoad];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleWillEnterBackgroundNotification:)
+												 name:UIApplicationDidEnterBackgroundNotification
+											   object:nil];
+	
 	[chatController setUnreadCount:0];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kResetUnreadCountNotification object:chatController];
 	
@@ -223,6 +228,17 @@ const CGFloat animationDuration = 0.2f;
 		[chatController setUnreadCount:0];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kResetUnreadCountNotification object:chatController];
 	}
+}
+
+- (void)handleWillEnterBackgroundNotification:(NSNotification *)note
+{
+	if (self.openedFromClanList == NO)
+	{
+		[[NSUserDefaults standardUserDefaults] setObject:[[[self.chatController chat] remoteFriend] userName] forKey:@"lastActiveChatUsername"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}
+	
+	[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

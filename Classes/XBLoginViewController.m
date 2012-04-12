@@ -223,7 +223,7 @@ NSString *kRememberKey = @"kRememberKey";
 
 - (void)showKeyboard:(NSNotification *)note
 {
-	[self hideConnectingOverlay];
+	//[self hideConnectingOverlay];
 	
 	if (!tableGroups)
 	{
@@ -423,6 +423,7 @@ NSString *kRememberKey = @"kRememberKey";
 - (void)saveUsername:(NSString *)usernameToSave password:(NSString *)passwordToSave
 {
 	[[NSUserDefaults standardUserDefaults] setObject:usernameToSave forKey:kUsernameKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 
 #if !TARGET_IPHONE_SIMULATOR
 	NSMutableDictionary *passwordEntry = [self newBaseDictionaryWithServer:XfireHostName account:usernameToSave];
@@ -449,6 +450,7 @@ NSString *kRememberKey = @"kRememberKey";
 	[passwordEntry release];
 #else
 	[[NSUserDefaults standardUserDefaults] setObject:passwordToSave forKey:kPasswordKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 #endif
 }
 
@@ -478,15 +480,18 @@ NSString *kRememberKey = @"kRememberKey";
 	return [savedPassword autorelease];
 #else
 	return [[NSUserDefaults standardUserDefaults] objectForKey:kPasswordKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 #endif
 }
 
 - (void)deleteSavedLoginDetails
 {
 	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kUsernameKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 	
 #if TARGET_IPHONE_SIMULATOR
 	[[NSUserDefaults standardUserDefaults] setObject:nil forKey:kPasswordKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 #endif
 }
 

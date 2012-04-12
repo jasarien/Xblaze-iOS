@@ -228,4 +228,9 @@
 {
 }
 
+- (BOOL)receiverProcessPacket:(XfirePacket *)pkt
+{
+	return NO;
+}
+
 @end

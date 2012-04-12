@@ -34,7 +34,7 @@ typedef enum
 	kXfireConnectionStopping
 } XfireConnectionStatus;
 
-@interface XfireConnection : NSObject
+@interface XfireConnection : NSObject <AsyncSocketDelegate>
 {
 	// Unchanging once created
 	NSString				*_host;
@@ -71,5 +71,23 @@ typedef enum
 
 // Receiving data is handled by internal receiver, which determines
 // what to do with it.
+
+- (id)initWithHost:(NSString *)aHost port:(unsigned short)aPort;
+
+// Send arbitrary data
+// Should only be used by external classes (XfireLoginConnection) to send the "UA01" key!!!
+- (void)sendData:(NSData *)dat;
+
+// same as -sendPacket, except doesn't check X
+// used for slightly reduced overhead
+- (void)sendPacketSafe:(XfirePacket *)pkt;
+
+// Subclass override stuff
+- (void)connectionDidConnect;
+- (void)connectionWillDisconnect;
+- (void)receiverProcessData:(NSData *)data;
+
+// return YES or NO whether to continue
+- (BOOL)receiverProcessPacket:(XfirePacket *)pkt;
 
 @end

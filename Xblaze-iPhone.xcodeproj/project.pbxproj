@@ -3126,6 +3126,8 @@
 		1AEAA29D15324D2E00681312 /* XBPushPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAA29B15324D2E00681312 /* XBPushPurchaseViewController.m */; };
 		1AEAA29E15324D2E00681312 /* XBPushPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AEAA29C15324D2E00681312 /* XBPushPurchaseViewController.xib */; };
 		1AEAA2AD1532FEE300681312 /* MAConfirmButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAA2AC1532FEE300681312 /* MAConfirmButton.m */; };
+		1AEAA2BC15332A2600681312 /* XBStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AEAA2BB15332A2600681312 /* XBStoreManager.m */; };
+		1AEAA2BE15332A9500681312 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AEAA2BD15332A9500681312 /* StoreKit.framework */; };
 		1AEEC05E11307A44005D8A73 /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AEEC05D11307A44005D8A73 /* gradient.png */; };
 		1AF4ABF7119F14A9009D48E0 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4ABF6119F14A9009D48E0 /* MainWindow-iPad.xib */; };
 		1AF4AC0D119F7305009D48E0 /* XBiPadChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */; };
@@ -6385,6 +6387,9 @@
 		1AEAA29C15324D2E00681312 /* XBPushPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = XBPushPurchaseViewController.xib; path = Classes/XBPushPurchaseViewController.xib; sourceTree = "<group>"; };
 		1AEAA2AB1532FEE300681312 /* MAConfirmButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAConfirmButton.h; sourceTree = "<group>"; };
 		1AEAA2AC1532FEE300681312 /* MAConfirmButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAConfirmButton.m; sourceTree = "<group>"; };
+		1AEAA2BA15332A2600681312 /* XBStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBStoreManager.h; sourceTree = "<group>"; };
+		1AEAA2BB15332A2600681312 /* XBStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBStoreManager.m; sourceTree = "<group>"; };
+		1AEAA2BD15332A9500681312 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		1AEEC05D11307A44005D8A73 /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gradient.png; path = Resources/Images/gradient.png; sourceTree = SOURCE_ROOT; };
 		1AF4ABF6119F14A9009D48E0 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		1AF4AC0B119F7305009D48E0 /* XBiPadChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XBiPadChatViewController.xib; path = Classes/XBiPadChatViewController.xib; sourceTree = "<group>"; };
@@ -6454,6 +6459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEAA2BE15332A9500681312 /* StoreKit.framework in Frameworks */,
 				1AD385B6130200F9000E7D60 /* CoreText.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -6484,6 +6490,7 @@
 				1AA5F68B131DA6C500CB24C5 /* AutoHyperlinks */,
 				1AF76D22152A2D24008207B1 /* JSON */,
 				1A0B0098152A2A84005F0B5C /* Push Management */,
+				1AEAA2B915332A0A00681312 /* Store Kit */,
 				1D3623240D0F684500981E51 /* Xblaze_iPhoneAppDelegate.h */,
 				1D3623250D0F684500981E51 /* Xblaze_iPhoneAppDelegate.m */,
 				1AC89F3310AC548300CE30D3 /* XBLoginViewController.h */,
@@ -9998,6 +10005,15 @@
 			path = game_icons;
 			sourceTree = "<group>";
 		};
+		1AEAA2B915332A0A00681312 /* Store Kit */ = {
+			isa = PBXGroup;
+			children = (
+				1AEAA2BA15332A2600681312 /* XBStoreManager.h */,
+				1AEAA2BB15332A2600681312 /* XBStoreManager.m */,
+			);
+			name = "Store Kit";
+			sourceTree = "<group>";
+		};
 		1AF4ABF3119F14A8009D48E0 /* Resources-iPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -10132,6 +10148,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AEAA2BD15332A9500681312 /* StoreKit.framework */,
 				1AA32FED10EE33ED0006B286 /* AudioToolbox.framework */,
 				1A80A74610B442910098BA9C /* SystemConfiguration.framework */,
 				1A8F89D610AE4ABB00E7EEBD /* CFNetwork.framework */,
@@ -13354,6 +13371,7 @@
 				1A10295B1532206900D590F6 /* XBPushPurchaseInfoViewController.m in Sources */,
 				1AEAA29D15324D2E00681312 /* XBPushPurchaseViewController.m in Sources */,
 				1AEAA2AD1532FEE300681312 /* MAConfirmButton.m in Sources */,
+				1AEAA2BC15332A2600681312 /* XBStoreManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

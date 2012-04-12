@@ -23,8 +23,9 @@
 		self.chat = _chat;
 		[self.chat setDelegate:self];
 		
+		_ownUsername = [[[xfSession loginIdentity] userName] copy];
+		
 		[self loadChatTranscript];
-//		self.chatMessages = [NSMutableArray array];
 	}
 	
 	return self;
@@ -33,10 +34,17 @@
 - (void)dealloc
 {
 	[self saveChatTranscript];
+	[_ownUsername release], _ownUsername = nil;
 	[self.chat setDelegate:nil];
 	self.chat = nil;
 	self.chatMessages = nil;
 	[super dealloc];
+}
+
+- (void)addMessage:(NSDictionary *)messageDict
+{
+	[self.chatMessages addObject:messageDict];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kMessageReceivedNotification object:self];
 }
 
 - (void)xfireSession:(XfireSession *)session chat:(XfireChat *)aChat didReceiveMessage:(NSString *)msg
@@ -90,6 +98,7 @@
 	}
 	
 	docsPath = [appDocsPath stringByAppendingPathComponent:@"ChatTranscripts"];
+	docsPath = [docsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", _ownUsername]];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:docsPath])
 	{ // create docs directory
 		NSError *error = nil;
@@ -135,6 +144,8 @@
 	}
 	
 	docsPath = [appDocsPath stringByAppendingPathComponent:@"ChatTranscripts"];
+	docsPath = [docsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", _ownUsername]];
+	
 	if (![[NSFileManager defaultManager] fileExistsAtPath:docsPath])
 	{ // create docs directory
 		NSError *error = nil;

@@ -24,6 +24,8 @@
 	NSInteger unreadCount;
 	
 	BOOL typing;
+	
+	NSString *_ownUsername;
 }
 
 @property (nonatomic, retain) XfireChat *chat;
@@ -35,5 +37,7 @@
 - (void)sendMessage:(NSString *)message;
 - (void)saveChatTranscript;
 - (void)clearChatHistory;
+
+- (void)addMessage:(NSDictionary *)messageDict;
 
 @end

@@ -168,7 +168,7 @@ static void _XfireCopyPreference( NSString *pktKey, NSString *dictKey, XfirePack
 	
 	[[self session] delegate_sessionWillDisconnect:reason];
 	
-	[super performSelector:@selector(onSocket:willDisconnectWithError:) withObject:sock withObject:err];
+	[super onSocket:sock willDisconnectWithError:err];
 }
 
 // Stuff you can only do on the log-in connection (to the Xfire master server)
@@ -754,6 +754,9 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 		naterr:0
 		uPnPInfo:@""];
 	[self sendPacketSafe:newPkt];
+	
+	if ([[self session] status] != kXfireSessionStatusOnline)
+		[[self session] setStatus:kXfireSessionStatusGettingFriends];
 }
 
 // Get newest version
@@ -790,18 +793,22 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 	
 	int i, cnt;
 	
-	if ([[self session] status] != kXfireSessionStatusOnline)
-		[[self session] setStatus:kXfireSessionStatusGettingFriends];
-	
+//	if ([[self session] status] != kXfireSessionStatusOnline)
+//	{
+//		dispatch_async(dispatch_get_main_queue(), ^{
+//			[[self session] setStatus:kXfireSessionStatusGettingFriends];
+//		});
+//	}
+//	
 	usernames = [pkt attributeValuesForKey:kXfireAttributeFriendsKey];
 	nicknames = [pkt attributeValuesForKey:kXfireAttributeNicknameKey];
 	userids   = [pkt attributeValuesForKey:kXfireAttributeUserIDKey];
 	
-	// SCR 37 - This prevents the main app from sending packets before we have a friends list
-	// Careful because this will not wait for status change, but friend list changes will wait
-	// I think it all gets queued through the NSRunLoop of the main thread, so we should be okay
-	if ([[self session] status] != kXfireSessionStatusOnline)
-		[[self session] setStatus:kXfireSessionStatusOnline];
+//	// SCR 37 - This prevents the main app from sending packets before we have a friends list
+//	// Careful because this will not wait for status change, but friend list changes will wait
+//	// I think it all gets queued through the NSRunLoop of the main thread, so we should be okay
+//	if ([[self session] status] != kXfireSessionStatusOnline)
+//		[[self session] setStatus:kXfireSessionStatusOnline];
 	
 	cnt = [usernames count];
 	for( i = 0; i < cnt; i++ )
@@ -839,6 +846,12 @@ SCR 37 - Don't set status to Online here, wait until we get the friends list (we
 			[[self session] delegate_friendDidChange:fr attribute:kXfireFriendWasAdded];
 		}
 	}
+	
+	// SCR 37 - This prevents the main app from sending packets before we have a friends list
+	// Careful because this will not wait for status change, but friend list changes will wait
+	// I think it all gets queued through the NSRunLoop of the main thread, so we should be okay
+	if ([[self session] status] != kXfireSessionStatusOnline)
+		[[self session] setStatus:kXfireSessionStatusOnline];
 }
 
 // Contains a list of userids and session IDs

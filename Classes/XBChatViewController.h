@@ -42,6 +42,7 @@
 }
 
 @property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, assign) BOOL openedFromClanList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil chatController:(XBChatController *)controller;
 
@@ -67,4 +68,6 @@
 
 - (void)options:(id)sender;
 - (void)clearChatHistory;
+
+- (void)handleWillEnterBackgroundNotification:(NSNotification *)note;
 @end
