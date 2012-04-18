@@ -12,10 +12,11 @@
 #import "XfireFriend.h"
 #import "MFGameRegistry.h"
 #import "XBWebViewController.h"
-#import "XBImageCache.h"
+#import "XBMediaCache.h"
 #import "Xblaze_iPhoneAppDelegate.h"
 #import "XBScreenshotGamesListViewController.h"
 #import "AutoHyperlinks.h"
+#import "XBLazyImageView.h"
 
 #define profileImageURLString @"http://screenshot.xfire.com/avatar/%@.jpg?%d"
 
@@ -162,7 +163,6 @@ const CGFloat animationDuration = 0.2f;
 	friendSummary = [[XBFriendSummaryViewController alloc] initWithNibName:@"XBFriendSummaryViewController" bundle:nil];
 	[friendSummary setDelegate:self];
 	[tableView setTableHeaderView:[friendSummary view]];
-	[[friendSummary spinner] startAnimating];
 	[self updateAvatar:nil];
 	[self updateFriendSummary:nil];
 	[self scrollTableToBottomAnimated:NO];
@@ -434,7 +434,6 @@ const CGFloat animationDuration = 0.2f;
 		[[friendSummary gameInfoLabel] setText:@""];
 		[[friendSummary gameIcon] setImage:nil];
 		[[friendSummary userImageIcon] setImage:nil];
-		[[friendSummary spinner] stopAnimating];
 		[[friendSummary profileButton] setEnabled:NO];
 		return;
 	}
@@ -470,12 +469,14 @@ const CGFloat animationDuration = 0.2f;
 		if (gameInfo)
 		{
 			[[friendSummary gameInfoLabel] setText:[NSString stringWithFormat:@"Playing %@", [gameInfo valueForKey:kMFGameRegistryLongNameKey]]];
-			[[friendSummary gameIcon] setImage:[[MFGameRegistry registry] iconForGameID:[friend gameID]]];
+			[[friendSummary gameIcon] setImageURL:[MFGameRegistry iconURLForGameID:[friend gameID]]];
+			[[friendSummary gameIcon] setPlaceholderImage:[UIImage imageNamed:@"XfireSmall.png"]];
+			[[friendSummary gameIcon] startLoad];
 		}
 		else
 		{
 			[[friendSummary gameInfoLabel] setText:@"Playing Unknown Game..."];
-			[[friendSummary gameIcon] setImage:[[MFGameRegistry registry] defaultImage]];
+			[[friendSummary gameIcon] setImage:[UIImage imageNamed:@"XfireSmall.png"]];
 		}
 	}
 	else
@@ -517,18 +518,9 @@ const CGFloat animationDuration = 0.2f;
 		}
 	}
 	
-	UIImage *profileImage = [XBImageCache readImageFromCacheForKey:[[friend avatarURL] absoluteString]];
-	if (profileImage)
-	{
-		[[friendSummary userImageIcon] setImage:profileImage];
-		[[friendSummary spinner] stopAnimating];
-	}
-	else if ([friend avatarURL])
-	{
-		NSURLRequest *request = [NSURLRequest requestWithURL:[friend avatarURL]];
-		[NSURLConnection connectionWithRequest:request delegate:self];
-		[[friendSummary spinner] startAnimating];
-	}
+	//[[friendSummary userImageIcon] setPlaceHolderImage:[UIImage imageNamed:@"defaultUserImage.png"]];
+	[[friendSummary userImageIcon] setImageURL:[friend avatarURL]];
+	[[friendSummary userImageIcon] startLoad];
 }
 
 - (void)scrollTableToBottomAnimated:(BOOL)animated
@@ -785,46 +777,6 @@ const CGFloat animationDuration = 0.2f;
 	
 	XBWebViewController *webView = [[[XBWebViewController alloc] initWithNibName:@"XBWebViewController" bundle:nil url:url] autorelease];
 	[self.navigationController pushViewController:webView animated:YES];
-}
-
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-	if (!profileImageData)
-		profileImageData = [[NSMutableData alloc] init];
-	
-	[profileImageData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-	[[friendSummary spinner] stopAnimating];
-	
-	UIImage *image = [UIImage imageWithData:profileImageData];
-	if (image)
-	{
-		[[friendSummary userImageIcon] setImage:image];
-		XfireFriend *friend = [[chatController chat] remoteFriend];
-		[XBImageCache writeImage:image forKey:[[friend avatarURL] absoluteString]];
-	}
-	else
-	{
-		[[friendSummary userImageIcon] setImage:[UIImage imageNamed:@"defaultUserImage.png"]];
-	}
-
-	[profileImageData release];
-	profileImageData = nil;
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	[[friendSummary spinner] stopAnimating];
-	
-	if (![[friendSummary userImageIcon] image])
-		[[friendSummary userImageIcon] setImage:[UIImage imageNamed:@"defaultUserImage.png"]];
-	
-	[profileImageData release];
-	profileImageData = nil;
 }
 
 - (void)friendSummaryViewTapped:(XBFriendSummaryViewController *)summaryView

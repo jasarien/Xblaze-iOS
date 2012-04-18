@@ -56,7 +56,7 @@
 		
 		// add a text field to the cell
 		CGRect frame = CGRectMake(0.0f, 0.0f, viewWidth, 21.0f);
-		self.textField = [[UITextField alloc] initWithFrame:frame];
+		self.textField = [[[UITextField alloc] initWithFrame:frame] autorelease];
 		[self.textField addTarget:self action:@selector(updateValue:) forControlEvents:UIControlEventEditingChanged];
 		[self.textField setDelegate:self];
 		NSString *value = [model objectForKey:key];

@@ -33,73 +33,40 @@ NSString *kMFGameRegistryIconKey        = @"Icon";
 NSString *kMFGameRegistryMacAppPathsKey = @"MacAppPaths";
 
 // Private interfaces
-@interface MFGameRegistry (Private)
-- (BOOL)loadGamesFile:(NSString *)path;
-- (BOOL)loadIconsFile:(NSString *)path;
-@end
+@interface MFGameRegistry ()
 
-#define TRIM(_str) [(_str) stringByTrimmingCharactersInSet:wscs]
+- (NSString *)gamesListPath;
+- (void)loadGamesFile;
+- (void)getLatestGamesListIfNecessary;
+
+@end
 
 @implementation MFGameRegistry
 
-@synthesize games=_games;
+@synthesize games = _games;
 
 + (id)registry
 {
-	if( gRegistry == nil )
+	if (gRegistry == nil)
 	{
 		gRegistry = [[MFGameRegistry alloc] init];
 	}
+	
 	return gRegistry;
 }
 
 - (id)init
 {
-	self = [super init];
-	if( self )
-	{
-		NSString *path;
-		
+	if((self = [super init]))
+	{		
 		_version = 0;
 		_defaultImage = nil;
 		_games = nil;
 		_macGames = nil;
-		
-		// Load the master game dictionary first
-		path = [[NSBundle bundleForClass:[self class]] pathForResource:@"Games" ofType:@"plist"];
-		if( path == nil )
-		{
-			// TODO: need to get some kind of warning up to the user
-			DebugLog(@"Game information file is missing");
-			[self release];
-			return nil;
-		}
-		if( ! [self loadGamesFile:path] )
-		{
-			// TODO: need to get some kind of warning up to the user
-			DebugLog(@"Could not load game information file");
-			[self release];
-			return nil;
-		}
+
+		[self loadGamesFile];
 		
 		_defaultImage = [[UIImage imageNamed:@"XfireLarge.png"] retain];
-		
-//		// Then load the icons file
-//		path = [[NSBundle bundleForClass:[self class]] pathForResource:@"icons" ofType:@"mar"];
-//		if( path == nil )
-//		{
-//			// TODO: need to get some kind of warning up to the user
-//			NSLog(@"Game icons file is missing");
-//			[self release];
-//			return nil;
-//		}
-//		if( ! [self loadIconsFile:path] )
-//		{
-//			// TODO: need to get some kind of warning up to the user
-//			NSLog(@"Could not load game icons file");
-//			[self release];
-//			return nil;
-//		}
 	}
 	return self;
 }
@@ -118,6 +85,19 @@ NSString *kMFGameRegistryMacAppPathsKey = @"MacAppPaths";
 	[super dealloc];
 }
 
+- (NSString *)gamesListPath
+{
+	NSString *gamesListPath = nil;
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	if ([paths count] > 0)
+	{
+		gamesListPath = [paths objectAtIndex:0];
+	}
+	
+	return [gamesListPath stringByAppendingPathComponent:@"Games.plist"];
+}
+
 /*
 The Games.plist file is a dictionary with two top level keys:
 	Games							NSArray(NSDictionary)
@@ -131,131 +111,94 @@ keys are:
 	MacAppPaths NSArray(NSString)	NSApplicationPath for matching
 	Icon		NSImage
 */
-- (BOOL)loadGamesFile:(NSString *)path
+- (void)loadGamesFile
 {
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
-	if( dict == nil )
-		return NO;
+	NSString *gamesListPath = [self gamesListPath];
 	
-	NSNumber *ver = [dict objectForKey:@"XfireGamesVersion"];
-	if( ver == nil )
-		return NO;
-	_version = [ver intValue];
+	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:gamesListPath];
+	if (dict == nil)
+	{
+		dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Games" ofType:@"plist"]];
+		[self getLatestGamesListIfNecessary];
+	}
+	
+	_version = [[dict objectForKey:@"XfireGamesVersion"] integerValue];
 	
 	NSArray *games = [dict objectForKey:@"Games"];
-	if( !games )
-		return NO;
+	
+	[_games release];
+	[_macGames release];
 	
 	_games = [[NSMutableDictionary alloc] init];
 	_macGames = [[NSMutableDictionary alloc] init];
 	
-	int i, cnt;
-	cnt = [games count];
-	NSMutableDictionary *game;
-	NSArray *appPaths;
-	for( i = 0; i < cnt; i++ )
+	for(NSDictionary *game in games)
 	{
-		game = [NSMutableDictionary dictionaryWithDictionary:[games objectAtIndex:i]];
 		id key = [game objectForKey:kMFGameRegistryIDKey];
-		if( key )
+		if (key)
 		{
 			[_games setObject:game forKey:key];
 			
-			appPaths = [game objectForKey:kMFGameRegistryMacAppPathsKey];
-			if( appPaths != nil )
+			NSArray *appPaths = [game objectForKey:kMFGameRegistryMacAppPathsKey];
+			if (appPaths != nil)
 			{
-				int j, cnt2;
-				cnt2 = [appPaths count];
-				for( j = 0; j < cnt2; j++ )
+				for (NSString *appPath in appPaths)
 				{
 					[_macGames setObject:game
-						forKey:[[appPaths objectAtIndex:j] uppercaseString]];
+						forKey:[appPath uppercaseString]];
 				}
 			}
 		}
 	}
-	
-	return YES;
 }
 
-- (BOOL)loadIconsFile:(NSString *)path
+- (void)getLatestGamesListIfNecessary
 {
-	return NO;
-//	BOOL rv = NO;
-//	
-//	@try
-//	{
-//		NSData *d = [NSData dataWithContentsOfFile:path];
-//		if( d == nil )
-//			return NO;
-//		
-//		NSArray *fls = [d unarchivedFiles];
-//		if( fls == nil )
-//			return NO;
-//		
-//		// now we have the list of files
-//		// build a dictionary for quick lookup
-//		// then put the icon images into the _games ivar
-//		NSMutableDictionary *imgMap = [NSMutableDictionary dictionary];
-//		NSString *path;
-//		UIImage *img;
-//		id file;
-//		
-//		int i, cnt;
-//		cnt = [fls count];
-//		for( i = 0; i < cnt; i++ )
-//		{
-//			file = [fls objectAtIndex:i];
-//			path = [[file path] uppercaseString];
-//			img = [[UIImage alloc] initWithData:[file data]];
-//			if( img )
-//			{
-//				[imgMap setObject:img forKey:path];
-//			}
-//			else
-//			{
-//				// skip it
-//				// in initial run there was only 1 that failed
-//				// Preview can't load it either
-//				NSLog(@"Could not load image for %@", path);
-//			}
-//		}
-//		
-//		_defaultImage = [[UIImage alloc] initWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"XfireLarge" ofType:@"png"]];
-//		
-//		// then put the icon images into the _games ivar
-//		NSEnumerator *gameNumer = [_games objectEnumerator];
-//		NSMutableDictionary *gameInfo;
-//		NSString *imgFileName;
-//		while( (gameInfo = [gameNumer nextObject]) != nil )
-//		{
-//			// find the proper image
-//			imgFileName = [gameInfo objectForKey:kMFGameRegistryShortNameKey];
-//			if( imgFileName ) // skip those without short names
-//			{
-//				imgFileName = [[NSString stringWithFormat:@"XF_%@.ICO", imgFileName] uppercaseString];
-//				img = [imgMap objectForKey:imgFileName];
-//				if( img )
-//				{
-//					[gameInfo setObject:img forKey:kMFGameRegistryIconKey];
-//				}
-//				else
-//				{
-//					if( _defaultImage )
-//						[gameInfo setObject:_defaultImage forKey:kMFGameRegistryIconKey];
-//				}
-//			}
-//		}
-//		
-//		rv = YES;
-//	}
-//	@catch( NSException *e )
-//	{
-//		NSLog(@"Caught exception loading icons file: %@", e);
-//		rv = NO;
-//	}
-//	
-//	return rv;
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://xblaze.co.uk/games/version"]];
+		NSHTTPURLResponse *urlResponse = nil;
+		NSError *error = nil;
+		NSData *response = [NSURLConnection sendSynchronousRequest:request
+												 returningResponse:&urlResponse
+															 error:&error];
+		if (([urlResponse statusCode] == 200) && (error == nil))
+		{
+			NSString *responseString = [[[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding] autorelease];
+			NSInteger version = [responseString integerValue];
+			
+			if (version > _version)
+			{
+				request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://xblaze.co.uk/games/Games.plist"]];
+				response = [NSURLConnection sendSynchronousRequest:request
+												 returningResponse:&urlResponse
+															 error:&error];
+				if (([urlResponse statusCode] == 200) && (error == nil))
+				{
+					responseString = [[[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding] autorelease];
+					[responseString writeToFile:[self gamesListPath]
+									 atomically:YES
+									   encoding:NSUTF8StringEncoding
+										  error:nil];
+					dispatch_async(dispatch_get_main_queue(), ^{
+						[self loadGamesFile];
+					});
+				}
+				else
+				{
+					NSLog(@"GamesList download respose: %d, error: %@", [urlResponse statusCode], [error localizedDescription]);
+				}
+			}
+			else
+			{
+				NSLog(@"No newer games list available");
+			}
+		}
+		else
+		{
+			NSLog(@"GamesList version check respose: %d, error: %@", [urlResponse statusCode], [error localizedDescription]);
+		}
+		
+	});
 }
 
 - (UIImage *)defaultImage
@@ -277,7 +220,7 @@ keys are:
 			icon = _defaultImage;
 		}
 		
-		[gameInfo setObject:icon forKey:kMFGameRegistryIconKey];
+		//[gameInfo setObject:icon forKey:kMFGameRegistryIconKey];
 	}
 	
 	return icon;
@@ -296,6 +239,15 @@ keys are:
 + (NSString *)longNameForGameID:(int)gid
 {
 	return [[self infoForGameID:gid] objectForKey:kMFGameRegistryLongNameKey];
+}
+
++ (NSURL *)iconURLForGameID:(int)gid
+{
+	NSMutableDictionary *gameInfo = (NSMutableDictionary *)[self infoForGameID:gid];
+	NSString *shortGameName = [gameInfo objectForKey:kMFGameRegistryShortNameKey];
+	NSString *iconName = [[NSString stringWithFormat:@"XF_%@.ICO", shortGameName] uppercaseString];
+	
+	return [NSURL URLWithString:[NSString stringWithFormat:@"http://xblaze.co.uk/games/icons/%@", iconName]];
 }
 
 + (NSDictionary *)infoForMacApplication:(NSDictionary *)appInfo

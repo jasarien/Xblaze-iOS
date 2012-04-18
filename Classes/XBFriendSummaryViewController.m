@@ -8,6 +8,7 @@
 
 #import "XBFriendSummaryViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "XBLazyImageView.h"
 
 @implementation XBFriendSummaryViewController
 
@@ -18,8 +19,6 @@
 @synthesize userImageIcon = _userImageIcon;
 @synthesize gameIcon = _gameIcon;
 
-@synthesize spinner = _spinner;
-
 @synthesize profileButton = _profileButton;
 
 @synthesize delegate = _delegate;
@@ -28,8 +27,10 @@
 {
     [super viewDidLoad];
 	
-	self.userImageIcon.layer.borderWidth = 1.0f;
-	self.userImageIcon.layer.borderColor = [[UIColor blackColor] CGColor];
+	UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(summaryViewTapped:)] autorelease];
+	[self.view addGestureRecognizer:tapRecognizer];
+	
+	[self.gameIcon setShowBorder:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -50,8 +51,6 @@
 	
 	self.userImageIcon = nil;
 	self.gameIcon = nil;
-	
-	self.spinner = nil;
 }
 
 - (void)dealloc
@@ -63,35 +62,29 @@
 	self.userImageIcon = nil;
 	self.gameIcon = nil;
 	
-	self.spinner = nil;
-	
 	self.delegate = nil;
 	
     [super dealloc];
 }
 
-- (IBAction)summaryViewTapped
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
 {
-	if ([_delegate respondsToSelector:@selector(friendSummaryViewTapped:)])
+	[self.view setBackgroundColor:[UIColor lightGrayColor]];
+	
+	return YES;
+}
+
+- (IBAction)summaryViewTapped:(UITapGestureRecognizer *)recognizer
+{
+	[self.view setBackgroundColor:[UIColor whiteColor]];
+	
+	if ([recognizer state] == UIGestureRecognizerStateRecognized)
 	{
-		[_delegate friendSummaryViewTapped:self];
+		if ([_delegate respondsToSelector:@selector(friendSummaryViewTapped:)])
+		{
+			[_delegate friendSummaryViewTapped:self];
+		}
 	}
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-}
-
-- (void)touchesCanceled:(NSSet *)touches withEvent:(UIEvent *)event
-{
 }
 
 @end

@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class XBLazyImageView;
+
 @protocol XBFriendSummaryViewDelegate;
 
-@interface XBFriendSummaryViewController : UIViewController {
+@interface XBFriendSummaryViewController : UIViewController <UIGestureRecognizerDelegate> {
 
 	UILabel *_displayNameLabel;
 	UILabel *_statusLabel;
 	UILabel *_gameInfoLabel;
 	
-	UIImageView *_userImageIcon;
-	UIImageView *_gameIcon;
-	
-	UIActivityIndicatorView *_spinner;
+	XBLazyImageView *_userImageIcon;
+	XBLazyImageView *_gameIcon;
 	
 	UIButton *_profileButton;
 	
@@ -31,16 +31,14 @@
 @property (nonatomic, retain) IBOutlet UILabel *statusLabel;
 @property (nonatomic, retain) IBOutlet UILabel *gameInfoLabel;
 
-@property (nonatomic, retain) IBOutlet UIImageView *userImageIcon;
-@property (nonatomic, retain) IBOutlet UIImageView *gameIcon;
-
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spinner;
+@property (nonatomic, retain) IBOutlet XBLazyImageView *userImageIcon;
+@property (nonatomic, retain) IBOutlet XBLazyImageView *gameIcon;
 
 @property (nonatomic, retain) IBOutlet UIButton *profileButton;
 
 @property (nonatomic, assign) id <XBFriendSummaryViewDelegate> delegate;
 
-- (IBAction)summaryViewTapped;
+- (IBAction)summaryViewTapped:(id)sender;
 
 @end
 

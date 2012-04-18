@@ -22,7 +22,8 @@
 #import "XBFriendRequestViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "XBPushPurchaseViewController.h"
-
+#import "XBContactCell.h"
+#import "XBLazyImageView.h"
 NSString *kContactListControllerDidAppear = @"kContactListControllerDidAppear";
 
 #define kNicknameChangeTag 999
@@ -529,9 +530,9 @@ enum {
 {
     static NSString *CellIdentifier = @"XfireFriendCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    XBContactCell *cell = (XBContactCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[XBContactCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 	
 	BOOL activeChats = NO;
@@ -548,8 +549,16 @@ enum {
 			
 			cell.textLabel.text = [friend displayName];
 			cell.detailTextLabel.text = [self statusStringForFriend:friend];
-			UIImage *icon = [[MFGameRegistry registry] iconForGameID:[friend gameID]];
-			cell.imageView.image = icon;
+			if ([friend gameID])
+			{
+				[[cell iconView] setImageURL:[MFGameRegistry iconURLForGameID:[friend gameID]]];
+				[[cell iconView] setPlaceholderImage:[[MFGameRegistry registry] defaultImage]];
+				[[cell iconView] startLoad];
+			}
+			else 
+			{
+				[[cell iconView] setImage:[[MFGameRegistry registry] defaultImage]];
+			}
 			
 			if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -608,8 +617,16 @@ enum {
 	}
 
 	cell.detailTextLabel.text = [self statusStringForFriend:friend];
-	UIImage *icon = [[MFGameRegistry registry] iconForGameID:[friend gameID]];
-	cell.imageView.image = icon;
+	if ([friend gameID])
+	{
+		[[cell iconView] setImageURL:[MFGameRegistry iconURLForGameID:[friend gameID]]];
+		[[cell iconView] setPlaceholderImage:[[MFGameRegistry registry] defaultImage]];
+		[[cell iconView] startLoad];
+	}
+	else 
+	{
+		[[cell iconView] setImage:[[MFGameRegistry registry] defaultImage]];
+	}
 	
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

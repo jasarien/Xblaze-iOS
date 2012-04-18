@@ -25,7 +25,7 @@
 
 @interface MFGameRegistry : NSObject
 {
-	int						_version;
+	NSInteger				_version;
 	UIImage					*_defaultImage;
 	
 	// _games key is the game ID, object has the keys identified by constants below
@@ -45,6 +45,7 @@
 
 // helper
 + (NSString *)longNameForGameID:(int)gid;
++ (NSURL *)iconURLForGameID:(int)gid;
 
 // pass the dictionary containing keys as populated by NSWorkspace
 + (NSDictionary *)infoForMacApplication:(NSDictionary *)appInfo;
